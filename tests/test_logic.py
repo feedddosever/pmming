@@ -34,8 +34,8 @@ def test_age_is_relative_to_as_of_and_boundary_is_unknown():
     cov = {"exemptions": [{"label": "new", "all": [C("age_years", "lte", 15)]}]}
     assert P.evaluate(cov, {"year_built": 2018}, D)[0] is False   # exempt
     assert P.evaluate(cov, {"year_built": 1990}, D)[0] is True
-    assert P.evaluate(cov, {"year_built": 2011}, D)[0] is False   # 14 or 15: exempt either way
-    assert P.evaluate(cov, {"year_built": 2010}, D)[0] is None    # 15 or 16: cannot tell
+    assert P.evaluate(cov, {"year_built": 2011}, D)[0] is None    # 14.75-15.75 years: cannot tell
+    assert P.evaluate(cov, {"year_built": 2010}, D)[0] is True    # at least 15.75 years: not exempt
 
 
 def test_certificate_of_occupancy_proxy():
@@ -71,3 +71,47 @@ def test_jurisdiction_ids_and_sf_consolidation():
 def test_offline_postal_alias_is_low_confidence():
     a = resolve_one({"address_id": "x", "street": "1 A St", "city": "Dorchester", "state": "MA", "zip": "02124", "facts": {}}, use_network=False)
     assert a["stack"][-1] == "MA:city:boston" and a["geocode"]["confidence"] == "low"
+
+
+def test_empty_exemption_group_does_not_exempt():
+    assert P.evaluate({"exemptions": [{"label": "x", "all": []}]}, {"units": 5}, D)[0] is True
+
+
+def test_bad_before_date_is_tolerated():
+    assert P.evaluate({"applies_if": [C("year_built", "before_date", text="1979")]}, {"year_built": 1960}, D)[0] is True
+    assert P.evaluate({"applies_if": [C("year_built", "before_date", text="June 1979")]}, {"year_built": 1960}, D)[0] is None
+
+
+def test_struck_rule_raises_no_conflict():
+    from navigator.apply.engine import evaluate_address
+    mk = lambda rid, jid, **kw: {"rule_id": rid, "kind": "rule", "category": "algorithmic_rent_setting",
+                                 "jurisdiction": {"id": jid}, "citation": rid, "source": {}, **kw}
+    rules = [mk("NJ-old", "NJ", status="struck", may_preempt=[{"category": "algorithmic_rent_setting", "level": "city"}]),
+             mk("HB", "NJ:city:hoboken", status="enacted")]
+    out = evaluate_address({"stack": ["NJ", "NJ:county:hudson", "NJ:city:hoboken"], "facts": {}}, rules, D)
+    assert out[0]["flags"] == []
+
+
+def test_version_chain_kept_separate():
+    from navigator.extract.extractor import consolidate
+    base = {"kind": "rule", "category": "security_deposit", "jurisdiction": {"id": "CA"}, "confidence": 0.9,
+            "source": {"doc_id": "d", "quote": "q", "quote_method": "verbatim"}, "rule_id": "CA|security_deposit|x"}
+    old = {**base, "effective_date": "2010-01-01", "end_date": "2024-07-01", "confidence": 0.99}
+    new = {**base, "effective_date": "2024-07-01", "end_date": None}
+    ids = {r["rule_id"] for r in consolidate([old, new])}
+    assert ids == {"CA|security_deposit|x", "CA|security_deposit|x@2010-01-01"}
+
+
+def test_starter_pack_prefers_manifest_and_skips_answer_files(tmp_path):
+    from navigator.ingest.starter_pack import StarterPack
+    (tmp_path / "corpus").mkdir()
+    (tmp_path / "corpus" / "d1.txt").write_text("x" * 300)
+    (tmp_path / "dev_key.csv").write_text("doc_id,source_url,expected\nd1,http://a,applies\n")
+    (tmp_path / "manifest.csv").write_text("doc_id,url,path\nd1,http://a,corpus/d1.txt\n")
+    (tmp_path / "addresses.csv").write_bytes("id,street,city,state,zip,year_built,units\n1,Pe\xf1a St,Boston,MA,02124,1900,3\n".encode("cp1252"))
+    (tmp_path / "expected_changes_answers.json").write_text("{}")
+    (tmp_path / "change_tests.json").write_text("[]")
+    sp = StarterPack(tmp_path)
+    assert sp.manifest_path.name == "manifest.csv" and sp.dev_key_path.name == "dev_key.csv"
+    assert sp.changes_path.name == "change_tests.json"
+    assert sp.documents()[0]["link_only"] is False and sp.addresses()[0]["street"] == "Pe\xf1a St"

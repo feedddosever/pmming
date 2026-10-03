@@ -77,6 +77,8 @@ def evaluate_address(address: dict, rules: list[dict], as_of: date, *, assume_en
 
     # Conflicts (from extracted preemption language only).
     for r in candidates:
+        if st.status_on(r, as_of) in (st.STRUCK, st.EXPIRED):
+            continue
         for p in r.get("may_preempt") or []:
             for other in candidates:
                 if other is r or other["category"] != p.get("category", r["category"]):

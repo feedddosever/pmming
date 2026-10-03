@@ -49,7 +49,7 @@ def select(rules: list[dict], sel: dict) -> list[dict]:
             continue
         if sel.get("status") and r.get("status") != sel["status"]:
             continue
-        if sel.get("doc_id") and (r.get("source") or {}).get("doc_id") != sel["doc_id"]:
+        if sel.get("doc_id") and sel["doc_id"] not in ([(r.get("source") or {}).get("doc_id")] + (r.get("sources_seen") or [])):
             continue
         if sel.get("citation_regex"):
             hay = " ".join(str(x) for x in (r.get("citation"), r.get("title"), (r.get("source") or {}).get("title")))
@@ -80,10 +80,12 @@ def run_case(case: dict, rules: list[dict], addresses: list[dict]) -> dict:
         res["notes"].append("measure is not law; no address is affected")
         return res
 
+    effs = [date.fromisoformat(r["effective_date"]) for r in target if r.get("effective_date")]
+    horizon = max([after] + effs)
     for a in addresses:
         if ctype == "pending":
             now = [x for x in evaluate_address(a, rules, after) if x["rule_id"] in ids]
-            if_enacted = [x for x in evaluate_address(a, rules, date(2100, 1, 1), assume_enacted=ids)
+            if_enacted = [x for x in evaluate_address(a, rules, horizon, assume_enacted=ids)
                           if x["rule_id"] in ids and x["result"] in ACTIVE]
             if if_enacted:
                 res["affected_addresses"].append(a["address_id"])
@@ -99,7 +101,7 @@ def run_case(case: dict, rules: list[dict], addresses: list[dict]) -> dict:
             det["before"] = _short(evaluate_address(a, rules, before))
         flags = [f for x in hit for f in x["flags"] if f.get("type") == "conflict"]
         # Conflicts are about the selected rule meeting a local rule, whatever the date.
-        for x in evaluate_address(a, rules, date(2100, 1, 1)):
+        for x in evaluate_address(a, rules, horizon):
             if x["rule_id"] in ids:
                 flags += [f for f in x["flags"] if f.get("type") == "conflict"]
         if flags:

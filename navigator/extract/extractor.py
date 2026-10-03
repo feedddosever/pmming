@@ -98,12 +98,16 @@ def consolidate(rules: list[dict]) -> list[dict]:
     """One record per (jurisdiction, category, citation); keep the best-verified, most confident one."""
     best: dict[str, dict] = {}
     for r in rules:
+        # Superseded versions (with an end date) keep their own identity in a version chain.
+        if r.get("end_date") and "@" not in r["rule_id"]:
+            r = {**r, "rule_id": f"{r['rule_id']}@{r.get('effective_date') or 'start'}"}
         cur = best.get(r["rule_id"])
+        seen_in = r.get("sources_seen") or [r["source"]["doc_id"]]
         score = (r["source"]["quote_method"] == "verbatim", r["source"]["quote"] is not None, r["confidence"])
         if cur is None:
-            best[r["rule_id"]] = {**r, "_score": score, "sources_seen": [r["source"]["doc_id"]]}
+            best[r["rule_id"]] = {**r, "_score": score, "sources_seen": sorted(set(seen_in))}
         else:
-            cur["sources_seen"] = sorted(set(cur["sources_seen"] + [r["source"]["doc_id"]]))
+            cur["sources_seen"] = sorted(set(cur["sources_seen"]) | set(seen_in))
             if score > cur["_score"]:
                 seen = cur["sources_seen"]
                 best[r["rule_id"]] = {**r, "_score": score, "sources_seen": seen}

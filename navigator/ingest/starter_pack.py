@@ -50,9 +50,18 @@ def _pick(header: list[str], key: str, overrides: dict) -> str | None:
 
 
 def _read_csv(p: Path) -> tuple[list[str], list[dict]]:
-    with p.open(newline="", encoding="utf-8-sig") as f:
-        r = csv.DictReader(f)
-        return list(r.fieldnames or []), list(r)
+    for enc in ("utf-8-sig", "cp1252", "latin-1"):
+        try:
+            with p.open(newline="", encoding=enc) as f:
+                r = csv.DictReader(f)
+                return list(r.fieldnames or []), list(r)
+        except UnicodeDecodeError:
+            continue
+    return [], []
+
+
+_ANSWER_NAMES = ("key", "answer", "expected", "gold", "solution")
+_ANSWER_COLS = {"expected", "expected_result", "answer", "result", "expected_rules", "gold"}
 
 
 def sha256_text(t: str) -> str:
@@ -69,30 +78,43 @@ class StarterPack:
 
     # ---------- discovery ----------
     def _classify(self):
+        """Score candidates instead of taking the first match; answer files are never inputs."""
+        manifests, addresses = [], []
         for p in sorted(self.root.rglob("*")):
             if not p.is_file():
                 continue
             name = p.name.lower()
+            answerish = any(k in name for k in _ANSWER_NAMES)
             if name.endswith(".py") and "score" in name:
                 self.score_script = p
             elif name.endswith(".csv"):
                 header, _ = _read_csv(p)
-                h = {x.lower() for x in header}
-                if h & {"year_built", "yearbuilt", "units", "unit_count", "zip", "zipcode", "zip_code"}:
-                    self.addresses_path = self.addresses_path or p
-                elif h & {"url", "source_url", "path", "file", "filename"}:
-                    self.manifest_path = self.manifest_path or p
+                h = {x.lower().strip() for x in header}
+                if answerish or h & _ANSWER_COLS:
+                    self.dev_key_path = self.dev_key_path or p
+                    continue
+                if h & {"year_built", "yearbuilt", "yr_built", "units", "unit_count", "num_units"}:
+                    addresses.append((("address" in name) + ("propert" in name), p))
+                elif h & {"url", "source_url", "path", "file", "filename", "file_path", "text_file"}:
+                    has_id = bool(h & {"doc_id", "document_id", "id", "source_id"})
+                    manifests.append((2 * ("manifest" in name) + has_id, p))
             elif name.endswith(".json"):
                 try:
-                    data = json.loads(p.read_text())
-                except (json.JSONDecodeError, UnicodeDecodeError):
+                    data = json.loads(p.read_text(encoding="utf-8", errors="replace"))
+                except json.JSONDecodeError:
                     continue
                 if isinstance(data, dict) and ("$schema" in data or ("properties" in data and "type" in data)):
                     self.schema_path = self.schema_path or p
-                elif any(k in name for k in ("change", "test_case", "tests")):
-                    self.changes_path = self.changes_path or p
-                elif any(k in name for k in ("key", "answer", "expected", "dev")):
+                elif answerish and not any(k in name for k in ("change", "test_case")):
                     self.dev_key_path = self.dev_key_path or p
+                elif any(k in name for k in ("change", "test_case", "tests")) and not answerish:
+                    self.changes_path = self.changes_path or p
+                elif answerish:
+                    self.dev_key_path = self.dev_key_path or p
+        if manifests:
+            self.manifest_path = max(manifests, key=lambda t: t[0])[1]
+        if addresses:
+            self.addresses_path = max(addresses, key=lambda t: t[0])[1]
 
     def describe(self) -> dict:
         return {k: str(getattr(self, k)) if getattr(self, k) else None for k in

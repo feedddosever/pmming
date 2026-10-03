@@ -67,7 +67,7 @@ conflict:"Possible conflict with",norule:"No rule found in the provided corpus f
 noruleat:"No rule at this level:",upcoming:"Coming up",geolow:"Address matched by postal city only; boundary not verified.",
 low:"Low confidence — flagged for human review",review:"Quote could not be verified — flagged for human review",
 affected:"Affected addresses",conflicts:"Conflict flags",rules:"Matched rules",notes:"Notes",kv:"Key value",
-foot:"Sources: provided starter-pack corpus. Extraction is automated; see the audit log in the repository for model, prompt version and source hashes."},
+range:"No data before",foot:"Sources: provided starter-pack corpus. Extraction is automated; see the audit log in the repository for model, prompt version and source hashes."},
 es:{title:"Navegador de leyes de vivienda de alquiler",sub:"¿Qué reglas aplican a esta dirección y qué está por cambiar?",
 banner:"Solo informativo. No es asesoría legal. Cada respuesta enlaza a la ley de origen; consulte a un abogado o a su agencia de vivienda local antes de actuar.",
 lookup:"Buscar dirección",changes:"Cambios de ley",addr:"Dirección",asof:"Respuesta a la fecha",today:"Fecha predeterminada",
@@ -78,16 +78,18 @@ conflict:"Posible conflicto con",norule:"No se encontró ninguna regla en el cor
 noruleat:"No hay regla en este nivel:",upcoming:"Próximamente",geolow:"Dirección ubicada solo por ciudad postal; límite no verificado.",
 low:"Confianza baja — marcada para revisión humana",review:"No se pudo verificar la cita — marcada para revisión humana",
 affected:"Direcciones afectadas",conflicts:"Conflictos",rules:"Reglas",notes:"Notas",kv:"Valor clave",
-foot:"Fuentes: corpus del paquete inicial. La extracción es automática; el registro de auditoría muestra modelo, versión de prompt y hashes."}};
+range:"No hay datos antes de",foot:"Fuentes: corpus del paquete inicial. La extracción es automática; el registro de auditoría muestra modelo, versión de prompt y hashes."}};
 let L="en",D=null,cur=null;
 const $=id=>document.getElementById(id),esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 function t(k){return T[L][k]}
-function snap(d){let i=0;D.dates.forEach((x,j)=>{if(x<=d)i=j});return i}
+function snap(d){let i=-1;D.dates.forEach((x,j)=>{if(x<=d)i=j});return i}
+function safeUrl(u){return /^https?:\/\//i.test(u||"")?u:""}
 function texts(){["title","sub","banner"].forEach(k=>$(k==="banner"?"banner":"t-"+k).textContent=t(k));
 $("tab-lookup").textContent=t("lookup");$("tab-changes").textContent=t("changes");$("t-addr").textContent=t("addr");
 $("t-asof").textContent=t("asof");$("today").textContent=t("today");$("foot").textContent=t("foot");document.documentElement.lang=L}
 function render(){texts();if(!cur){$("result").innerHTML=`<p class="muted">${t("pick")}</p>`;renderChanges();return}
-const ai=D.addresses.findIndex(a=>a.id===cur),a=D.addresses[ai],di=snap($("asof").value||D.as_of_default),rows=D.results[ai][di];
+const ai=D.addresses.findIndex(a=>a.id===cur),a=D.addresses[ai],di=snap($("asof").value||D.as_of_default);
+if(di<0){$("result").innerHTML=`<p class="muted">${t("range")} ${esc(D.dates[0])}.</p>`;renderChanges();return}const rows=D.results[ai][di];
 const f=v=>v==null?`<span class="muted">${t("notindata")}</span>`:esc(v);
 let h=`<div class="cat"><h3>${esc(a.label)}</h3><div class="chips">${(a.stack_labels||a.stack).map(s=>`<span class="chip">${esc(s)}</span>`).join("")}</div>
 <div class="facts"><span>${t("built")}: ${f(a.facts.year_built)}</span><span>${t("units")}: ${f(a.facts.units)}</span><span>${t("use")}: ${f(a.facts.use_code)}</span></div>
@@ -105,7 +107,7 @@ for(const [cat,labels] of Object.entries(D.categories)){
   ${(r.confidence??1)<0.6?`<div class="small" style="color:var(--warn)">${t("low")}</div>`:""}
   ${!s.quote?`<div class="small" style="color:var(--warn)">${t("review")}</div>`:""}
   ${why.length?`<ul class="why">${why.map(i=>`<li>${esc(D.reasons[i])}</li>`).join("")}</ul>`:""}
-  ${s.quote?`<details><summary>${t("source")}</summary><blockquote>${esc(s.quote)}</blockquote><div class="muted small">${esc(s.title||s.doc_id)} · ${t("retrieved")} ${esc(s.retrieval_date)} ${s.url?`· <a href="${esc(s.url)}" target="_blank" rel="noopener">link</a>`:""} · sha256 ${esc((s.sha256||"").slice(0,12))} · ${esc((r.provenance||{}).prompt_version||"")}</div></details>`:""}</div>`}
+  ${s.quote?`<details><summary>${t("source")}</summary><blockquote>${esc(s.quote)}</blockquote><div class="muted small">${esc(s.title||s.doc_id)} · ${t("retrieved")} ${esc(s.retrieval_date)} ${safeUrl(s.url)?`· <a href="${esc(safeUrl(s.url))}" target="_blank" rel="noopener">link</a>`:""} · sha256 ${esc((s.sha256||"").slice(0,12))} · ${esc((r.provenance||{}).prompt_version||"")}</div></details>`:""}</div>`}
  h+=`</div>`}
 $("result").innerHTML=h;renderChanges()}
 function renderChanges(){if(!D.changes){$("changes").innerHTML="";return}

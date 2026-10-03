@@ -17,6 +17,7 @@ exactly on the boundary year instead of guessing.
 """
 from __future__ import annotations
 
+import re
 from datetime import date
 from typing import Any
 
@@ -61,7 +62,11 @@ def _interval(fact: str, facts: dict, as_of: date):
         if yb is None:
             return None
         # Built some time during year yb; as_of is a precise date.
-        return (as_of.year - yb - 1, as_of.year - yb)
+        yb = int(yb)
+        try:
+            return ((as_of - date(yb, 12, 31)).days / 365.2425, (as_of - date(yb, 1, 1)).days / 365.2425)
+        except ValueError:
+            return None
     v = _num(facts.get(fact))
     return None if v is None else (v, v)
 
@@ -79,6 +84,17 @@ def _cmp_interval(lo: float, hi: float, op: str, x: float):
     return a if a == b else UNKNOWN
 
 
+def _parse_cutoff(text: str):
+    t = str(text).strip()
+    try:
+        return date.fromisoformat(t[:10])
+    except ValueError:
+        pass
+    if re.fullmatch(r"\d{4}", t):
+        return date(int(t), 1, 1)
+    return None
+
+
 def eval_clause(clause: dict, facts: dict, as_of: date):
     fact, op = clause.get("fact"), clause.get("op")
     num, text, lst = clause.get("value_number"), clause.get("value_text"), clause.get("value_list") or []
@@ -87,7 +103,9 @@ def eval_clause(clause: dict, facts: dict, as_of: date):
         yb = _num(facts.get(fact))
         if yb is None or not text:
             return UNKNOWN
-        cutoff = date.fromisoformat(text)
+        cutoff = _parse_cutoff(text)
+        if cutoff is None:
+            return UNKNOWN
         if yb < cutoff.year:
             return TRUE
         if yb > cutoff.year:
@@ -132,6 +150,8 @@ def evaluate(coverage: dict | None, facts: dict, as_of: date) -> tuple[Any, list
 
     ex_vals = []
     for ex in coverage.get("exemptions") or []:
+        if not ex.get("all"):
+            continue  # an exemption with no stated condition must not exempt everything
         v = k_and(eval_clause(c, facts, as_of) for c in ex.get("all") or [])
         ex_vals.append(v)
         if v is not FALSE:

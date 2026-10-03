@@ -103,8 +103,12 @@ def cmd_ingest(a, sp: StarterPack):
     ledger.log("ingest", doc_id=doc_id, sha256=doc["sha256"], path=str(src))
     old = _load(RULES_INTERNAL)
     new = extractor.extract_document(doc)
-    merged = extractor.consolidate([r for r in old if r.get("kind") == "rule"] + new) + \
-        [r for r in old if r.get("kind") == "no_rule"]
+    merged = extractor.consolidate([r for r in old if r.get("kind") == "rule"] + new)
+    enacted = {(r["jurisdiction"]["id"], r["category"]) for r in merged if r.get("status") == "enacted"}
+    dropped = [r for r in old if r.get("kind") == "no_rule" and (r["jurisdiction"]["id"], r["category"]) in enacted]
+    merged += [r for r in old if r.get("kind") == "no_rule" and r not in dropped]
+    for r in dropped:
+        ledger.log("no_rule_withdrawn", rule_id=r["rule_id"], reason="new enacted rule in same jurisdiction/category")
     export.write_json(RULES_INTERNAL, merged)
     mapped, errors = export.export_rules(merged, sp.schema())
     export.write_json(OUT / "rules.json", mapped)
