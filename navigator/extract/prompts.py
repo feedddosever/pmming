@@ -73,11 +73,11 @@ NO_RULE_SCHEMA = {
 }
 
 CATEGORY_GUIDE = """Categories:
-- rent_increase: caps on rent increases (formula, covered buildings, exemptions, local vs state precedence).
+- rent_increase_limits: caps on rent increases (formula, covered buildings, exemptions, local vs state precedence).
 - just_cause_eviction: limits on evictions to listed causes, notice, relocation assistance.
-- security_deposit: maximum deposit, exceptions (e.g. small landlords), effective date.
-- application_screening_fee: caps on application/screening fees, allowed upfront charges, receipts, refunds.
-- screening_restriction: limits on criminal-history or source-of-income screening, timing rules.
+- security_deposits: maximum deposit, exceptions (e.g. small landlords), effective date.
+- application_screening_fees: caps on application/screening fees, allowed upfront charges, receipts, refunds.
+- screening_restrictions: limits on criminal-history or source-of-income screening, timing rules.
 - algorithmic_rent_setting: bans/limits on software or algorithms that set or recommend rents (definition of covered software, prohibited conduct, penalties)."""
 
 EXTRACT_SYSTEM = f"""You extract structured rental-housing rules from official legal text for a public, citation-backed lookup tool. Output is checked automatically against the source, so precision matters more than recall of minor details.
@@ -87,15 +87,16 @@ EXTRACT_SYSTEM = f"""You extract structured rental-housing rules from official l
 Granularity: emit ONE record per (jurisdiction, category, primary legal provision). Do not split one provision into sub-records; do not merge provisions from different jurisdictions. Ignore definitions sections, findings and procedural rules unless they ARE the rule. Skip material outside the six categories.
 
 Field rules:
-- citation: the primary provision in standard short form, e.g. "Cal. Civ. Code §1947.12", "S.F. Admin. Code ch. 37", "N.J.S.A. 2A:18-61.1", "M.G.L. c.186 §15B". If this document is a bill, cite the bill (e.g. "AB 325 (2025)").
+- citation: the primary provision in standard short form, e.g. "Cal. Civ. Code § 1947.12", "S.F. Admin. Code ch. 37", "N.J.S.A. 2A:18-61.1", "M.G.L. c.186 § 15B", "Berkeley Mun. Code ch. 13.63". If this document is a bill, cite the bill (e.g. "AB 325 (2025)").
 - quote: copy ONE contiguous passage VERBATIM from the document (character for character, 1-3 sentences) that states the core requirement. Never paraphrase, never join separate passages, never add ellipses.
-- status: enacted (signed/adopted law), pending (bill or proposal not enacted), struck (removed from ballot, invalidated, failed or repealed).
+- status: enacted (signed/adopted law, even if its effective date is in the future), pending (bill or proposal not enacted), struck (removed from the ballot, invalidated, failed or repealed). A struck measure is still recorded (it will be reported as failed) so users can see it is not law.
+- Jurisdiction: state rules use the state; city rules use the city. San Francisco is a consolidated city and county: use level city, name "San Francisco".
 - effective_date / end_date: ISO YYYY-MM-DD when the text states them; null otherwise. Never guess.
 - requirement: one or two plain-English sentences a renter can understand (reading level ~8th grade). requirement_es: the same in Spanish.
 - key_value: the headline number or formula ("5% + CPI, max 10%", "one month's rent", "$50, CPI-adjusted") or null.
 - applies_if (all must hold) and exemptions (each group is an AND; the rule does not apply if ANY group holds) use facts:
   year_built (integer year), age_years (building age on the lookup date; use for rolling tests like "built within the last 15 years" -> exemption age_years lte 15), units (number of units in the building), use_code, building_type (single_family, condo, duplex, multifamily, mobile_home, dormitory...), owner_type (natural_person, corporation, reit, public...), owner_units_owned, subsidized.
-  Certificate-of-occupancy cutoffs: use fact year_built, op before_date, value_text = the cutoff date (YYYY-MM-DD).
+  Certificate-of-occupancy cutoffs (e.g. "on or before June 13, 1979"): use fact year_built, op before_date, value_text = the day AFTER the last covered date when the text says "on or before" (1979-06-14), or the cutoff date itself when it says "before". The data only has year built, so the boundary year is resolved as unknown automatically.
   Only encode conditions the text states. If a condition depends on a fact not in this list, use fact "other" with value_text describing it.
 - yields_to: when this rule says it does not apply where a stricter/local ordinance applies (e.g. a state rent cap exempting units under local rent control), list {{category, level}} of the rule it yields to.
 - may_preempt: when this rule states or the text indicates it may preempt or conflict with local rules, list {{category, level, note}}.

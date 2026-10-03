@@ -94,12 +94,12 @@ def test_struck_rule_raises_no_conflict():
 
 def test_version_chain_kept_separate():
     from navigator.extract.extractor import consolidate
-    base = {"kind": "rule", "category": "security_deposit", "jurisdiction": {"id": "CA"}, "confidence": 0.9,
-            "source": {"doc_id": "d", "quote": "q", "quote_method": "verbatim"}, "rule_id": "CA|security_deposit|x"}
+    base = {"kind": "rule", "category": "security_deposits", "jurisdiction": {"id": "CA"}, "confidence": 0.9,
+            "source": {"doc_id": "d", "quote": "q", "quote_method": "verbatim"}, "rule_id": "CA|security_deposits|x"}
     old = {**base, "effective_date": "2010-01-01", "end_date": "2024-07-01", "confidence": 0.99}
     new = {**base, "effective_date": "2024-07-01", "end_date": None}
     ids = {r["rule_id"] for r in consolidate([old, new])}
-    assert ids == {"CA|security_deposit|x", "CA|security_deposit|x@2010-01-01"}
+    assert ids == {"CA|security_deposits|x", "CA|security_deposits|x@2010-01-01"}
 
 
 def test_starter_pack_prefers_manifest_and_skips_answer_files(tmp_path):

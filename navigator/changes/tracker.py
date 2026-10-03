@@ -22,17 +22,32 @@ from ..apply.engine import evaluate_address
 ACTIVE = ("applies", "unknown")
 
 
+_TYPE_MAP = {"as_of": "in_force", "boundary": "in_force", "pending": "pending", "negative": "struck"}
+
+
 def load_cases(official=None) -> list[dict]:
+    """Official tests (dev/change_tests.json) supply ids, types and dates; config supplies selectors.
+
+    Official ``rule_ids`` (e.g. "CA-ALG-01") name the organizers' answer-key rules, which our
+    extracted records cannot know, so each test is matched to our rules through a selector."""
     p = config.CONFIG_DIR / "change_cases.json"
-    cases = json.loads(p.read_text()) if p.exists() else []
-    if official:  # keep official ids/titles when they line up with ours
-        items = official if isinstance(official, list) else official.get("tests") or official.get("cases") or []
-        by_id = {str(c.get("id") or c.get("test_id")): c for c in items if isinstance(c, dict)}
-        for c in cases:
-            o = by_id.get(c["id"])
-            if o:
-                c["official"] = o
-    return cases
+    ours = {c["id"]: c for c in (json.loads(p.read_text()) if p.exists() else [])}
+    items = official if isinstance(official, list) else (official or {}).get("tests") or []
+    cases = []
+    for o in items:
+        if not isinstance(o, dict):
+            continue
+        tid = str(o.get("test_id") or o.get("id"))
+        c = dict(ours.pop(tid, {"id": tid, "select": {}}))
+        c["id"], c["title"] = tid, o.get("title") or c.get("title")
+        c["type"] = _TYPE_MAP.get(o.get("type"), c.get("type", "in_force"))
+        if o.get("as_of_before"):
+            c["before"] = o["as_of_before"]
+        if o.get("as_of_after") or o.get("as_of"):
+            c["after"] = o.get("as_of_after") or o.get("as_of")
+        c["official"] = o
+        cases.append(c)
+    return cases + list(ours.values())  # cases we added ourselves (e.g. via nav ingest)
 
 
 def select(rules: list[dict], sel: dict) -> list[dict]:

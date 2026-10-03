@@ -26,7 +26,7 @@ def chunks(text: str):
 
 def norm_citation(c: str | None) -> str:
     c = (c or "").replace("Section", "§").replace("sec.", "§").replace("Sec.", "§")
-    c = re.sub(r"§\s*", "§", c)
+    c = re.sub(r"§\s*", "§ ", c)  # official style: "Cal. Civ. Code § 1947.12"
     return re.sub(r"\s+", " ", c).strip()
 
 
@@ -120,11 +120,11 @@ def consolidate(rules: list[dict]) -> list[dict]:
 
 # ---------------- "no rule at this level" findings ----------------
 _CAT_WORDS = {
-    "rent_increase": ["rent control", "rent increase", "rent stabilization", "rent cap", "amount of rent", "rental rate"],
+    "rent_increase_limits": ["rent control", "rent increase", "rent stabilization", "rent cap", "amount of rent", "rental rate"],
     "just_cause_eviction": ["just cause", "eviction", "good cause"],
-    "security_deposit": ["security deposit", "deposit"],
-    "application_screening_fee": ["application fee", "screening fee", "broker", "fee"],
-    "screening_restriction": ["criminal", "source of income", "fair chance", "screening"],
+    "security_deposits": ["security deposit", "deposit"],
+    "application_screening_fees": ["application fee", "screening fee", "broker", "fee"],
+    "screening_restrictions": ["criminal", "source of income", "fair chance", "screening"],
     "algorithmic_rent_setting": ["algorithm", "software", "pricing", "coordinat"],
 }
 

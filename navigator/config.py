@@ -19,23 +19,23 @@ DEFAULT_AS_OF = date.fromisoformat(os.environ.get("NAV_AS_OF", "2026-10-01"))
 LLM_MODE = os.environ.get("NAV_LLM", "anthropic")
 LLM_MODEL = os.environ.get("NAV_MODEL", "claude-opus-5-5")
 LLM_EFFORT = os.environ.get("NAV_EFFORT", "high")
-PROMPT_VERSION = "2026-10-03.1"
+PROMPT_VERSION = "2026-10-03.2"
 
 CATEGORIES = [
-    "rent_increase",
+    "rent_increase_limits",
     "just_cause_eviction",
-    "security_deposit",
-    "application_screening_fee",
-    "screening_restriction",
+    "security_deposits",
+    "application_screening_fees",
+    "screening_restrictions",
     "algorithmic_rent_setting",
 ]
 
 CATEGORY_LABELS = {
-    "rent_increase": ("Rent increase limits", "Límites de aumento de renta"),
+    "rent_increase_limits": ("Rent increase limits", "Límites de aumento de renta"),
     "just_cause_eviction": ("Just-cause eviction", "Desalojo con causa justificada"),
-    "security_deposit": ("Security deposits", "Depósitos de garantía"),
-    "application_screening_fee": ("Application & screening fees", "Cuotas de solicitud y evaluación"),
-    "screening_restriction": ("Screening restrictions", "Restricciones de evaluación"),
+    "security_deposits": ("Security deposits", "Depósitos de garantía"),
+    "application_screening_fees": ("Application & screening fees", "Cuotas de solicitud y evaluación"),
+    "screening_restrictions": ("Screening restrictions", "Restricciones de evaluación"),
     "algorithmic_rent_setting": ("Algorithmic rent-setting", "Fijación algorítmica de rentas"),
 }
 

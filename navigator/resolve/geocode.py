@@ -10,6 +10,7 @@ Fallback (no network): postal city/neighborhood alias table, marked ``confidence
 from __future__ import annotations
 
 import hashlib
+import re
 import json
 from concurrent.futures import ThreadPoolExecutor
 
@@ -44,13 +45,22 @@ def census_lookup(line: str, client: httpx.Client | None = None) -> dict | None:
     return data
 
 
-def _parse_census(data: dict | None):
+def _parse_census(data: dict | None, prefer: str | None = None):
     try:
         m = data["result"]["addressMatches"]
     except (TypeError, KeyError):
         return None
     if not m:
         return {"match": False}
+    best = m[0]
+    if prefer and len(m) > 1:  # tie: prefer the candidate inside the postal city
+        for cand in m:
+            g = cand.get("geographies", {})
+            names = [(g.get(k) or [{}])[0].get("NAME", "") for k in ("Incorporated Places", "County Subdivisions")]
+            if any(n.lower().startswith(prefer.lower()) for n in names):
+                best = cand
+                break
+    m = [best] + [x for x in m if x is not best]
     geo = m[0].get("geographies", {})
     first = lambda k: (geo.get(k) or [{}])[0]  # noqa: E731
     state = first("States").get("STUSAB")
@@ -62,9 +72,25 @@ def _parse_census(data: dict | None):
             "ties": len(m) > 1}
 
 
+def _normalize_street(street: str | None) -> str | None:
+    if not street:
+        return street
+    s = re.sub(r"\b0+(\d+(ST|ND|RD|TH))\b", r"\1", street.upper())   # 05TH -> 5TH
+    s = re.sub(r"\bAV\b", "AVE", s)
+    return s
+
+
 def resolve_one(addr: dict, use_network: bool = True, client=None) -> dict:
-    line = ", ".join(x for x in [addr.get("street"), addr.get("city"), addr.get("state"), addr.get("zip")] if x)
-    parsed = _parse_census(census_lookup(line, client)) if use_network else None
+    parsed = None
+    if use_network:
+        line = ", ".join(x for x in [addr.get("street"), addr.get("city"), addr.get("state"), addr.get("zip")] if x)
+        parsed = _parse_census(census_lookup(line, client), addr.get("city"))
+        if not (parsed and parsed.get("match")):
+            # retry: normalized street, and without a possibly wrong ZIP
+            line2 = ", ".join(x for x in [_normalize_street(addr.get("street")), addr.get("city"), addr.get("state")] if x)
+            retry = _parse_census(census_lookup(line2, client), addr.get("city"))
+            if retry and retry.get("match"):
+                parsed = retry
     st = addr.get("state")
     if parsed and parsed.get("match"):
         st = parsed["state"] or st

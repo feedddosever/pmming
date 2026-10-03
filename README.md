@@ -21,31 +21,39 @@ exact quoted source text, and shows which addresses a new, pending or struck law
 ```bash
 pip install -r requirements.txt
 export ANTHROPIC_API_KEY=...            # extraction model: NAV_MODEL (default claude-opus-5-5)
-# put the official starter pack in data/starter_pack/
-python -m navigator inspect             # what was found (manifest, addresses, schema, dev key, score.py)
+# the official starter pack goes anywhere under data/starter_pack/ (found automatically)
+python -m navigator inspect             # what was found: 87 docs (54 with text), 500 addresses, schema, T1-T5
 python -m navigator all                 # extract → resolve → lookup → changes → site
-python -m navigator score -- <args>     # official score.py (see its --help)
+python -m navigator lookup --as-of 2027-07-02   # extra as-of snapshots (lookups_<date>.json)
 python -m http.server -d out/site 8000  # demo UI
 pytest -q                               # 13 tests, run offline with a fake LLM on synthetic fixtures
 ```
-Outputs: `out/rules.json`, `out/lookups.json`, `out/changes.json`, `out/audit_log.jsonl`,
-`out/schema_report.json`, `out/site/` (static demo: deploy to GitHub Pages or any static host).
+Outputs, in the participant guide's formats (§5):
+- `out/rules.json`: `{"rules": [...]}`, each record validated against `schema/rule_record.schema.json`
+  (`team_rule_id` is a stable hash, so ids survive reruns and `nav ingest`). Rules whose quote cannot be
+  verified verbatim are skipped and listed in `out/schema_report.json`, never exported with an invented span.
+- `out/lookups.json`: `{"as_of", "lookups": {address_id: [{team_rule_id, result, explanation, conflict_flag}]}}`
+  for all 500 addresses; rules that don't apply are left out.
+- `out/changes.json`: `{test_id: {affected_address_ids, conflict_flag_address_ids, notes}}` for T1–T5
+  (dates and types read from `dev/change_tests.json`; selectors in `config/change_cases.json`).
+- Also `changes_details.json` (before/after per address), `no_rule_findings.json`, `audit_log.jsonl`, and
+  `out/site/` (static demo for GitHub Pages or any static host).
+
+The official pack has **no scoring script or dev answer key** ("no-scoring" edition), so quality is checked
+against the expected behaviour stated in `dev/change_tests.json` and the participant guide.
 
 Every LLM and geocoder response is cached in `cache/`. `NAV_LLM=replay` reruns the whole pipeline
 offline and deterministically (useful for the live rerun in the demo check).
 
-## Kickoff checklist (hour 0–1)
-1. Copy the starter pack into `data/starter_pack/`, then run `python -m navigator inspect`. If a file or
-   column is not detected, set it in `config/column_map.json`
-   (`{"addresses": {"year_built": "YrBuilt"}, "manifest": {"path": "file"}}`).
-2. Open the rule schema. `out/schema_report.json` lists every field the exporter could not fill;
-   map them in `config/schema_map.json` (`{"target_field": "source.quote"}`).
-3. Compare 3 dev-key rules with our records: citation **style** and granularity decide matching.
-   Adjust the citation examples in `navigator/extract/prompts.py` and bump `PROMPT_VERSION`.
-4. Read the participant guide's partial-credit rules and the change-case file. Align the selectors in
-   `config/change_cases.json` to the official ids.
-5. `python -m navigator resolve` early: the Census geocoder is the slowest external dependency.
-6. Check the lookups.json shape against what `score.py` expects (`export.lookups`).
+## Run checklist
+1. `export ANTHROPIC_API_KEY=...`, then `python -m navigator all`.
+2. Read `out/schema_report.json`: skipped rules (unverified quotes) and any schema errors.
+3. Spot-check the known cases: SF before/after 1979 (superseded vs unknown), Berkeley/San Diego (unknown),
+   Hoboken/Jersey City (local bans, FAIR Act conflict flag), Boston/Cambridge (pending bills, no rent cap).
+4. Check `out/changes.json` against the expected behaviour in `dev/change_tests.json` (T1–T5).
+5. If citations or rule granularity look off, adjust `navigator/extract/prompts.py`, bump `PROMPT_VERSION`
+   and rerun (unchanged calls come from the cache).
+6. `python -m navigator lookup --as-of 2027-07-02` for the T3 "after" snapshot shown in the demo.
 
 ## Hour-16 drill
 ```bash
@@ -61,8 +69,8 @@ T6 (`--case`), and prints the affected addresses and the effective date. Rehears
   in 1979 (unknown, with the explanation), Berkeley/San Diego (missing facts → unknown), Hoboken
   (local ban + FAIR Act conflict flag, not yet effective), Boston (pending bills, no city rent control).
   Then switch to Spanish, move the date to 2027-07-02, and open the Changes tab.
-- **Technical:** pipeline diagram, citation lock, three-valued logic, as-of engine, full `score.py` dev
-  report, T1–T6 results, and the hour-16 `nav ingest` run.
+- **Technical:** pipeline diagram, citation lock, three-valued logic, as-of engine, T1–T5 results against
+  the expected behaviour in `dev/change_tests.json`, and a `nav ingest` run of a new ordinance.
 
 ## Architecture
 ```
@@ -86,7 +94,10 @@ rules + stacks + date ─► apply/predicates.py (three-valued) + status.py (as-
   the as-of date; boundary years return `unknown`.
 
 ## Status and limits
-- Built and tested before the starter pack was available (it was not reachable from the build
-  environment). The tests use a synthetic fixture corpus under `fixtures/`, clearly labelled
-  *not legal text*, and a fake LLM. Real extraction quality must be measured with `score.py` at kickoff.
-- `out/` holds submission files only after a real run on the official corpus.
+- Adapted to the official starter pack (formats, column names, category names, T1–T5).
+- Address resolution has been run on all 500 sample addresses: 493 matched by the Census geocoder,
+  7 resolved from the postal city (house-number-less Boston streets, Newark rows with wrong ZIPs);
+  every address lands in the expected city.
+- **Extraction has not been run yet:** it needs `ANTHROPIC_API_KEY`. Estimated 55 extraction calls,
+  roughly $10–20 with the default model.
+- Tests use a synthetic fixture corpus under `fixtures/` (labelled *not legal text*) and a fake LLM.

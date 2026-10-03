@@ -28,40 +28,52 @@ def test_end_to_end(workspace):
     assert json.loads((out / "schema_report.json").read_text())["n_errors"] == 0
     # no-rule findings only with evidence: Boston and Cambridge rent control
     nr = {r["rule_id"] for r in rules if r["kind"] == "no_rule"}
-    assert nr == {"MA:city:boston|rent_increase|no_rule", "MA:city:cambridge|rent_increase|no_rule"}
+    assert nr == {"MA:city:boston|rent_increase_limits|no_rule", "MA:city:cambridge|rent_increase_limits|no_rule"}
 
     sf1 = results(addrs, rules, "SF1")        # 1962: local ordinance applies, state cap yields
-    assert sf1["CA:city:san-francisco|rent_increase"]["result"] == "applies"
-    assert sf1["CA|rent_increase"]["result"] == "superseded"
+    assert sf1["CA:city:san-francisco|rent_increase_limits"]["result"] == "applies"
+    assert sf1["CA|rent_increase_limits"]["result"] == "superseded"
     sf2 = results(addrs, rules, "SF2")        # built 1979: local coverage unknown -> state unknown
-    assert sf2["CA:city:san-francisco|rent_increase"]["result"] == "unknown"
-    assert sf2["CA|rent_increase"]["result"] == "unknown"
+    assert sf2["CA:city:san-francisco|rent_increase_limits"]["result"] == "unknown"
+    assert sf2["CA|rent_increase_limits"]["result"] == "unknown"
     sf3 = results(addrs, rules, "SF3")        # 2018: state 15-year exemption, local not covered
-    assert "CA|rent_increase" not in sf3 and "CA:city:san-francisco|rent_increase" not in sf3
+    assert "CA|rent_increase_limits" not in sf3 and "CA:city:san-francisco|rent_increase_limits" not in sf3
     sd1 = results(addrs, rules, "SD1")        # no year built -> unknown, never "does not apply"
-    assert sd1["CA|rent_increase"]["result"] == "unknown"
+    assert sd1["CA|rent_increase_limits"]["result"] == "unknown"
     hb1 = results(addrs, rules, "HB1")
     assert hb1["NJ|algorithmic_rent_setting"]["result"] == "not_yet_effective"
     assert hb1["NJ:city:hoboken|algorithmic_rent_setting"]["flags"][0]["type"] == "conflict"
     bo1 = results(addrs, rules, "BO1")
     assert bo1["MA|algorithmic_rent_setting"]["result"] == "pending"
     assert all(r["citation"] != ballot["citation"] for r in bo1.values())   # struck never exported
-    # every "applies" carries a verified quote and retrieval date
+    # official formats: every address present; every result points at an exported, quoted rule
+    rules_out = json.loads((out / "rules.json").read_text())["rules"]
+    by_tid = {r["team_rule_id"]: r for r in rules_out}
+    assert all(len(r["quoted_span"]) >= 20 and r["source_url"] for r in rules_out)
+    assert all(r["category"] in config.CATEGORIES and r["level"] in ("state", "city") for r in rules_out)
+    assert {r["jurisdiction"] for r in rules_out} >= {"CA", "San Francisco, CA", "Hoboken, NJ"}
     lk = json.loads((out / "lookups.json").read_text())
-    applies = [r for a in lk["addresses"] for r in a["results"] if r["result"] == "applies"]
-    assert applies and all(r["quote"] and r["retrieval_date"] for r in applies)
+    assert lk["as_of"] == "2026-10-01" and set(lk["lookups"]) == {a["address_id"] for a in addrs}
+    rows = [r for rs in lk["lookups"].values() for r in rs]
+    assert rows and all(r["team_rule_id"] in by_tid and r["explanation"] for r in rows)
+    assert set(rows[0]) == {"team_rule_id", "result", "explanation", "conflict_flag"}
+    hb = lk["lookups"]["HB1"]
+    assert any(r["conflict_flag"] for r in hb)
+    fair_out = next(r for r in rules_out if "FAIR" in r["citation"])
+    assert fair_out["status"] == "not_yet_effective" and fair_out["conflict_flag"]
 
 
 def test_change_cases(workspace):
     rules, addrs, out = run_all(workspace)
-    t = {x["id"]: x for x in json.loads((out / "changes.json").read_text())["tests"]}
+    t = json.loads((out / "changes.json").read_text())
+    assert set(t) == {"T1", "T2", "T3", "T4", "T5"}
     ca = {a["address_id"] for a in addrs if a["state"] == "CA"}
-    assert set(t["T1"]["affected_addresses"]) == ca
-    assert set(t["T2"]["affected_addresses"]) == {"HB1"}           # only inside Hoboken (no JC fixture rule)
-    assert set(t["T3"]["affected_addresses"]) == {"HB1", "JC1", "NW1"}
-    assert t["T3"]["conflicts"] == ["HB1"]                         # conflict only where a local ban exists
-    assert set(t["T4"]["affected_addresses"]) == {"BO1", "CB1"}
-    assert t["T5"]["affected_addresses"] == []
+    assert set(t["T1"]["affected_address_ids"]) == ca
+    assert t["T2"]["affected_address_ids"] == ["HB1"]              # only inside Hoboken (no JC fixture rule)
+    assert t["T3"]["affected_address_ids"] == ["HB1", "JC1", "NW1"]
+    assert t["T3"]["conflict_flag_address_ids"] == ["HB1"]         # conflict only where a local ban exists
+    assert t["T4"]["affected_address_ids"] == ["BO1", "CB1"]
+    assert t["T5"]["affected_address_ids"] == []
 
 
 def test_hour16_ingest(workspace):
@@ -69,10 +81,11 @@ def test_hour16_ingest(workspace):
     cli.main(["--pack", str(workspace / "pack"), "ingest", str(config.ROOT / "fixtures" / "new_cambridge_ordinance.txt"),
               "--doc-id", "new_cambridge_ordinance", "--retrieval-date", "2026-10-04"])
     out = workspace / "out"
-    t6 = next(x for x in json.loads((out / "changes.json").read_text())["tests"] if x["id"] == "T6")
-    assert t6["affected_addresses"] == ["CB1"] and t6["after"] == "2027-03-01"
-    cb1 = next(a for a in json.loads((out / "lookups.json").read_text())["addresses"] if a["address_id"] == "CB1")
-    fee = next(r for r in cb1["results"] if r["category"] == "application_screening_fee")
+    t6 = json.loads((out / "changes.json").read_text())["T6"]
+    assert t6["affected_address_ids"] == ["CB1"] and "2027-03-01" in t6["notes"]
+    rules_out = {r["team_rule_id"]: r for r in json.loads((out / "rules.json").read_text())["rules"]}
+    cb1 = json.loads((out / "lookups.json").read_text())["lookups"]["CB1"]
+    fee = next(r for r in cb1 if rules_out[r["team_rule_id"]]["category"] == "application_screening_fees")
     assert fee["result"] == "not_yet_effective"
 
 

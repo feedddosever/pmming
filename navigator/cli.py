@@ -44,16 +44,32 @@ def cmd_inspect(a, sp: StarterPack):
     print(json.dumps(info, indent=2))
 
 
+def _write_rules(rules, sp: StarterPack) -> set[str]:
+    """Write the official rules.json, validate each record, and return the exported team ids."""
+    import jsonschema
+    data, skipped = export.official_rules(rules, config.DEFAULT_AS_OF)
+    schema = sp.schema()
+    errors = []
+    if schema:
+        v = jsonschema.validators.validator_for(schema)(schema)
+        for rec in data["rules"]:
+            errors += [f"{rec['team_rule_id']}: {'/'.join(map(str, e.path))} {e.message}" for e in v.iter_errors(rec)]
+    export.write_json(OUT / "rules.json", data)
+    export.write_json(OUT / "schema_report.json", {"n_errors": len(errors), "errors": errors[:500],
+                                                    "skipped": skipped})
+    no_rule = [r for r in rules if r.get("kind") == "no_rule"]
+    export.write_json(OUT / "no_rule_findings.json", no_rule)
+    return {r["team_rule_id"] for r in data["rules"]}
+
+
 def cmd_extract(a, sp: StarterPack):
     docs = sp.documents()
     rules = extractor.extract_corpus(docs, workers=a.workers, no_rule=not a.skip_no_rule)
     export.write_json(RULES_INTERNAL, rules)
-    mapped, errors = export.export_rules(rules, sp.schema())
-    export.write_json(OUT / "rules.json", mapped)
-    export.write_json(OUT / "schema_report.json", {"errors": errors[:500], "n_errors": len(errors)})
-    unverified = sum(1 for r in rules if r.get("source", {}).get("quote") is None)
-    print(f"{len(rules)} records ({sum(r.get('kind') == 'no_rule' for r in rules)} no-rule findings), "
-          f"{unverified} without verified quote, {len(errors)} schema errors")
+    ids = _write_rules(rules, sp)
+    rep = json.loads((OUT / "schema_report.json").read_text())
+    print(f"{len(rules)} records ({sum(r.get('kind') == 'no_rule' for r in rules)} no-rule findings); "
+          f"{len(ids)} exported, {len(rep['skipped'])} skipped, {rep['n_errors']} schema errors")
 
 
 def cmd_resolve(a, sp: StarterPack):
@@ -70,19 +86,22 @@ def cmd_lookup(a, sp: StarterPack):
         addrs = [x for x in addrs if x["address_id"] == a.address]
         print(json.dumps(export.lookups(addrs, rules, as_of), indent=1))
         return
-    data = export.lookups(addrs, rules, as_of)
-    export.write_json(OUT / "lookups.json", data)
+    ids = _write_rules(rules, sp)
+    data = export.official_lookups(addrs, rules, as_of, ids)
+    name = "lookups.json" if as_of == config.DEFAULT_AS_OF else f"lookups_{as_of.isoformat()}.json"
+    export.write_json(OUT / name, data)
     counts = {}
-    for x in data["addresses"]:
-        for r in x["results"]:
+    for rows in data["lookups"].values():
+        for r in rows:
             counts[r["result"]] = counts.get(r["result"], 0) + 1
-    print(f"lookups for {len(addrs)} addresses as of {as_of}: {counts}")
+    print(f"{name}: {len(data['lookups'])} addresses as of {as_of}: {counts}")
 
 
 def cmd_changes(a, sp: StarterPack):
     rules, addrs = _load(RULES_INTERNAL), _load(ADDRS)
     data = tracker.run_all(rules, addrs, sp.change_cases())
-    export.write_json(OUT / "changes.json", data)
+    export.write_json(OUT / "changes_details.json", data)
+    export.write_json(OUT / "changes.json", export.official_changes(data))
     for t in data["tests"]:
         print(f"{t['id']}: {len(t['affected_addresses'])} affected, {len(t['conflicts'])} conflict-flagged, "
               f"{len(t['rules'])} rules matched {('- ' + '; '.join(t['notes'])) if t['notes'] else ''}")
@@ -110,8 +129,7 @@ def cmd_ingest(a, sp: StarterPack):
     for r in dropped:
         ledger.log("no_rule_withdrawn", rule_id=r["rule_id"], reason="new enacted rule in same jurisdiction/category")
     export.write_json(RULES_INTERNAL, merged)
-    mapped, errors = export.export_rules(merged, sp.schema())
-    export.write_json(OUT / "rules.json", mapped)
+    _write_rules(merged, sp)
     print(f"extracted {len(new)} rule(s) from {doc_id}:")
     for r in new:
         print(f"  - {r['citation']} | {r['jurisdiction']['id']} | {r['category']} | status={r['status']} "
@@ -140,7 +158,8 @@ def cmd_ingest(a, sp: StarterPack):
 
 def cmd_site(a, sp: StarterPack):
     rules, addrs = _load(RULES_INTERNAL), _load(ADDRS)
-    changes = json.loads((OUT / "changes.json").read_text()) if (OUT / "changes.json").exists() else None
+    p = OUT / "changes_details.json"
+    changes = json.loads(p.read_text()) if p.exists() else None
     path = site.build(rules, addrs, changes)
     print(f"site written to {path}  (serve: python -m http.server -d {path} 8000)")
 

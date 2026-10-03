@@ -7,3 +7,5 @@ data/starter_pack/*
 cache/
 out/site/
 .env
+out/*
+!out/README.md
