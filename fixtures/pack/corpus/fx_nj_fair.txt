@@ -1,0 +1,2 @@
+SYNTHETIC TEST FIXTURE - NOT LEGAL TEXT. Written for automated tests of the Navigator pipeline only.
+New Jersey Fixture FAIR Act, P.L.2026, c.43, approved July 20, 2026. No landlord shall use an algorithmic device that relies on nonpublic competitor data to set or recommend rent for a dwelling unit. This act shall take effect July 1, 2027. The provisions of this act shall supersede any municipal ordinance regulating the use of algorithmic rent-setting devices.

@@ -1,0 +1,2 @@
+SYNTHETIC TEST FIXTURE - NOT LEGAL TEXT. Written for automated tests of the Navigator pipeline only.
+Massachusetts Fixture General Laws Chapter 40P. No city or town shall enact, maintain or enforce any ordinance or by-law regulating the amount of rent charged for the use or occupancy of residential property.

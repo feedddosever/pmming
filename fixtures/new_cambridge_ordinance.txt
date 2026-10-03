@@ -1,0 +1,2 @@
+SYNTHETIC TEST FIXTURE - NOT LEGAL TEXT. Written for automated tests of the Navigator pipeline only.
+Cambridge Fixture Ordinance 2026-99. No owner of a residential building containing three or more units shall charge an application fee to a prospective tenant. This ordinance shall take effect on March 1, 2027.

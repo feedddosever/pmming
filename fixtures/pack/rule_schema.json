@@ -1,0 +1,9 @@
+{"$schema": "https://json-schema.org/draft/2020-12/schema", "title": "FIXTURE rule record (guess; replace with the official schema)",
+ "type": "object",
+ "properties": {
+  "rule_id": {"type": "string"}, "category": {"type": "string", "enum": ["rent_increase","just_cause_eviction","security_deposit","application_screening_fee","screening_restriction","algorithmic_rent_setting"]},
+  "jurisdiction": {"type": "string"}, "requirement": {"type": "string"}, "coverage_conditions": {"type": ["string","null"]},
+  "exemptions": {"type": "array", "items": {"type": "string"}}, "effective_date": {"type": ["string","null"]},
+  "status": {"type": "string", "enum": ["enacted","pending","struck"]}, "penalty": {"type": ["string","null"]},
+  "citation": {"type": "string"}, "quoted_span": {"type": ["string","null"]}},
+ "required": ["rule_id","category","jurisdiction","requirement","status","citation"]}

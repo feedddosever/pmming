@@ -1,0 +1,2 @@
+SYNTHETIC TEST FIXTURE - NOT LEGAL TEXT. Written for automated tests of the Navigator pipeline only.
+Massachusetts Fixture Ballot Question (2026) concerning local rent control. On June 23, 2026 the Supreme Judicial Court ordered that the question be struck from the November ballot, and it will not appear before voters.

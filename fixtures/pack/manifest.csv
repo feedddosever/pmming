@@ -1,0 +1,10 @@
+doc_id,title,url,path,retrieval_date
+fx_ca_rent,Fixture CA rent cap,https://example.invalid/fx_ca_rent,corpus/fx_ca_rent.txt,2026-09-15
+fx_sf_rent,Fixture SF rent ordinance,https://example.invalid/fx_sf_rent,corpus/fx_sf_rent.txt,2026-09-15
+fx_ca_algo,Fixture CA AB 325,https://example.invalid/fx_ca_algo,corpus/fx_ca_algo.txt,2026-09-15
+fx_nj_fair,Fixture NJ FAIR Act,https://example.invalid/fx_nj_fair,corpus/fx_nj_fair.txt,2026-09-15
+fx_hoboken_algo,Fixture Hoboken ban,https://example.invalid/fx_hoboken_algo,corpus/fx_hoboken_algo.txt,2026-09-15
+fx_ma_rent,Fixture MA c.40P,https://example.invalid/fx_ma_rent,corpus/fx_ma_rent.txt,2026-09-15
+fx_ma_pending,Fixture MA S.2983,https://example.invalid/fx_ma_pending,corpus/fx_ma_pending.txt,2026-09-15
+fx_ma_ballot,Fixture MA ballot question,https://example.invalid/fx_ma_ballot,corpus/fx_ma_ballot.txt,2026-09-15
+fx_news,Fixture news link (link only),https://example.invalid/news,,2026-09-15

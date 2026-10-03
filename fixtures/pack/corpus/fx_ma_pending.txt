@@ -1,0 +1,2 @@
+SYNTHETIC TEST FIXTURE - NOT LEGAL TEXT. Written for automated tests of the Navigator pipeline only.
+Massachusetts Fixture Senate Bill S.2983, as filed. A landlord shall not use a rent-setting algorithm that incorporates nonpublic competitor data to determine rent for a residential dwelling unit. This bill has been referred to committee and has not been enacted.

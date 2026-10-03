@@ -1,0 +1,4 @@
+SYNTHETIC TEST FIXTURE - NOT LEGAL TEXT. Written for automated tests of the Navigator pipeline only.
+California Fixture Code Section 100. (a) An owner of residential real property shall not, over the course of any 12-month period, increase the gross rental rate for a dwelling or a unit more than 5 percent plus the percentage change in the cost of living, or 10 percent, whichever is lower.
+(b) This section shall not apply to housing that has been issued a certificate of occupancy within the previous 15 years.
+(c) This section shall not apply to a dwelling unit that is subject to any ordinance that restricts annual increases in the rental rate to an amount lower than that provided in subdivision (a).

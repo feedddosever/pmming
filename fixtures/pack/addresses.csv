@@ -1,0 +1,11 @@
+property_id,street,city,state,zip,year_built,units,use_code
+SF1,100 Fixture St,San Francisco,CA,94110,1962,20,MF
+SF2,200 Fixture St,San Francisco,CA,94110,1979,12,MF
+SF3,300 Fixture St,San Francisco,CA,94110,2018,40,MF
+LA1,400 Fixture Ave,Los Angeles,CA,90012,1970,8,MF
+SD1,500 Fixture Ave,San Diego,CA,92101,,30,MF
+HB1,1 Fixture Pl,Hoboken,NJ,07030,1990,10,MF
+JC1,2 Fixture Pl,Jersey City,NJ,07302,2000,50,MF
+NW1,3 Fixture Pl,Newark,NJ,07102,1950,6,MF
+BO1,4 Fixture Rd,Dorchester,MA,02124,1920,3,MF
+CB1,5 Fixture Rd,Cambridge,MA,02139,1900,4,MF
