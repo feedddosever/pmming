@@ -65,6 +65,9 @@ def needs_review(rule: dict, doc_text: str) -> list[str]:
         why.append("low-confidence just-cause rule")
     if (rule.get("confidence") or 0) < 0.6:
         why.append("low confidence")
+    if rule["category"] == "just_cause_eviction" and re.search(
+            r"(?i)notif|notice", " ".join(str(rule.get(k) or "") for k in ("title", "requirement"))):
+        why.append("just-cause rule that may only concern notices")
     if rule.get("status") == "pending" and ":" in rule["jurisdiction"]["id"]:
         why.append("pending local ordinance")
     if rule.get("status") == "enacted" and not rule.get("effective_date") and re.search(
