@@ -200,6 +200,8 @@ class StarterPack:
             for h in header:
                 if h not in col.values() and row.get(h) not in (None, ""):
                     facts.setdefault(h.lower(), row[h])
+            from ..resolve.enrich import enrich
+            facts = enrich(facts)
             out.append({
                 "address_id": g("address_id") or f"A{i:04d}",
                 "street": g("street"), "city": g("city"), "state": (g("state") or "").upper() or None,

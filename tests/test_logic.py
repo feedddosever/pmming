@@ -145,3 +145,33 @@ def test_review_flags():
                                                                   "effective_date": None}, "AB 325 (2025)")
     assert "pending local ordinance" in needs_review({**base, "status": "pending",
                                                       "jurisdiction": {"id": "CA:city:berkeley"}}, "1947.12")
+
+
+def test_enrich_unit_ranges_and_defaults():
+    from navigator.resolve.enrich import enrich
+    f = enrich({"use_description": "APT 7-30 UNITS", "use_code": "A/112", "units": None})
+    assert (f["units_min"], f["units_max"], f["building_type"]) == (7, 30, "multifamily")
+    assert f["subsidized"] == "false" and "subsidized" in f["derived_facts"]
+    assert enrich({"use_description": "SUBSD HOUSING S- 8", "units": None})["subsidized"] == "true"
+    assert enrich({"use_description": "4B-7U/4B-24U-G", "use_code": "4C", "units": None})["units_max"] == 31
+    assert enrich({"use_description": "x", "units": 12})["units"] == 12          # data always wins
+
+
+def test_unit_range_resolves_exemption_and_trigger_is_ignored():
+    cov = {"applies_if": [C("trigger", "is_true", text="tenant lived there 12 months")],
+           "exemptions": [{"label": "duplex", "all": [C("units", "lte", 2)]}]}
+    assert P.evaluate(cov, {"units_min": 7, "units_max": 30}, D)[0] is True
+    assert P.evaluate(cov, {"units_min": 1, "units_max": 4}, D)[0] is None
+
+
+def test_covered_by_follows_local_ordinance():
+    from navigator.apply.engine import evaluate_address
+    base = lambda rid, jid, cat, cov: {"rule_id": rid, "kind": "rule", "category": cat, "jurisdiction": {"id": jid},
+                                       "citation": rid, "status": "enacted", "coverage": cov, "source": {}}
+    rules = [base("RSO", "CA:city:los-angeles", "rent_increase_limits",
+                  {"applies_if": [C("year_built", "before_date", text="1978-10-02")]}),
+             base("RSO-annual", "CA:city:los-angeles", "rent_increase_limits",
+                  {"applies_if": [C("covered_by", "is_true", text="rent_increase_limits")]})]
+    addr = lambda yb: {"stack": ["CA", "CA:county:los-angeles", "CA:city:los-angeles"], "facts": {"year_built": yb}}
+    assert {r["rule_id"]: r["result"] for r in evaluate_address(addr(1927), rules, D)}["RSO-annual"] == "applies"
+    assert "RSO-annual" not in {r["rule_id"] for r in evaluate_address(addr(1990), rules, D)}

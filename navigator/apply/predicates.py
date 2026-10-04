@@ -68,7 +68,12 @@ def _interval(fact: str, facts: dict, as_of: date):
         except ValueError:
             return None
     v = _num(facts.get(fact))
-    return None if v is None else (v, v)
+    if v is not None:
+        return (v, v)
+    lo, hi = _num(facts.get(f"{fact}_min")), _num(facts.get(f"{fact}_max"))
+    if lo is None and hi is None:
+        return None
+    return (lo if lo is not None else float("-inf"), hi if hi is not None else float("inf"))
 
 
 def _cmp_interval(lo: float, hi: float, op: str, x: float):
@@ -97,6 +102,11 @@ def _parse_cutoff(text: str):
 
 def eval_clause(clause: dict, facts: dict, as_of: date):
     fact, op = clause.get("fact"), clause.get("op")
+    if fact == "trigger":  # tenancy/event condition: not part of building-level coverage
+        return TRUE
+    if fact == "covered_by":
+        v = (facts.get("_covered_by") or {}).get(clause.get("value_text"), UNKNOWN)
+        return k_not(v) if op == "is_false" else v
     num, text, lst = clause.get("value_number"), clause.get("value_text"), clause.get("value_list") or []
 
     if op == "before_date":  # e.g. year_built vs certificate-of-occupancy cutoff date
@@ -157,6 +167,14 @@ def evaluate(coverage: dict | None, facts: dict, as_of: date) -> tuple[Any, list
         if v is not FALSE:
             reasons.append(f"exemption '{ex.get('label', 'exemption')}' is {_word(v)}")
     exempt = k_or(ex_vals) if ex_vals else FALSE
+    derived = set(facts.get("derived_facts") or [])
+    used = {c.get("fact") for c in coverage.get("applies_if") or []} | {
+        c.get("fact") for ex in coverage.get("exemptions") or [] for c in ex.get("all") or []}
+    for f in sorted(used & ({"units", "building_type", "subsidized"})):
+        keys = [k for k in derived if k == f or k.startswith(f + "_")]
+        if keys:
+            vals = ", ".join(f"{k}={facts.get(k)}" for k in sorted(keys))
+            reasons.append(f"derived from the assessor use description: {vals}")
     return k_and([base, k_not(exempt)]), reasons
 
 
@@ -164,7 +182,8 @@ def _word(v):
     return "unknown (the data does not say)" if v is UNKNOWN else ("met" if v else "not met")
 
 
-_FACT = {"year_built": "year built", "age_years": "building age (years)", "units": "number of units",
+_FACT = {"covered_by": "covered by local ordinance (category)", "trigger": "tenancy/event condition",
+         "owner_occupied": "owner-occupied", "year_built": "year built", "age_years": "building age (years)", "units": "number of units",
          "use_code": "use code", "building_type": "building type", "owner_type": "owner type",
          "owner_units_owned": "units the owner owns", "subsidized": "subsidized housing", "other": "condition"}
 _OP = {"lt": "under", "lte": "at most", "gt": "over", "gte": "at least", "eq": "is", "ne": "is not",

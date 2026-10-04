@@ -33,6 +33,20 @@ def evaluate_address(address: dict, rules: list[dict], as_of: date, *, assume_en
     facts = address.get("facts") or {}
     candidates = [r for r in rules if r.get("kind", "rule") == "rule" and r["jurisdiction"]["id"] in stack]
 
+    # "covered by the local <category> ordinance": OR of the coverage of local in-force rules in that
+    # category that do not themselves depend on such a reference.
+    facts = dict(facts)
+    cov_map: dict[str, object] = {}
+    for r in candidates:
+        if ":" not in r["jurisdiction"]["id"] or st.status_on(r, as_of) != st.IN_FORCE:
+            continue
+        cov = r.get("coverage") or {}
+        if any(c.get("fact") == "covered_by" for c in cov.get("applies_if") or []):
+            continue
+        v, _ = predicates.evaluate(cov, facts, as_of)
+        cov_map[r["category"]] = predicates.k_or([cov_map.get(r["category"], False), v])
+    facts["_covered_by"] = cov_map
+
     raw: dict[str, dict] = {}
     for r in candidates:
         rr = dict(r)

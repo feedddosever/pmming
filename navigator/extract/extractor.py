@@ -223,6 +223,9 @@ def extract_corpus(docs: list[dict], workers: int = 4, no_rule: bool = True) -> 
         from .review import review
         by_id = {d["doc_id"]: d for d in docs}
         rules = consolidate(review(rules, by_id, _rule_from_llm))
+    if not PENDING:  # make free-text coverage clauses testable
+        from .normalize import normalize
+        rules = normalize(rules)
     if no_rule and not PENDING:
         rules += no_rule_pass(rules, docs)
     return rules

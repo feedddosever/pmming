@@ -73,6 +73,8 @@ def fake(system, user, schema_name):
                     "citation": "M.G.L. Fixture c.40P",
                     "quote": "No city or town shall enact, maintain or enforce any ordinance or by-law regulating the amount of rent charged for the use or occupancy of residential property."}
         return {"exists": False, "explanation": "No explicit evidence.", "citation": None, "quote": None}
+    if schema_name == "normalize":
+        return {"clauses": []}
     if schema_name == "review":
         rec = json.loads(user.split("Record:\n", 1)[1].split("\n\nDocument id:", 1)[0])
         return {"decision": "keep", "reason": "fixture", "rule": rec}

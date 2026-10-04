@@ -119,7 +119,8 @@ def run_case(case: dict, rules: list[dict], addresses: list[dict]) -> dict:
         for x in evaluate_address(a, rules, horizon):
             if x["rule_id"] in ids:
                 flags += [f for f in x["flags"] if f.get("type") == "conflict"]
-        if flags:
+        wants_conflicts = "conflict_with" in (case.get("official") or {}) or not case.get("official")
+        if flags and wants_conflicts:
             uniq = {json.dumps(f, sort_keys=True): f for f in flags}
             det["conflict_flags"] = list(uniq.values())
             res["conflicts"].append(a["address_id"])
