@@ -17,7 +17,7 @@ DEFAULT_AS_OF = date.fromisoformat(os.environ.get("NAV_AS_OF", "2026-10-01"))
 
 # LLM: "anthropic" (live + cache), "replay" (cache only), "fake" (tests).
 LLM_MODE = os.environ.get("NAV_LLM", "anthropic")
-LLM_MODEL = os.environ.get("NAV_MODEL", "claude-opus-5-5")
+LLM_MODEL = os.environ.get("NAV_MODEL", "claude-code-agent" if LLM_MODE == "agent" else "claude-opus-5-5")
 LLM_EFFORT = os.environ.get("NAV_EFFORT", "high")
 PROMPT_VERSION = "2026-10-03.2"
 

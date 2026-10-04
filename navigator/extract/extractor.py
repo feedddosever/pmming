@@ -78,6 +78,17 @@ def _iso(s):
 
 
 def extract_document(doc: dict) -> list[dict]:
+    try:
+        return _extract_document(doc)
+    except llm.LLMPending:
+        PENDING.append(doc["doc_id"])
+        return []
+
+
+PENDING: list[str] = []
+
+
+def _extract_document(doc: dict) -> list[dict]:
     if doc.get("link_only"):
         ledger.log("skip_link_only", doc_id=doc["doc_id"])
         return []
@@ -169,6 +180,13 @@ def no_rule_pass(rules: list[dict], docs: list[dict]) -> list[dict]:
 
     def run(t):
         jid, level, cat, ex = t
+        try:
+            return _run(jid, level, cat, ex)
+        except llm.LLMPending:
+            PENDING.append(f"no_rule:{jid}:{cat}")
+            return None
+
+    def _run(jid, level, cat, ex):
         out = llm.complete_json(prompts.NO_RULE_SYSTEM, prompts.no_rule_user(label(jid), level, cat, ex),
                                 prompts.NO_RULE_SCHEMA, "no_rule")
         ledger.log("no_rule_check", jurisdiction=jid, category=cat, output=out)
@@ -199,7 +217,7 @@ def extract_corpus(docs: list[dict], workers: int = 4, no_rule: bool = True) -> 
     with ThreadPoolExecutor(workers) as ex:
         all_rules = [r for rs in ex.map(extract_document, docs) for r in rs]
     rules = consolidate(all_rules)
-    if no_rule:
+    if no_rule and not PENDING:  # absence checks need the complete rule set
         rules += no_rule_pass(rules, docs)
     return rules
 

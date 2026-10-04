@@ -65,6 +65,9 @@ def _write_rules(rules, sp: StarterPack) -> set[str]:
 def cmd_extract(a, sp: StarterPack):
     docs = sp.documents()
     rules = extractor.extract_corpus(docs, workers=a.workers, no_rule=not a.skip_no_rule)
+    if extractor.PENDING:
+        print(f"{len(extractor.PENDING)} request(s) queued for agents in cache/agent_requests/; "
+              f"answer them, then rerun extract")
     export.write_json(RULES_INTERNAL, rules)
     ids = _write_rules(rules, sp)
     rep = json.loads((OUT / "schema_report.json").read_text())

@@ -115,3 +115,20 @@ def test_starter_pack_prefers_manifest_and_skips_answer_files(tmp_path):
     assert sp.manifest_path.name == "manifest.csv" and sp.dev_key_path.name == "dev_key.csv"
     assert sp.changes_path.name == "change_tests.json"
     assert sp.documents()[0]["link_only"] is False and sp.addresses()[0]["street"] == "Pe\xf1a St"
+
+
+def test_agent_mode_queues_then_accepts_valid_answer(tmp_path, monkeypatch):
+    import json
+    import pytest
+    from navigator import config
+    from navigator.extract import llm, prompts
+    monkeypatch.setattr(config, "CACHE_DIR", tmp_path)
+    with pytest.raises(llm.LLMPending):
+        llm.complete_json("sys", "user", prompts.NO_RULE_SCHEMA, "no_rule", mode="agent")
+    req = json.loads(next((tmp_path / "agent_requests").glob("*.json")).read_text())
+    resp = tmp_path / "agent_responses" / f"{req['key']}.json"
+    resp.write_text(json.dumps({"exists": "yes"}))          # invalid: re-queued, not crashed
+    with pytest.raises(llm.LLMPending):
+        llm.complete_json("sys", "user", prompts.NO_RULE_SCHEMA, "no_rule", mode="agent")
+    resp.write_text(json.dumps({"exists": False, "explanation": "x", "citation": None, "quote": None}))
+    assert llm.complete_json("sys", "user", prompts.NO_RULE_SCHEMA, "no_rule", mode="agent")["exists"] is False

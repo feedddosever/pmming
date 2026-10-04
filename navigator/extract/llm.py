@@ -24,6 +24,41 @@ class LLMError(RuntimeError):
     pass
 
 
+class LLMPending(LLMError):
+    """Agent mode: the request was queued for a Claude Code agent and has no answer yet."""
+
+
+AGENT_MODEL = "claude-code-agent"
+
+
+def agent_dirs():
+    req, resp = config.CACHE_DIR / "agent_requests", config.CACHE_DIR / "agent_responses"
+    req.mkdir(parents=True, exist_ok=True)
+    resp.mkdir(parents=True, exist_ok=True)
+    return req, resp
+
+
+def _agent(system: str, user: str, schema: dict, schema_name: str) -> dict:
+    """Same prompt and schema as the API path; the answer is written by a Claude Code agent.
+    Answers are validated against the schema before they are accepted."""
+    import jsonschema
+    key = hashlib.sha256(json.dumps([AGENT_MODEL, system, user, schema], sort_keys=True).encode()).hexdigest()[:24]
+    req, resp = agent_dirs()
+    out = resp / f"{key}.json"
+    if out.exists():
+        try:
+            data = json.loads(out.read_text())
+            jsonschema.validate(data, schema)
+            return data
+        except (json.JSONDecodeError, jsonschema.ValidationError) as e:
+            out.rename(out.with_suffix(".invalid.json"))  # keep for inspection, ask again
+            (req / f"{key}.error.txt").write_text(str(e)[:2000])
+    (req / f"{key}.json").write_text(json.dumps(
+        {"key": key, "schema_name": schema_name, "system": system, "user": user, "schema": schema,
+         "response_path": str(out)}, indent=1))
+    raise LLMPending(f"queued {schema_name} request {key} for an agent")
+
+
 def set_fake(fn: Callable[[str, str, str], dict] | None):
     global _fake
     _fake = fn
@@ -37,6 +72,8 @@ def _cache_path(key: str):
 
 def complete_json(system: str, user: str, schema: dict, schema_name: str, *, mode: str | None = None) -> dict:
     mode = mode or config.LLM_MODE
+    if mode == "agent":
+        return _agent(system, user, schema, schema_name)
     if mode == "fake":
         if _fake is None:
             raise LLMError("fake LLM mode without a fake installed")
