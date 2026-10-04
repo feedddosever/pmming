@@ -7,7 +7,8 @@
   changes                 -> out/changes.json (T1-T6 from config/change_cases.json)
   ingest FILE [--doc-id X] [--retrieval-date D] [--case T6]   add a new law and show what it changes
   site                    -> out/site (static demo)
-  score [-- extra args]   run the official score.py from the starter pack
+  score [-- extra args]   run the official score.py from the starter pack (if one is published)
+  report                  self-check scorecard: schema, verbatim quotes, formats, T1-T5 expectations
   all [--offline]         extract + resolve + lookup + changes + site
 """
 from __future__ import annotations
@@ -192,6 +193,11 @@ def cmd_score(a, sp: StarterPack):
     sys.exit(subprocess.call(args))
 
 
+def cmd_report(a, sp: StarterPack):
+    from .report import print_report
+    sys.exit(0 if print_report(sp) else 1)
+
+
 def cmd_all(a, sp: StarterPack):
     cmd_extract(a, sp)
     cmd_resolve(a, sp)
@@ -204,7 +210,7 @@ def main(argv=None):
     p = argparse.ArgumentParser(prog="navigator", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--pack", help="starter pack directory (default data/starter_pack)")
     sub = p.add_subparsers(dest="cmd", required=True)
-    for name in ("inspect", "extract", "resolve", "lookup", "changes", "ingest", "site", "score", "all"):
+    for name in ("inspect", "extract", "resolve", "lookup", "changes", "ingest", "site", "score", "report", "all"):
         s = sub.add_parser(name)
         if name in ("extract", "all"):
             s.add_argument("--workers", type=int, default=4)
