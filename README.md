@@ -12,7 +12,7 @@ exact quoted source text, and shows which addresses a new, pending or struck law
 | Extraction 25 | LLM extraction with a strict JSON schema; one record per (jurisdiction, category, provision); citation normalization; evidence-gated "no rule at this level" findings |
 | Address coverage 20 | Census place / county-subdivision resolution (never the postal city); three-valued coverage logic that returns **unknown** instead of guessing (missing an applicable rule costs 2×) |
 | Citations 15 | Citation lock: every exported quote is a verbatim substring of the corpus document, or the rule is flagged for review |
-| Change tracking 15 | As-of engine (enacted / pending / struck / not yet effective) + config-driven change cases T1–T6 + extracted-preemption conflict flags (T3) |
+| Change tracking 15 | As-of engine (enacted / pending / struck / not yet effective) + config-driven change cases T1–T5 (+ T6 from `nav ingest`) + extracted-preemption conflict flags (T3) |
 | Plain language 10 | Static renter view, English/Spanish, quote + retrieval date on every answer, "as of" date picker |
 | Responsible design 10 | Unknown/low-confidence/needs-review flags, append-only audit log (source hashes, model, prompt version, raw outputs), no legal-advice framing |
 | Scalability 5 | New city = drop documents + one entry in `navigator/resolve/jurisdictions.py`; `nav ingest` adds laws live |
@@ -20,13 +20,14 @@ exact quoted source text, and shows which addresses a new, pending or struck law
 ## Quick start
 ```bash
 pip install -r requirements.txt
-export ANTHROPIC_API_KEY=...            # extraction model: NAV_MODEL (default claude-opus-5-5)
+export ANTHROPIC_API_KEY=...            # or NAV_LLM=agent to replay the committed agent-mode run offline
 # the official starter pack goes anywhere under data/starter_pack/ (found automatically)
 python -m navigator inspect             # what was found: 87 docs (54 with text), 500 addresses, schema, T1-T5
 python -m navigator all                 # extract → resolve → lookup → changes → site
 python -m navigator lookup --as-of 2027-07-02   # extra as-of snapshots (lookups_<date>.json)
+python -m navigator report              # self-check scorecard: schema, quotes, lookups, T1-T5 (10/10)
 python -m http.server -d out/site 8000  # demo UI
-pytest -q                               # 13 tests, run offline with a fake LLM on synthetic fixtures
+pytest -q                               # 24 tests, run offline with a fake LLM on synthetic fixtures
 ```
 Outputs, in the participant guide's formats (§5):
 - `out/rules.json`: `{"rules": [...]}`, each record validated against `schema/rule_record.schema.json`
@@ -37,7 +38,8 @@ Outputs, in the participant guide's formats (§5):
 - `out/changes.json`: `{test_id: {affected_address_ids, conflict_flag_address_ids, notes}}` for T1–T5
   (dates and types read from `dev/change_tests.json`; selectors in `config/change_cases.json`).
 - Also `changes_details.json` (before/after per address), `no_rule_findings.json`, `audit_log.jsonl`, and
-  `out/site/` (static demo for GitHub Pages or any static host).
+  `out/site/` (static demo, committed; `.github/workflows/pages.yml` publishes it to GitHub Pages on pushes to
+  `main` once Settings → Pages → Source is set to "GitHub Actions").
 
 The official pack has **no scoring script or dev answer key** ("no-scoring" edition), so quality is checked
 against the expected behaviour stated in `dev/change_tests.json` and the participant guide.
@@ -64,6 +66,7 @@ T6 (`--case`), and prints the affected addresses and the effective date. Rehears
 `fixtures/new_cambridge_ordinance.txt` before hour 16, then record the real run for the video.
 
 ## Videos (scores must be on screen)
+Full scripts with the exact demo addresses: [`docs/VIDEOS.md`](docs/VIDEOS.md). Show `python -m navigator report`.
 - **Team:** who we are, roles.
 - **Demo:** pick an SF address built before 1979 (local ordinance applies, state cap superseded), one built
   in 1979 (unknown, with the explanation), Berkeley/San Diego (missing facts → unknown), Hoboken
