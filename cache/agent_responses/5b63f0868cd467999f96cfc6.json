@@ -1,0 +1,26 @@
+{
+ "rules": [
+  {
+   "key_value": null,
+   "applies_if": [],
+   "exemptions": [],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "jurisdiction_state": "MA",
+   "jurisdiction_level": "city",
+   "category": "screening_restrictions",
+   "jurisdiction_name": "Boston",
+   "title": "No discrimination based on rental assistance (source of income)",
+   "citation": "Boston Fair Housing Regulations",
+   "requirement": "In Boston, landlords cannot refuse to rent to you or treat you differently because you use rental assistance, such as a Section 8 voucher, social security disability voucher, or veterans voucher.",
+   "requirement_es": "En Boston, los propietarios no pueden negarse a rentarle ni tratarle de forma diferente porque usted usa asistencia de alquiler, como un vale de Sección 8, un vale de discapacidad del seguro social o un vale para veteranos.",
+   "coverage_text": "All housing rentals in the City of Boston; protected classes include rental assistance (e.g., Section 8 vouchers).",
+   "quote": "The landlord tells you they don't accept rental assistance. This includes Section 8 vouchers, social security disability vouchers, and veterans vouchers.",
+   "confidence": 0.6
+  }
+ ]
+}

@@ -1,0 +1,130 @@
+[
+ {
+  "rule_id": "MA|algorithmic_rent_setting|no_rule",
+  "kind": "no_rule",
+  "category": "algorithmic_rent_setting",
+  "jurisdiction": {
+   "id": "MA",
+   "level": "state",
+   "label": "Massachusetts"
+  },
+  "title": "No algorithmic rent setting rule at the state level",
+  "citation": "Mass. Bill S.2983 (194th General Court), Bill History",
+  "requirement": "Massachusetts algorithmic rent-setting legislation exists only as pending bills (S.2983 and H.5222) reported by the Joint Committee on Housing on 3/12/2026 and referred to Ways and Means; no enacted state rule is shown.",
+  "status": "enacted",
+  "effective_date": null,
+  "end_date": null,
+  "confidence": 0.7,
+  "flags": [],
+  "source": {
+   "doc_id": "D046",
+   "url": "https://malegislature.gov/Bills/194/S2983",
+   "retrieval_date": "2026-10-01T22:36Z",
+   "sha256": "6ea5313d0a656ab73b683e72b594cf143ee61bd6923ee1d9f3df46682248004d",
+   "quote": "Bill reported favorably by committee and referred to the committee on\nSenate Ways and Means",
+   "quote_start": 1131,
+   "quote_end": 1222,
+   "quote_method": "verbatim"
+  },
+  "provenance": {
+   "model": "claude-code-agent",
+   "prompt_version": "2026-10-03.2"
+  }
+ },
+ {
+  "rule_id": "MA:city:boston|rent_increase_limits|no_rule",
+  "kind": "no_rule",
+  "category": "rent_increase_limits",
+  "jurisdiction": {
+   "id": "MA:city:boston",
+   "level": "city",
+   "label": "City of Boston"
+  },
+  "title": "No rent increase limits rule at the city level",
+  "citation": "Mass. Gen. Laws ch. 40P, § 4",
+  "requirement": "Massachusetts law (c. 40P, s. 4) bars cities from enacting or enforcing rent control (aside from a narrow voluntary opt-in exception); Boston's home-rule petition H.3744 is only a bill, and the statewide ballot question was struck.",
+  "status": "enacted",
+  "effective_date": null,
+  "end_date": null,
+  "confidence": 0.7,
+  "flags": [],
+  "source": {
+   "doc_id": "D048",
+   "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40P/Section4",
+   "retrieval_date": "2026-10-01T22:36Z",
+   "sha256": "090647f489ec5f03c114df23b74c28a107a7e0b855e382969c27dbf58a55837d",
+   "quote": "No city or town may enact, maintain or enforce rent control of any kind",
+   "quote_start": 425,
+   "quote_end": 496,
+   "quote_method": "verbatim"
+  },
+  "provenance": {
+   "model": "claude-code-agent",
+   "prompt_version": "2026-10-03.2"
+  }
+ },
+ {
+  "rule_id": "MA:city:boston|just_cause_eviction|no_rule",
+  "kind": "no_rule",
+  "category": "just_cause_eviction",
+  "jurisdiction": {
+   "id": "MA:city:boston",
+   "level": "city",
+   "label": "City of Boston"
+  },
+  "title": "No just cause eviction rule at the city level",
+  "citation": "Bill H.3744, 193rd General Court (2023-2024), https://malegislature.gov/Bills/193/H3744",
+  "requirement": "Boston's tenant eviction protections exist only as a home rule petition (H.3744) seeking state authorization; the excerpted bill history shows only committee referral and reporting-date extensions, with no enactment. The city's adopted ordinance (HSNA) only requires notice of rights and does not halt evictions, so no city-level just cause eviction rule is shown.",
+  "status": "enacted",
+  "effective_date": null,
+  "end_date": null,
+  "confidence": 0.7,
+  "flags": [],
+  "source": {
+   "doc_id": "D011",
+   "url": "https://malegislature.gov/Bills/193/H3744",
+   "retrieval_date": "2026-10-01T22:35Z",
+   "sha256": "93835654c3483e7b169677f7a3ccdcf021b6edab4ac81ab7ad3091903de71ff2",
+   "quote": "An Act petition for a special law authorizing the city of Boston to implement rent stabilization and tenant eviction protections",
+   "quote_start": 196,
+   "quote_end": 324,
+   "quote_method": "verbatim"
+  },
+  "provenance": {
+   "model": "claude-code-agent",
+   "prompt_version": "2026-10-03.2"
+  }
+ },
+ {
+  "rule_id": "MA:city:cambridge|rent_increase_limits|no_rule",
+  "kind": "no_rule",
+  "category": "rent_increase_limits",
+  "jurisdiction": {
+   "id": "MA:city:cambridge",
+   "level": "city",
+   "label": "City of Cambridge"
+  },
+  "title": "No rent increase limits rule at the city level",
+  "citation": "Mass. Gen. Laws ch. 40P, § 4",
+  "requirement": "Massachusetts law (c. 40P, s. 4) bars cities including Cambridge from enacting or enforcing rent control (aside from a narrow voluntary opt-in exception), and the statewide ballot question was struck.",
+  "status": "enacted",
+  "effective_date": null,
+  "end_date": null,
+  "confidence": 0.7,
+  "flags": [],
+  "source": {
+   "doc_id": "D048",
+   "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40P/Section4",
+   "retrieval_date": "2026-10-01T22:36Z",
+   "sha256": "090647f489ec5f03c114df23b74c28a107a7e0b855e382969c27dbf58a55837d",
+   "quote": "No city or town may enact, maintain or enforce rent control of any kind",
+   "quote_start": 425,
+   "quote_end": 496,
+   "quote_method": "verbatim"
+  },
+  "provenance": {
+   "model": "claude-code-agent",
+   "prompt_version": "2026-10-03.2"
+  }
+ }
+]

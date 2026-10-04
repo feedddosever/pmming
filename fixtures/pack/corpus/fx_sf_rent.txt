@@ -1,0 +1,2 @@
+SYNTHETIC TEST FIXTURE - NOT LEGAL TEXT. Written for automated tests of the Navigator pipeline only.
+San Francisco Fixture Administrative Code Chapter 37. Rental units for which a certificate of occupancy was first issued on or before June 13, 1979 are subject to this Chapter. The landlord may impose an annual rent increase that does not exceed 60 percent of the increase in the Consumer Price Index.

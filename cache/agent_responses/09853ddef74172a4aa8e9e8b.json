@@ -1,0 +1,83 @@
+{
+ "rules": [
+  {
+   "jurisdiction_level": "city",
+   "key_value": "CPI-based AGA, max 5%",
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "New construction (certificate of occupancy issued after 1980)",
+     "all": [
+      {
+       "fact": "year_built",
+       "op": "gt",
+       "value_number": 1980,
+       "value_text": null,
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Most single-family homes and condominiums (partially covered)",
+     "all": [
+      {
+       "fact": "building_type",
+       "op": "in",
+       "value_number": null,
+       "value_text": null,
+       "value_list": [
+        "single_family",
+        "condo"
+       ]
+      },
+      {
+       "fact": "other",
+       "op": "is_false",
+       "value_number": null,
+       "value_text": "single-family home with tenancy that began before 1996 or five or more rooms rented separately",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "rent_increase_limits",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "Berkeley",
+   "title": "Annual General Adjustment capped at 5% (Measure BB)",
+   "citation": "Berkeley Rent Ordinance (Measure BB, 2024)",
+   "requirement": "In fully covered Berkeley units, rent can rise each year only by the Annual General Adjustment set by the Rent Board, which is tied to inflation and can be no more than 5%.",
+   "requirement_es": "En las unidades de Berkeley con cobertura total, la renta solo puede subir cada año según el Ajuste General Anual que fija la Junta de Renta, ligado a la inflación y que no puede ser mayor del 5%.",
+   "coverage_text": "Fully covered units (rent ceiling): most units in multifamily properties built before 1980, single-family homes with tenancies that began before 1996, and single-family homes with five or more rooms rented separately. Partially covered (no rent ceiling): new construction with a certificate of occupancy issued after 1980, most single-family homes, and most condominiums. Government-owned or subsidized units are now fully or partially covered depending on unit type. Landlords with banked AGAs from prior years may still raise rent above 5% up to the rent ceiling.",
+   "quote": "The maximum AGA is 5%.",
+   "confidence": 0.75
+  },
+  {
+   "jurisdiction_level": "city",
+   "key_value": "nonpayment eviction requires debt of at least one month's Fair Market Rent",
+   "applies_if": [],
+   "exemptions": [],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "just_cause_eviction",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "Berkeley",
+   "title": "Just cause eviction (Measure BB changes)",
+   "citation": "Berkeley Rent Ordinance (Measure BB, 2024)",
+   "requirement": "Tenants in fully or partially covered Berkeley units can only be evicted for a just cause. A tenant cannot be evicted for unpaid rent of less than one month's Fair Market Rent, or for refusing to sign a similar new lease.",
+   "requirement_es": "Los inquilinos de unidades de Berkeley con cobertura total o parcial solo pueden ser desalojados por una causa justa. No se puede desalojar a un inquilino por renta impaga menor a un mes de la Renta Justa de Mercado, ni por negarse a firmar un nuevo contrato similar.",
+   "coverage_text": "Units fully or partially covered by the Berkeley Rent Ordinance. Eviction notices must refer tenants to the Rent Board, and copies must be filed with the Rent Board within three business days of service.",
+   "quote": "In Berkeley, tenants in units that are fully or partially covered by the Rent Ordinance cannot be evicted unless there is \"just cause” (previously called “good cause”).",
+   "confidence": 0.75
+  }
+ ]
+}

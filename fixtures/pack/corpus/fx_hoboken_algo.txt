@@ -1,0 +1,2 @@
+SYNTHETIC TEST FIXTURE - NOT LEGAL TEXT. Written for automated tests of the Navigator pipeline only.
+Hoboken Fixture Code Chapter 158, Article II. No landlord shall use, license or rely upon any algorithmic device to set rents for residential rental units within the City of Hoboken. This article shall take effect July 1, 2025.

@@ -1,0 +1,34 @@
+{
+ "rules": [
+  {
+   "jurisdiction_level": "city",
+   "key_value": null,
+   "applies_if": [
+    {
+     "fact": "subsidized",
+     "op": "is_true",
+     "value_number": null,
+     "value_text": null,
+     "value_list": []
+    }
+   ],
+   "exemptions": [],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "screening_restrictions",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "San Francisco",
+   "title": "Fair Chance Ordinance (affordable housing)",
+   "citation": "San Francisco Fair Chance Ordinance",
+   "requirement": "In San Francisco, the Fair Chance Ordinance protects people with arrest or conviction records when they apply for affordable housing.",
+   "requirement_es": "En San Francisco, la Ordenanza de Oportunidad Justa protege a las personas con antecedentes de arresto o condena cuando solicitan vivienda asequible.",
+   "coverage_text": "Affordable housing decisions in San Francisco. This page only summarizes the ordinance and does not give its code section or details.",
+   "quote": "San Francisco's Fair Chance Ordinance protects residents with arrest or conviction history in affordable housing decisions.",
+   "confidence": 0.55
+  }
+ ]
+}

@@ -1,0 +1,2 @@
+SYNTHETIC TEST FIXTURE - NOT LEGAL TEXT. Written for automated tests of the Navigator pipeline only.
+California Fixture Bill AB 325 (2025). It shall be unlawful for a person to use or distribute a common pricing algorithm as part of a contract, combination in the form of a trust, or conspiracy to restrain trade or commerce. This act shall take effect on January 1, 2026.

@@ -1,0 +1,59 @@
+[
+  {
+    "id": "T1",
+    "title": "CA AB 325 / SB 763 (common pricing algorithms), effective 1/1/2026",
+    "type": "in_force",
+    "select": {
+      "jurisdiction_prefix": "CA",
+      "category": "algorithmic_rent_setting",
+      "citation_regex": "AB ?325|SB ?763|16729|Cartwright"
+    },
+    "before": "2025-12-31",
+    "after": "2026-01-02"
+  },
+  {
+    "id": "T2",
+    "title": "Hoboken and Jersey City local algorithmic rent-setting bans",
+    "type": "in_force",
+    "select": {
+      "category": "algorithmic_rent_setting",
+      "jurisdiction_ids": [
+        "NJ:city:hoboken",
+        "NJ:city:jersey-city"
+      ]
+    },
+    "after": "2026-10-01"
+  },
+  {
+    "id": "T3",
+    "title": "NJ FAIR Act, signed 7/20/2026, effective 7/1/2027",
+    "type": "in_force",
+    "select": {
+      "jurisdiction_prefix": "NJ",
+      "category": "algorithmic_rent_setting",
+      "citation_regex": "FAIR|P\\.L\\. ?2026"
+    },
+    "before": "2026-10-01",
+    "after": "2027-07-02"
+  },
+  {
+    "id": "T4",
+    "title": "MA S.2983 and H.5222 (pending bills)",
+    "type": "pending",
+    "select": {
+      "jurisdiction_prefix": "MA",
+      "citation_regex": "S\\.? ?2983|H\\.? ?5222"
+    },
+    "after": "2026-10-01"
+  },
+  {
+    "id": "T5",
+    "title": "MA rent-control ballot question, struck 6/23/2026",
+    "type": "struck",
+    "select": {
+      "jurisdiction_prefix": "MA",
+      "category": "rent_increase_limits",
+      "status": "struck"
+    }
+  }
+]

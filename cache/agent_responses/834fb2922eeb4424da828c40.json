@@ -1,0 +1,34 @@
+{
+ "decision": "drop",
+ "reason": "M.G.L. c.186 s.12 sets notice periods for ending a tenancy at will (and a cure right for nonpayment notices); it does not limit the reasons a landlord may end the tenancy. Notice/procedural rule only (strict rule 4).",
+ "rule": {
+  "category": "just_cause_eviction",
+  "jurisdiction_level": "state",
+  "jurisdiction_state": "MA",
+  "jurisdiction_name": "Massachusetts",
+  "title": "Notice to end a tenancy at will",
+  "citation": "M.G.L. c.186 § 12",
+  "requirement": "To end a tenancy at will, a landlord must give written notice of at least one rental period or 30 days, whichever is longer (three months if rent is paid less often). For unpaid rent, 14 days' written notice is enough, but a tenant who has not had such a notice in the past 12 months can stop the eviction by paying all rent due within 10 days.",
+  "requirement_es": "Para terminar un arrendamiento a voluntad, el propietario debe dar aviso por escrito de al menos un período de renta o 30 días, lo que sea más largo (tres meses si la renta se paga con menos frecuencia). Por falta de pago, basta un aviso escrito de 14 días, pero el inquilino que no haya recibido un aviso así en los últimos 12 meses puede detener el desalojo pagando toda la renta adeudada dentro de 10 días.",
+  "key_value": "30 days or one rental period (14 days for nonpayment)",
+  "coverage_text": "Tenancies at will in Massachusetts.",
+  "applies_if": [
+   {
+    "fact": "other",
+    "op": "is_true",
+    "value_number": null,
+    "value_text": "Tenancy at will (no fixed-term lease)",
+    "value_list": []
+   }
+  ],
+  "exemptions": [],
+  "effective_date": null,
+  "end_date": null,
+  "status": "enacted",
+  "yields_to": [],
+  "may_preempt": [],
+  "penalty": null,
+  "quote": "In case of neglect or refusal to pay the rent due from a tenant at will, fourteen days' notice to quit, given in writing by the landlord to the tenant, shall be sufficient to determine the tenancy;",
+  "confidence": 0.6
+ }
+}

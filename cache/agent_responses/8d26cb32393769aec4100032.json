@@ -1,0 +1,48 @@
+{
+ "rules": [
+  {
+   "key_value": "Lesser of 3% or 80% of CPI (2.87% for 9/1/2026-8/31/2027)",
+   "applies_if": [],
+   "exemptions": [],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "rent_increase_limits",
+   "jurisdiction_level": "city",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "Santa Ana",
+   "title": "Santa Ana annual rent increase cap",
+   "citation": "Santa Ana Rent Stabilization and Just Cause Eviction Ordinance",
+   "requirement": "Your landlord can raise rent only once a year, by no more than 3% or 80% of the change in the Consumer Price Index, whichever is lower. From September 1, 2026 through August 31, 2027, the maximum increase is 2.87%.",
+   "requirement_es": "Su propietario solo puede aumentar la renta una vez al año, no más del 3% o del 80% del cambio en el Índice de Precios al Consumidor, lo que sea menor. Del 1 de septiembre de 2026 al 31 de agosto de 2027, el aumento máximo es de 2.87%.",
+   "coverage_text": "Rental units covered by the Santa Ana Rent Stabilization and Just Cause Eviction Ordinance.",
+   "quote": "The increase cannot be more than 3% of your current rent or 80% of the Consumer Price Index (CPI) change, whichever is less.",
+   "confidence": 0.75
+  },
+  {
+   "key_value": null,
+   "applies_if": [],
+   "exemptions": [],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "just_cause_eviction",
+   "jurisdiction_level": "city",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "Santa Ana",
+   "title": "Santa Ana just cause eviction and relocation assistance",
+   "citation": "Santa Ana Rent Stabilization and Just Cause Eviction Ordinance",
+   "requirement": "Your landlord needs a valid reason to evict you, such as not paying rent, breaking the lease, or moving into the unit. For some reasons, the landlord may have to help pay your moving costs.",
+   "requirement_es": "Su propietario necesita una razón válida para desalojarlo, como no pagar la renta, violar el contrato o mudarse a la unidad. Por algunas razones, el propietario podría tener que ayudar a pagar sus gastos de mudanza.",
+   "coverage_text": "Rental units covered by the Santa Ana Rent Stabilization and Just Cause Eviction Ordinance.",
+   "quote": "Your landlord must have a valid reason to evict you.",
+   "confidence": 0.65
+  }
+ ]
+}

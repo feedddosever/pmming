@@ -1,0 +1,26 @@
+{
+ "rules": [
+  {
+   "key_value": "Broker fee paid only by the party who hired the broker",
+   "applies_if": [],
+   "exemptions": [],
+   "effective_date": "2025-08-01",
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "application_screening_fees",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "MA",
+   "jurisdiction_name": "Massachusetts",
+   "title": "Broker fees paid only by the party who hired the broker",
+   "citation": "M.G.L. c.112 § 87DDD1/2",
+   "requirement": "A rental broker's fee can only be charged to the person who hired the broker. If the landlord hired the broker, the landlord pays the fee, not you.",
+   "requirement_es": "La comisión de un corredor de alquileres solo se puede cobrar a la persona que contrató al corredor. Si el propietario contrató al corredor, el propietario paga la comisión, no usted.",
+   "coverage_text": "Fees charged by licensed brokers or salespersons for finding rental housing.",
+   "quote": "Any fee shall only be paid by the party, lessor or tenant who originally engaged and entered into a contract with the licensed broker or salesperson.",
+   "confidence": 0.7
+  }
+ ]
+}

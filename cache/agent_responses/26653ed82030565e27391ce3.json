@@ -1,0 +1,34 @@
+{
+ "decision": "correct",
+ "reason": "Document never states 'ch. 13.76'; it names only 'Berkeley's Rent Ordinance', so citation uses that name (rule 5). Coverage text no longer names an ordinance title absent from the document. Requirement and quote are supported verbatim.",
+ "rule": {
+  "category": "security_deposits",
+  "jurisdiction_level": "city",
+  "jurisdiction_state": "CA",
+  "jurisdiction_name": "Berkeley",
+  "title": "Berkeley security deposit interest",
+  "citation": "Berkeley Rent Ordinance",
+  "requirement": "In Berkeley units fully or partly covered by the Rent Ordinance, landlords must pay tenants interest on their security deposit every year, plus a prorated amount if the tenant moves out before year end.",
+  "requirement_es": "En las unidades de Berkeley cubiertas total o parcialmente por la Ordenanza de Renta, los propietarios deben pagar a los inquilinos intereses sobre su depósito de seguridad cada año, más una cantidad prorrateada si el inquilino se muda antes de fin de año.",
+  "key_value": null,
+  "coverage_text": "Tenancies in units fully or partially covered by Berkeley's Rent Ordinance.",
+  "applies_if": [
+   {
+    "fact": "other",
+    "op": "is_true",
+    "value_number": null,
+    "value_text": "Unit fully or partially covered by the Berkeley Rent Ordinance",
+    "value_list": []
+   }
+  ],
+  "exemptions": [],
+  "effective_date": null,
+  "end_date": null,
+  "status": "enacted",
+  "yields_to": [],
+  "may_preempt": [],
+  "penalty": null,
+  "quote": "For tenancies in units fully or partially covered by Berkeley's Rent Ordinance, landlords must pay tenants interest on their security deposit at the end of each year and a prorated amount if the tenant moves out before the end of the year.",
+  "confidence": 0.7
+ }
+}

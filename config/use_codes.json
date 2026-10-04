@@ -1,0 +1,81 @@
+{
+ "_comment": "Derive building facts from assessor use descriptions (public data in the sample). Rules are applied in order; every matching rule contributes. units_min/units_max bound the unit count when 'units' is missing.",
+ "rules": [
+  {
+   "match": "(?i)five or more apartments|\\(5\\+ units\\)",
+   "units_min": 5,
+   "building_type": "multifamily"
+  },
+  {
+   "match": "(?i)apartment 15 units or more",
+   "units_min": 15,
+   "building_type": "multifamily"
+  },
+  {
+   "match": "(?i)(apartment|flats?|flat & store) 5 to 14 units",
+   "units_min": 5,
+   "units_max": 14,
+   "building_type": "multifamily"
+  },
+  {
+   "match": "(?i)tic bldg 4 units or less",
+   "units_min": 1,
+   "units_max": 4,
+   "building_type": "tenancy_in_common"
+  },
+  {
+   "match": "(?i)apt (\\d+)-(\\d+) units",
+   "units_min_group": 1,
+   "units_max_group": 2,
+   "building_type": "multifamily"
+  },
+  {
+   "match": "(?i)^(\\d+)-(\\d+)-unit-apt",
+   "units_min_group": 1,
+   "units_max_group": 2,
+   "building_type": "multifamily"
+  },
+  {
+   "match": "(?i)>8-unit-apt",
+   "units_min": 9,
+   "building_type": "multifamily"
+  },
+  {
+   "match": "(?i)luxury apartment",
+   "building_type": "multifamily"
+  },
+  {
+   "match": "(?i)elderly home",
+   "building_type": "senior_housing"
+  },
+  {
+   "match": "(?i)subsd housing|affordabl",
+   "subsidized": "true"
+  },
+  {
+   "match": "(?i)co-?op",
+   "building_type": "cooperative"
+  },
+  {
+   "match": "(?i)(?<![\\d.])(\\d+)U(?![a-z])",
+   "units_sum_all": true,
+   "building_type": "multifamily"
+  },
+  {
+   "match": "(?i)apartments \\(class 4c\\)",
+   "building_type": "multifamily"
+  },
+  {
+   "match_code": "^4C$",
+   "units_min": 5,
+   "building_type": "multifamily",
+   "_note": "NJ property class 4C = apartment buildings of five or more units"
+  }
+ ],
+ "default": {
+  "building_type": "multifamily",
+  "units_min": 2,
+  "_note": "the sample is ~500 multifamily properties (participant guide 4.1); subsidized is assumed false unless the assessor description says subsidized/affordable (reported in explanations)",
+  "subsidized": "false"
+ }
+}

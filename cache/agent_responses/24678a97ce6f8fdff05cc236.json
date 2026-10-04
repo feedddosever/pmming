@@ -1,0 +1,22 @@
+{
+ "clauses": [
+  {
+   "index": 0,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "mobilehome"
+   ]
+  },
+  {
+   "index": 1,
+   "kind": "unknown",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  }
+ ]
+}

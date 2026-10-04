@@ -1,0 +1,12 @@
+{
+ "clauses": [
+  {
+   "index": 0,
+   "kind": "covered_by",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": "rent_increase_limits",
+   "value_list": []
+  }
+ ]
+}

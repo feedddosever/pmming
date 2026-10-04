@@ -1,0 +1,219 @@
+{
+ "rules": [
+  {
+   "key_value": "Relocation: 2 months' rent (3 months for seniors or disabled tenants)",
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Transient or tourist hotel occupancy",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "Transient and tourist hotel occupancy",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Short-term residential occupancy",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "Short-term residential occupancy under SDMC ch. 5, art. 10, div. 1",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Deed-restricted affordable housing",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "Housing deed- or regulatory-restricted as affordable for very low, low, or moderate income",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Subsidized affordable housing (not Section 8)",
+     "all": [
+      {
+       "fact": "subsidized",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": null,
+       "value_list": []
+      },
+      {
+       "fact": "other",
+       "op": "is_false",
+       "value_number": null,
+       "value_text": "Tenant receives Section 8 housing choice voucher",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Mobilehomes under Mobilehome Residency Law",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "Mobilehome subject to the Mobilehome Residency Law",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Nonprofit hospital, religious, care facility or transitional housing",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "Nonprofit hospital, religious facility, extended care, licensed residential care, adult residential facility, or non-profit transitional housing",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "School or college dormitory",
+     "all": [
+      {
+       "fact": "building_type",
+       "op": "eq",
+       "value_number": null,
+       "value_text": "dormitory",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Tenant shares bathroom or kitchen with resident landlord",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "Tenant shares bathroom or kitchen with landlord who lives there",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Owner-occupied single-family home",
+     "all": [
+      {
+       "fact": "building_type",
+       "op": "eq",
+       "value_number": null,
+       "value_text": "single_family",
+       "value_list": []
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "Landlord occupies as principal residence and rents no more than two bedrooms/ADUs/JADUs",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Owner-occupied duplex",
+     "all": [
+      {
+       "fact": "building_type",
+       "op": "eq",
+       "value_number": null,
+       "value_text": "duplex",
+       "value_list": []
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "Landlord occupies one unit as principal residence since start of tenancy",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "New construction (certificate of occupancy within 15 years)",
+     "all": [
+      {
+       "fact": "age_years",
+       "op": "lte",
+       "value_number": 15,
+       "value_text": null,
+       "value_list": []
+      },
+      {
+       "fact": "building_type",
+       "op": "ne",
+       "value_number": null,
+       "value_text": "mobile_home",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Separately alienable unit not owned by REIT or corporation, with notice",
+     "all": [
+      {
+       "fact": "building_type",
+       "op": "in",
+       "value_number": null,
+       "value_text": null,
+       "value_list": [
+        "single_family",
+        "condo"
+       ]
+      },
+      {
+       "fact": "owner_type",
+       "op": "not_in",
+       "value_number": null,
+       "value_text": null,
+       "value_list": [
+        "reit",
+        "corporation"
+       ]
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "Tenant given written notice of exemption under SDMC 98.0703(l)",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": "2023-06-24",
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": "Wrongful eviction damages of at least three times actual economic damages; at least three times required relocation assistance for failure to pay it; possible punitive damages and attorney's fees.",
+   "category": "just_cause_eviction",
+   "jurisdiction_level": "city",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "San Diego",
+   "title": "San Diego Residential Tenant Protections (just cause and relocation)",
+   "citation": "San Diego Mun. Code ch. 9, art. 8, div. 7",
+   "requirement": "Your landlord cannot end your tenancy without a just cause listed in the law, such as unpaid rent or the owner moving in. For no-fault evictions, the landlord must pay relocation help equal to two months' rent (three months if you are a senior or disabled), either in cash or by waiving rent.",
+   "requirement_es": "Su propietario no puede terminar su arrendamiento sin una causa justa indicada en la ley, como renta no pagada o que el dueño se mude a la vivienda. En desalojos sin culpa, el propietario debe pagar ayuda de reubicación igual a dos meses de renta (tres meses si usted es una persona mayor o tiene una discapacidad), en efectivo o eximiendo la renta.",
+   "coverage_text": "Residential rental property in the City of San Diego, including mobilehome park units, with a tenancy of more than 30 days, unless exempt.",
+   "quote": "A landlord shall not terminate a tenancy without just cause. For purposes of this Division, just cause includes at-fault just cause and no-fault just cause.",
+   "confidence": 0.75
+  }
+ ]
+}

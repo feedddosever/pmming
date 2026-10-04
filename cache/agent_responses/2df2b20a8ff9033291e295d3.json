@@ -1,0 +1,20 @@
+{
+ "clauses": [
+  {
+   "index": 0,
+   "kind": "trigger",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": "eviction based on owner/relative move-in, demolition/permanent removal, temporary capital improvement work, or substantial rehabilitation",
+   "value_list": []
+  },
+  {
+   "index": 1,
+   "kind": "trigger",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": "temporary capital improvement eviction for less than 20 days",
+   "value_list": []
+  }
+ ]
+}

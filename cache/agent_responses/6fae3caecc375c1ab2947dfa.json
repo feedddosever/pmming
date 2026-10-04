@@ -1,0 +1,26 @@
+{
+ "rules": [
+  {
+   "key_value": null,
+   "applies_if": [],
+   "exemptions": [],
+   "effective_date": "2024-10-14",
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": "A tenant or the City Attorney may bring a civil action.",
+   "jurisdiction_state": "CA",
+   "jurisdiction_level": "city",
+   "category": "algorithmic_rent_setting",
+   "jurisdiction_name": "San Francisco",
+   "title": "Ban on algorithmic devices to set rents",
+   "citation": "S.F. Admin. Code § 37.10C",
+   "requirement": "Landlords in San Francisco may not use, and companies may not sell, software that analyzes private competitor rent data to recommend rents or manage occupancy. Tenants or the City Attorney can sue over violations.",
+   "requirement_es": "En San Francisco, los propietarios no pueden usar, y las empresas no pueden vender, programas que analizan datos privados de alquiler de competidores para recomendar rentas o manejar la ocupación. Los inquilinos o el Abogado de la Ciudad pueden demandar por violaciones.",
+   "coverage_text": "Residential units in San Francisco; covers any device such as software that uses algorithms to analyze nonpublic competitor rental data to recommend rent for a vacant unit.",
+   "quote": "Legislation adding Section 37.10C to the Rent Ordinance went into effect on October 14, 2024. The law prohibits the sale or use of algorithmic devices to set rents or manage occupancy levels for residential units in San Francisco.",
+   "confidence": 0.85
+  }
+ ]
+}

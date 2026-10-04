@@ -1,0 +1,157 @@
+{
+ "rules": [
+  {
+   "key_value": "Lower of 3% or 80% of CPI",
+   "applies_if": [
+    {
+     "fact": "year_built",
+     "op": "before_date",
+     "value_number": null,
+     "value_text": "1995-02-02",
+     "value_list": []
+    }
+   ],
+   "exemptions": [
+    {
+     "label": "Mobile home spaces first offered for rent after January 1, 1990",
+     "all": [
+      {
+       "fact": "building_type",
+       "op": "eq",
+       "value_number": null,
+       "value_text": "mobile_home",
+       "value_list": []
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "mobile home space first offered for rent after January 1, 1990",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": "2021-11-19",
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "jurisdiction_state": "CA",
+   "jurisdiction_level": "city",
+   "category": "rent_increase_limits",
+   "jurisdiction_name": "Santa Ana",
+   "title": "Santa Ana rent stabilization cap",
+   "citation": "Santa Ana Rent Stabilization Ordinance",
+   "requirement": "In Santa Ana, rent can go up by no more than 3% per year or 80% of the change in CPI, whichever is lower. If CPI is negative, no rent increase is allowed.",
+   "requirement_es": "En Santa Ana, la renta puede subir como máximo un 3% al año o el 80% del cambio en el IPC, lo que sea menor. Si el IPC es negativo, no se permite ningún aumento.",
+   "coverage_text": "Residential rental units in Santa Ana, except buildings constructed after February 1, 1995 and mobile home spaces offered for rent after January 1, 1990.",
+   "quote": "Increase in residential rents are limited to the lower of 3% per year, or 80% of the percent change in the Consumer Price Index over the most recent 12-month period. If the CPI is negative, no rent increase is permitted.",
+   "confidence": 0.75
+  },
+  {
+   "key_value": "3 months' relocation assistance (no-fault)",
+   "applies_if": [
+    {
+     "fact": "other",
+     "op": "is_true",
+     "value_number": null,
+     "value_text": "tenancy has lasted more than 30 days",
+     "value_list": []
+    }
+   ],
+   "exemptions": [
+    {
+     "label": "Housing produced in the last 15 years",
+     "all": [
+      {
+       "fact": "age_years",
+       "op": "lte",
+       "value_number": 15,
+       "value_text": null,
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Deed-restricted affordable housing",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "deed-restricted affordable housing",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Dormitories",
+     "all": [
+      {
+       "fact": "building_type",
+       "op": "eq",
+       "value_number": null,
+       "value_text": "dormitory",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Hotel and transient occupancy",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "hotel or transient occupancy",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Hospital and care facilities",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "hospital or care facility",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Other shared living quarters",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "shared living quarters",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": "2021-11-19",
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "jurisdiction_state": "CA",
+   "jurisdiction_level": "city",
+   "category": "just_cause_eviction",
+   "jurisdiction_name": "Santa Ana",
+   "title": "Santa Ana just cause eviction",
+   "citation": "Santa Ana Just Cause Eviction Ordinance",
+   "requirement": "After 30 days of tenancy, a Santa Ana landlord must have a just cause listed in the law and state it in a written notice to end your tenancy. For no-fault evictions, the landlord must pay 3 months of relocation assistance or waive the last 3 months of rent.",
+   "requirement_es": "Después de 30 días de arrendamiento, el propietario en Santa Ana debe tener una causa justa establecida en la ley e indicarla por escrito para terminar su arrendamiento. En desalojos sin culpa, el propietario debe pagar 3 meses de asistencia de reubicación o perdonar la renta de los últimos 3 meses.",
+   "coverage_text": "Residential tenancies in Santa Ana after 30 days, except housing produced in the last 15 years, deed-restricted affordable housing, hotel and transient occupancy, hospital and care facilities, dormitories, and other shared living quarters.",
+   "quote": "After 30 days, an owner shall not terminate a tenancy without just cause, which shall be stated in a written notice.",
+   "confidence": 0.75
+  }
+ ]
+}

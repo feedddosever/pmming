@@ -1,0 +1,87 @@
+{
+ "rules": [
+  {
+   "key_value": "one month's rent (two months for qualifying small landlords)",
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Small landlord (may charge up to two months' rent)",
+     "all": [
+      {
+       "fact": "owner_type",
+       "op": "in",
+       "value_number": null,
+       "value_text": null,
+       "value_list": [
+        "natural_person",
+        "family_trust",
+        "llc_all_natural_persons"
+       ]
+      },
+      {
+       "fact": "owner_units_owned",
+       "op": "lte",
+       "value_number": 4,
+       "value_text": null,
+       "value_list": []
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "Landlord owns no more than two rental properties",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": "2024-07-01",
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "security_deposits",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "California",
+   "title": "Security deposit limited to one month's rent",
+   "citation": "AB 12",
+   "requirement": "Starting July 1, 2024, most landlords may charge a security deposit of no more than one month's rent, whether the unit is furnished or not. Small landlords who are individuals (or family trusts or LLCs of individuals) owning no more than two rental properties with four or fewer units total may charge up to two months' rent.",
+   "requirement_es": "A partir del 1 de julio de 2024, la mayoría de los propietarios pueden cobrar un depósito de seguridad de no más de un mes de renta, esté o no amueblada la unidad. Los pequeños propietarios que son personas (o fideicomisos familiares o LLC de personas) y que poseen no más de dos propiedades de alquiler con cuatro unidades o menos en total pueden cobrar hasta dos meses de renta.",
+   "coverage_text": "Residential rentals in California, furnished and unfurnished; last month's rent counts toward the deposit, first month's rent does not.",
+   "quote": "Starting July 1, 2024, many landlords may only charge one month's rent for unfurnished and furnished units",
+   "confidence": 0.75
+  },
+  {
+   "key_value": null,
+   "applies_if": [
+    {
+     "fact": "other",
+     "op": "is_true",
+     "value_number": null,
+     "value_text": "Unit fully or partially covered by the Berkeley Rent Ordinance",
+     "value_list": []
+    }
+   ],
+   "exemptions": [],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "security_deposits",
+   "jurisdiction_level": "city",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "Berkeley",
+   "title": "Berkeley security deposit interest",
+   "citation": "Berkeley Mun. Code ch. 13.76",
+   "requirement": "In Berkeley units fully or partly covered by the Rent Ordinance, landlords must pay tenants interest on their security deposit every year, plus a prorated amount if the tenant moves out before year end.",
+   "requirement_es": "En las unidades de Berkeley cubiertas total o parcialmente por la Ordenanza de Renta, los propietarios deben pagar a los inquilinos intereses sobre su depósito de seguridad cada año, más una cantidad prorrateada si el inquilino se muda antes de fin de año.",
+   "coverage_text": "Units fully or partially covered by the Berkeley Rent Stabilization and Eviction for Good Cause Ordinance.",
+   "quote": "For tenancies in units fully or partially covered by Berkeley's Rent Ordinance, landlords must pay tenants interest on their security deposit at the end of each year and a prorated amount if the tenant moves out before the end of the year.",
+   "confidence": 0.7
+  }
+ ]
+}

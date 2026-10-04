@@ -1,0 +1,208 @@
+{
+ "decision": "correct",
+ "reason": "end_date 2030-01-01 is correct: subd. (n) says the section remains in effect only until January 1, 2030, and as of that date is repealed. may_preempt removed: subd. (i)(3) only overrides less protective local ordinances adopted after 9/1/2019 and defers to more protective ones, which is a partial override, not preemption. yields_to stays.",
+ "rule": {
+  "category": "just_cause_eviction",
+  "jurisdiction_level": "state",
+  "jurisdiction_state": "CA",
+  "jurisdiction_name": "California",
+  "title": "Tenant Protection Act just cause for eviction",
+  "citation": "Cal. Civ. Code § 1946.2",
+  "requirement": "After you have lived in your home for 12 months, your landlord can only end your tenancy for a listed just cause, stated in the written notice. For no-fault reasons, the landlord must pay relocation help or waive the last month's rent, equal to one month's rent.",
+  "requirement_es": "Después de vivir en su vivienda por 12 meses, el arrendador solo puede terminar su arrendamiento por una causa justa de la lista, indicada en el aviso por escrito. Por causas sin culpa del inquilino, el arrendador debe pagar ayuda de reubicación o perdonar la renta del último mes, igual a un mes de renta.",
+  "key_value": "One month's rent relocation assistance (no-fault)",
+  "coverage_text": "Residential real property in California after tenants have continuously and lawfully occupied it for 12 months (or 24 months for one tenant when adult tenants are added), unless an exemption applies or a qualifying local just cause ordinance applies.",
+  "applies_if": [
+   {
+    "fact": "other",
+    "op": "is_true",
+    "value_number": null,
+    "value_text": "Tenant(s) have continuously and lawfully occupied the unit for 12 months (or one tenant for 24 months if adult tenants were added)",
+    "value_list": []
+   }
+  ],
+  "exemptions": [
+   {
+    "label": "Certificate of occupancy within the previous 15 years (not a mobilehome)",
+    "all": [
+     {
+      "fact": "age_years",
+      "op": "lte",
+      "value_number": 15,
+      "value_text": null,
+      "value_list": []
+     },
+     {
+      "fact": "building_type",
+      "op": "ne",
+      "value_number": null,
+      "value_text": "mobile_home",
+      "value_list": []
+     }
+    ]
+   },
+   {
+    "label": "Owner-occupied single-family residence renting no more than two units or bedrooms",
+    "all": [
+     {
+      "fact": "building_type",
+      "op": "eq",
+      "value_number": null,
+      "value_text": "single_family",
+      "value_list": []
+     },
+     {
+      "fact": "other",
+      "op": "is_true",
+      "value_number": null,
+      "value_text": "Owner occupies the residence and rents no more than two units or bedrooms",
+      "value_list": []
+     }
+    ]
+   },
+   {
+    "label": "Owner-occupied duplex",
+    "all": [
+     {
+      "fact": "building_type",
+      "op": "eq",
+      "value_number": null,
+      "value_text": "duplex",
+      "value_list": []
+     },
+     {
+      "fact": "other",
+      "op": "is_true",
+      "value_number": null,
+      "value_text": "Owner occupied one unit as principal residence at the beginning of the tenancy and continues in occupancy; neither unit is an ADU/JADU",
+      "value_list": []
+     }
+    ]
+   },
+   {
+    "label": "Separately alienable unit not owned by REIT/corporation, with required exemption notice",
+    "all": [
+     {
+      "fact": "building_type",
+      "op": "in",
+      "value_number": null,
+      "value_text": null,
+      "value_list": [
+       "single_family",
+       "condo",
+       "mobile_home"
+      ]
+     },
+     {
+      "fact": "owner_type",
+      "op": "not_in",
+      "value_number": null,
+      "value_text": null,
+      "value_list": [
+       "reit",
+       "corporation"
+      ]
+     },
+     {
+      "fact": "other",
+      "op": "is_true",
+      "value_number": null,
+      "value_text": "Owner is not an LLC with a corporate member and tenants received the required written exemption notice",
+      "value_list": []
+     }
+    ]
+   },
+   {
+    "label": "Deed-restricted or subsidized affordable housing",
+    "all": [
+     {
+      "fact": "subsidized",
+      "op": "is_true",
+      "value_number": null,
+      "value_text": null,
+      "value_list": []
+     }
+    ]
+   },
+   {
+    "label": "School or college dormitories",
+    "all": [
+     {
+      "fact": "building_type",
+      "op": "eq",
+      "value_number": null,
+      "value_text": "dormitory",
+      "value_list": []
+     }
+    ]
+   },
+   {
+    "label": "Transient/tourist hotel occupancy",
+    "all": [
+     {
+      "fact": "other",
+      "op": "is_true",
+      "value_number": null,
+      "value_text": "Transient and tourist hotel occupancy",
+      "value_list": []
+     }
+    ]
+   },
+   {
+    "label": "Nonprofit hospital, religious, extended care or licensed residential care facilities",
+    "all": [
+     {
+      "fact": "other",
+      "op": "is_true",
+      "value_number": null,
+      "value_text": "Housing in a nonprofit hospital, religious facility, extended care facility, or licensed residential care/adult residential facility",
+      "value_list": []
+     }
+    ]
+   },
+   {
+    "label": "Tenant shares bathroom or kitchen with owner-occupant",
+    "all": [
+     {
+      "fact": "other",
+      "op": "is_true",
+      "value_number": null,
+      "value_text": "Tenant shares bathroom or kitchen facilities with the owner who lives there",
+      "value_list": []
+     }
+    ]
+   },
+   {
+    "label": "Mobilehome homeowner",
+    "all": [
+     {
+      "fact": "other",
+      "op": "is_true",
+      "value_number": null,
+      "value_text": "Tenant is a homeowner of a mobilehome as defined in Section 798.9",
+      "value_list": []
+     }
+    ]
+   }
+  ],
+  "effective_date": "2024-04-01",
+  "end_date": "2030-01-01",
+  "status": "enacted",
+  "yields_to": [
+   {
+    "note": "Does not apply where a local just cause ordinance adopted on or before Sept. 1, 2019, or a more protective later ordinance, applies.",
+    "category": "just_cause_eviction",
+    "level": "city"
+   },
+   {
+    "note": "Same local-ordinance carve-out applies to county ordinances.",
+    "category": "just_cause_eviction",
+    "level": "county"
+   }
+  ],
+  "may_preempt": [],
+  "penalty": "Owner liable for actual damages, discretionary attorney's fees and costs, and up to three times actual damages (plus punitive damages) for willful, oppressive, fraudulent or malicious conduct; noncompliant notices are void.",
+  "quote": "Notwithstanding any other law, after a tenant has continuously and lawfully occupied a residential real property for 12 months, the owner of the residential real property shall not terminate a tenancy without just cause, which shall be stated in the written notice to terminate tenancy.",
+  "confidence": 0.8
+ }
+}

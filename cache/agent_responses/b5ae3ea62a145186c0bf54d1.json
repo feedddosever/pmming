@@ -1,0 +1,46 @@
+{
+ "rules": [
+  {
+   "category": "just_cause_eviction",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "NJ",
+   "jurisdiction_name": "New Jersey",
+   "title": "Anti-Eviction Act: eviction only for listed good causes",
+   "citation": "N.J.S.A. 2A:18-61.1",
+   "requirement": "A landlord in New Jersey can evict a tenant only for one of the causes listed in the Anti-Eviction Act, such as not paying rent, disorderly conduct, damaging the property, or serious lease violations, and must give the required Notice to Quit first. Tenants evicted for health and safety reasons or illegal occupancy may get relocation help, including six months' rent for illegal occupancy evictions.",
+   "requirement_es": "En Nueva Jersey, el propietario solo puede desalojar a un inquilino por una de las causas que enumera la Ley Contra el Desalojo, como no pagar la renta, conducta desordenada, dañar la propiedad o violaciones graves del contrato, y primero debe entregar el Aviso de Desalojo (Notice to Quit) requerido. Los inquilinos desalojados por razones de salud y seguridad u ocupación ilegal pueden recibir ayuda para reubicarse, incluida una suma igual a seis meses de renta en casos de ocupación ilegal.",
+   "key_value": "Listed causes only; relocation assistance of 6x monthly rent for illegal-occupancy evictions",
+   "coverage_text": "Applies to residential tenancies in New Jersey; landlord-occupied two- and three-family dwellings follow separate rules under N.J.S.A. 2A:18-61.2.",
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Owner-occupied two- or three-family dwelling (governed by N.J.S.A. 2A:18-61.2)",
+     "all": [
+      {
+       "fact": "units",
+       "op": "lte",
+       "value_number": 3,
+       "value_text": null,
+       "value_list": []
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "landlord occupies the building",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": "Landlord who does not occupy a unit after an owner-occupancy eviction, or who reuses a retired/demolished property within five years, may owe three times the tenant's damages plus attorney fees and costs; civil penalty up to $10,000 per violation (N.J.S.A. 2A:18-61.6).",
+   "quote": "Listed below are the statutory grounds for eviction as set forth in the Anti-Eviction Statute.",
+   "confidence": 0.75
+  }
+ ]
+}

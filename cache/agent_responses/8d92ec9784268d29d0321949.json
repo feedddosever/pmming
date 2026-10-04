@@ -1,0 +1,34 @@
+{
+ "decision": "drop",
+ "reason": "M.G.L. c.186 s.11 only sets a 14-day notice to quit for nonpayment and a right to cure. It is a notice/procedural rule that does not limit the reasons for eviction (rule 4).",
+ "rule": {
+  "category": "just_cause_eviction",
+  "jurisdiction_level": "state",
+  "jurisdiction_state": "MA",
+  "jurisdiction_name": "Massachusetts",
+  "title": "14-day notice to quit for nonpayment of rent, with right to cure",
+  "citation": "M.G.L. c.186 \u00a7 11",
+  "requirement": "If you have a written lease and fall behind on rent, your landlord must give you 14 days' written notice to quit. You can stop the eviction by paying all rent owed, plus interest and court costs, by the day your answer is due in court.",
+  "requirement_es": "Si tiene un contrato de arrendamiento por escrito y se atrasa en la renta, el propietario debe darle un aviso por escrito de 14 d\u00edas para desalojar. Puede detener el desalojo pagando toda la renta adeudada, m\u00e1s intereses y costos judiciales, a m\u00e1s tardar el d\u00eda en que vence su respuesta en el tribunal.",
+  "key_value": "14 days' written notice",
+  "coverage_text": "Tenancies under a written lease where the tenant fails to pay rent.",
+  "applies_if": [
+   {
+    "fact": "other",
+    "op": "is_true",
+    "value_number": null,
+    "value_text": "Tenancy under a written lease",
+    "value_list": []
+   }
+  ],
+  "exemptions": [],
+  "effective_date": null,
+  "end_date": null,
+  "status": "enacted",
+  "yields_to": [],
+  "may_preempt": [],
+  "penalty": null,
+  "quote": "Upon the neglect or refusal to pay the rent due under a written lease, fourteen days' notice to quit, given in writing by the landlord to the tenant, shall be sufficient to determine the lease, unless the tenant, on or before the day the answer is due, in an action by the landlord to recover possession of the premises, pays or tenders to the landlord or to his attorney all rent then due, with interest and costs of suit.",
+  "confidence": 0.55
+ }
+}

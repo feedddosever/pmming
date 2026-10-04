@@ -1,0 +1,207 @@
+{
+ "rules": [
+  {
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "NJ",
+   "jurisdiction_name": "New Jersey",
+   "status": "enacted",
+   "effective_date": null,
+   "end_date": null,
+   "category": "security_deposits",
+   "title": "Security deposit limit (Security Deposit Law)",
+   "citation": "N.J.S.A. 46:8-21.2",
+   "requirement": "A landlord cannot collect a security deposit of more than one and a half times one month's rent. Any yearly increase in the deposit cannot be more than 10% of the current deposit, and the deposit must be returned with interest, minus allowed deductions, within 30 days after the tenancy ends.",
+   "requirement_es": "El arrendador no puede cobrar un depósito de seguridad de más de una vez y media el alquiler de un mes. Cualquier aumento anual del depósito no puede superar el 10% del depósito actual, y el depósito debe devolverse con intereses, menos las deducciones permitidas, dentro de los 30 días después de que termine el arrendamiento.",
+   "key_value": "1.5 times one month's rent",
+   "coverage_text": "Applies to most residential rental properties, including mobile homes. Owner-occupied two- or three-family dwellings are exempt unless the tenant sends a written request to have the law apply (effective 30 days after the request).",
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Owner-occupied two- or three-family dwelling (unless tenant opts in by written request)",
+     "all": [
+      {
+       "fact": "units",
+       "op": "lte",
+       "value_number": 3,
+       "value_text": null,
+       "value_list": []
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "owner occupies one of the units",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": "Tenant may sue for double the amount wrongfully withheld plus court costs and attorney's fees (N.J.S.A. 46:8-21.1); unlawful use of deposit money is a disorderly persons offense (N.J.S.A. 46:8-25).",
+   "quote": "The maximum-security deposit to be collected by the landlord cannot be more than one and one-half times one month’s rent ( N.J.S.A. 46:8-21.2 ).",
+   "confidence": 0.85
+  },
+  {
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "NJ",
+   "jurisdiction_name": "New Jersey",
+   "status": "enacted",
+   "effective_date": null,
+   "end_date": null,
+   "category": "just_cause_eviction",
+   "title": "Anti-Eviction Act good-cause requirement",
+   "citation": "N.J.S.A. 2A:18-61.1",
+   "requirement": "A landlord can only evict a tenant or refuse to renew a lease (written or oral) for one of the good causes listed in state law, and must prove the cause in court. Except for unpaid rent, the landlord must give the tenant a written Notice to Quit describing the cause.",
+   "requirement_es": "El arrendador solo puede desalojar a un inquilino o negarse a renovar un contrato (escrito u oral) por una de las causas justificadas que indica la ley estatal, y debe probar la causa ante el tribunal. Excepto por falta de pago del alquiler, el arrendador debe darle al inquilino un Aviso de Desalojo (Notice to Quit) por escrito que describa la causa.",
+   "key_value": null,
+   "coverage_text": "Applies to most residential rentals, including single-family homes, mobile homes and mobile home park land, apartment buildings, complexes, and rooming and boarding homes. Does not apply to owner-occupied premises with two or fewer rental units, transient or seasonal hotel/motel/guest house occupants, or a unit held in trust for a developmentally disabled immediate family member who permanently occupies it.",
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Owner-occupied two- or three-unit premises with two or fewer rental units",
+     "all": [
+      {
+       "fact": "units",
+       "op": "lte",
+       "value_number": 3,
+       "value_text": null,
+       "value_list": []
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "owner occupies one of the units",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Hotel, motel or guest house rented to transient or seasonal guests",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "hotel, motel or guest house rented to a transient guest or seasonal tenant (not a continual resident with no alternate residence)",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Unit held in trust for a developmentally disabled immediate family member who permanently occupies it",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "unit held in trust for developmentally disabled immediate family member who permanently occupies it",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "quote": "No residential landlord may evict or fail to renew a lease, whether it is a written or an oral lease without good cause.",
+   "confidence": 0.8
+  },
+  {
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "NJ",
+   "jurisdiction_name": "New Jersey",
+   "status": "enacted",
+   "effective_date": null,
+   "end_date": null,
+   "category": "rent_increase_limits",
+   "title": "No state rent control; increases must not be unconscionable",
+   "citation": "N.J.S.A. 2A:18-61.1(f)",
+   "requirement": "New Jersey has no statewide cap on rent. A landlord cannot raise rent in the middle of a lease, must give proper written notice to end the old lease and offer a new one, and the increase cannot be unconscionable (shockingly unfair) and must follow any local rent control ordinance.",
+   "requirement_es": "Nueva Jersey no tiene un límite estatal sobre el alquiler. El arrendador no puede subir el alquiler a mitad del contrato, debe dar aviso por escrito para terminar el contrato anterior y ofrecer uno nuevo, y el aumento no puede ser abusivo (injusto de manera escandalosa) y debe cumplir con cualquier ordenanza local de control de alquileres.",
+   "key_value": "No fixed cap; increase must not be unconscionable",
+   "coverage_text": "Applies statewide to tenancies covered by the Anti-Eviction Act. Local rent control or rent leveling ordinances may set stricter limits; newly constructed multiple dwellings are exempt from local rent control for 30 years after completion (N.J.S.A. 2A:42-84.5), and HUD- or NJHMFA-controlled housing is not subject to municipal rent control.",
+   "applies_if": [],
+   "exemptions": [],
+   "yields_to": [
+    {
+     "category": "rent_increase_limits",
+     "level": "city",
+     "note": "Increases must comply with any municipal rent control or rent leveling ordinance."
+    }
+   ],
+   "may_preempt": [
+    {
+     "category": "rent_increase_limits",
+     "level": "city",
+     "note": "Under N.J.S.A. 2A:42-84.5, newly constructed multiple dwellings are exempt from local rent control ordinances for 30 years after construction is completed."
+    }
+   ],
+   "penalty": null,
+   "quote": "The increase in rent must not be unconscionable; it must not be so unreasonable as to shock the conscience of a fair and honest person and must comply with any municipal ordinances governing rent increases.",
+   "confidence": 0.6
+  },
+  {
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "NJ",
+   "jurisdiction_name": "New Jersey",
+   "status": "enacted",
+   "effective_date": null,
+   "end_date": null,
+   "category": "screening_restrictions",
+   "title": "Law Against Discrimination: source of lawful income",
+   "citation": "N.J.S.A. 10:5-12",
+   "requirement": "Landlords cannot refuse to rent to you or treat you differently because of your source of lawful income (such as housing vouchers or benefits), or because of race, religion, disability, familial status, and other protected traits.",
+   "requirement_es": "Los arrendadores no pueden negarse a alquilarle ni tratarle de manera diferente por la fuente de sus ingresos legales (como vales de vivienda o beneficios), ni por raza, religión, discapacidad, situación familiar y otras características protegidas.",
+   "key_value": null,
+   "coverage_text": "Applies to all landlord-tenant relationships except two-family owner-occupied dwellings, rooms in an owner- or resident-occupied single home, and single-sex residences (and age-restricted housing as to familial status).",
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Two-family owner-occupied dwelling",
+     "all": [
+      {
+       "fact": "units",
+       "op": "lte",
+       "value_number": 2,
+       "value_text": null,
+       "value_list": []
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "owner occupies one of the units",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Room in an owner- or resident-occupied single-family home",
+     "all": [
+      {
+       "fact": "building_type",
+       "op": "eq",
+       "value_number": null,
+       "value_text": "single_family",
+       "value_list": []
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "room rented in owner- or resident-occupied home",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": "Fines and penalties up to $10,000 for a first offense (N.J.S.A. 10:5-14.1a(a)), plus possible damages and an order to rent the unit.",
+   "quote": "The New Jersey Law Against Discrimination (LAD), N.J.S.A. 10:5-12(g) to -(h), prohibits discrimination when selling or renting property and requires equal treatment in the sale or rental of housing regardless of race, creed, color, national origin, ancestry, sex, marital status, civil union status, domestic partnership status, familial status, affectional or sexual orientation, gender identity or expression, mental and physical disability, nationality, or source of lawful income.",
+   "confidence": 0.7
+  }
+ ]
+}

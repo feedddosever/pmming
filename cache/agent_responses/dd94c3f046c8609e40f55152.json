@@ -1,0 +1,64 @@
+{
+ "rules": [
+  {
+   "key_value": "$19,413 (+$6,471 for qualifying households), CPI-adjusted yearly",
+   "applies_if": [
+    {
+     "fact": "other",
+     "op": "is_true",
+     "value_number": null,
+     "value_text": "eviction is an owner move-in eviction",
+     "value_list": []
+    }
+   ],
+   "exemptions": [],
+   "effective_date": "2026-01-01",
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "confidence": 0.75,
+   "category": "just_cause_eviction",
+   "jurisdiction_level": "city",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "Berkeley",
+   "title": "Relocation assistance for owner move-in evictions",
+   "citation": "Berkeley Rent Stabilization and Good Cause for Eviction Ordinance",
+   "requirement": "If a landlord evicts you so the owner can move in, the landlord must pay you relocation money. Starting January 1, 2026, the standard payment is $19,413, plus $6,471 more for qualifying households.",
+   "requirement_es": "Si el propietario lo desaloja para mudarse a la unidad, debe pagarle una ayuda de reubicación. Desde el 1 de enero de 2026, el pago estándar es de $19,413, más $6,471 adicionales para hogares que califiquen.",
+   "coverage_text": "Tenants evicted for owner move-in under Berkeley's Rent Stabilization and Good Cause for Eviction Ordinance.",
+   "quote": "The Rent Stabilization and Good Cause for Eviction Ordinance requires owners to pay tenants relocation assistance in the event of an owner move-in eviction."
+  },
+  {
+   "key_value": "$19,413 (+$6,471 for qualifying households), CPI-adjusted yearly",
+   "applies_if": [
+    {
+     "fact": "other",
+     "op": "is_true",
+     "value_number": null,
+     "value_text": "eviction is to remove the property from the rental market (Ellis Act)",
+     "value_list": []
+    }
+   ],
+   "exemptions": [],
+   "effective_date": "2026-01-01",
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "confidence": 0.75,
+   "category": "just_cause_eviction",
+   "jurisdiction_level": "city",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "Berkeley",
+   "title": "Relocation assistance for Ellis Act evictions",
+   "citation": "Berkeley Ellis Implementation Ordinance",
+   "requirement": "If a landlord evicts you to take the property off the rental market (Ellis Act), the landlord must pay you the same relocation money as for an owner move-in eviction. Starting January 1, 2026, that is $19,413, plus $6,471 more for qualifying households.",
+   "requirement_es": "Si el propietario lo desaloja para retirar la propiedad del mercado de alquiler (Ley Ellis), debe pagarle la misma ayuda de reubicación que en un desalojo para ocupación del propietario. Desde el 1 de enero de 2026, son $19,413, más $6,471 adicionales para hogares que califiquen.",
+   "coverage_text": "Tenants evicted so the owner can remove the property from the rental housing market under Berkeley's Ellis Implementation Ordinance.",
+   "quote": "The Ellis Implementation Ordinance requires the same relocation assistance payments for tenants evicted so the owner can remove a property from the rental housing market."
+  }
+ ]
+}

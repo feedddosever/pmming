@@ -1,0 +1,48 @@
+{
+ "rules": [
+  {
+   "key_value": null,
+   "applies_if": [],
+   "exemptions": [],
+   "effective_date": null,
+   "end_date": null,
+   "status": "struck",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "rent_increase_limits",
+   "jurisdiction_level": "city",
+   "jurisdiction_state": "MA",
+   "jurisdiction_name": "Boston",
+   "title": "Boston rent stabilization home rule petition (not enacted)",
+   "citation": "H.3744 (2023)",
+   "requirement": "This bill would have let Boston limit rent increases. It was sent to a study order in 2024 and did not become law.",
+   "requirement_es": "Este proyecto de ley habría permitido a Boston limitar los aumentos de renta. Fue enviado a una orden de estudio en 2024 y no se convirtió en ley.",
+   "coverage_text": "Proposed home rule petition for the City of Boston; it was sent to a study order and not enacted.",
+   "quote": "An Act petition for a special law authorizing the city of Boston to implement rent stabilization and tenant eviction protections",
+   "confidence": 0.6
+  },
+  {
+   "key_value": null,
+   "applies_if": [],
+   "exemptions": [],
+   "effective_date": null,
+   "end_date": null,
+   "status": "struck",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "just_cause_eviction",
+   "jurisdiction_level": "city",
+   "jurisdiction_state": "MA",
+   "jurisdiction_name": "Boston",
+   "title": "Boston tenant eviction protections home rule petition (not enacted)",
+   "citation": "H.3744 (2023)",
+   "requirement": "This bill would have let Boston adopt eviction protections for tenants. It was sent to a study order in 2024 and did not become law.",
+   "requirement_es": "Este proyecto de ley habría permitido a Boston adoptar protecciones contra el desalojo para inquilinos. Fue enviado a una orden de estudio en 2024 y no se convirtió en ley.",
+   "coverage_text": "Proposed home rule petition for the City of Boston; it was sent to a study order and not enacted.",
+   "quote": "An Act petition for a special law authorizing the city of Boston to implement rent stabilization and tenant eviction protections",
+   "confidence": 0.6
+  }
+ ]
+}

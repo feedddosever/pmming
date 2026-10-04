@@ -1,0 +1,74 @@
+{
+ "rules": [
+  {
+   "key_value": "one month's rent",
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Vacation or recreational rental of 100 days or less",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "lease or rental of 100 days or less for vacation or recreational purpose",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": "Failure to deposit, transfer or return the deposit as required entitles the tenant to three times the deposit plus 5% interest, court costs and reasonable attorney's fees; the lessor forfeits the right to keep any of the deposit.",
+   "category": "security_deposits",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "MA",
+   "jurisdiction_name": "Massachusetts",
+   "title": "Massachusetts security deposit limit and protections",
+   "citation": "M.G.L. c.186 § 15B",
+   "requirement": "In Massachusetts, a security deposit cannot be more than one month's rent. The landlord must give receipts, keep it in a separate interest-bearing bank account in Massachusetts, pay you interest, and return it within 30 days after you move out, minus only allowed deductions.",
+   "requirement_es": "En Massachusetts, el depósito de seguridad no puede ser mayor que la renta de un mes. El propietario debe darle recibos, guardarlo en una cuenta bancaria separada con intereses en Massachusetts, pagarle intereses y devolverlo dentro de 30 días después de que usted se mude, menos solo las deducciones permitidas.",
+   "coverage_text": "Residential tenancies in Massachusetts, except vacation or recreational rentals of 100 days or less.",
+   "quote": "(iii) a security deposit equal to the first month's rent provided that such security deposit is deposited as required by subsection (3) and that the tenant is given the statement of condition as required by subsection (2);",
+   "confidence": 0.8
+  },
+  {
+   "key_value": "First month, last month, security deposit (max one month), lock and key cost",
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Vacation or recreational rental of 100 days or less",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "lease or rental of 100 days or less for vacation or recreational purpose",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": "2025-08-01",
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "application_screening_fees",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "MA",
+   "jurisdiction_name": "Massachusetts",
+   "title": "Limits on upfront charges at start of tenancy",
+   "citation": "M.G.L. c.186 § 15B",
+   "requirement": "In Massachusetts, before or at move-in a landlord or the landlord's agent can only charge you first month's rent, last month's rent, a security deposit up to one month's rent, and the cost of a new lock and key.",
+   "requirement_es": "En Massachusetts, antes o al mudarse, el propietario o su agente solo puede cobrarle la renta del primer mes, la renta del último mes, un depósito de seguridad de hasta un mes de renta y el costo de una nueva cerradura y llave.",
+   "coverage_text": "Residential tenancies in Massachusetts, except vacation or recreational rentals of 100 days or less. The version covering agents of the lessor is effective August 1, 2025.",
+   "quote": "(b) At or prior to the commencement of any tenancy, no lessor or agent of the lessor may require a tenant or prospective tenant to pay, to the lessor or to an agent of the lessor, any amount in excess of the following:",
+   "confidence": 0.7
+  }
+ ]
+}

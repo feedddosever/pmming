@@ -1,0 +1,65 @@
+{
+ "rules": [
+  {
+   "key_value": null,
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Unit in owner-occupied two-family dwelling",
+     "all": [
+      {
+       "fact": "units",
+       "op": "eq",
+       "value_number": 2,
+       "value_text": null,
+       "value_list": []
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "owner occupies the other unit as residence",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Room rental in owner-occupied one-family dwelling",
+     "all": [
+      {
+       "fact": "units",
+       "op": "eq",
+       "value_number": 1,
+       "value_text": null,
+       "value_list": []
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "owner or occupant rents rooms in the home they live in",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "confidence": 0.7,
+   "category": "screening_restrictions",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "NJ",
+   "jurisdiction_name": "New Jersey",
+   "title": "Source of income discrimination ban",
+   "citation": "N.J. Law Against Discrimination (N.J.S.A. 10:5)",
+   "requirement": "Landlords cannot turn you down or treat you differently because of how you pay rent, such as a Section 8 voucher or other lawful income.",
+   "requirement_es": "Los propietarios no pueden rechazarlo ni tratarlo de forma diferente por la manera en que paga el alquiler, como con un vale de la Sección 8 u otro ingreso legal.",
+   "coverage_text": "Rental of all property, except a unit in an owner-occupied two-family dwelling and rooms in an owner-occupied one-family dwelling.",
+   "quote": "The LAD also prohibits housing discrimination  based on the source of lawful income or source of lawful rent or mortgage payment a tenant or purchaser uses."
+  }
+ ]
+}

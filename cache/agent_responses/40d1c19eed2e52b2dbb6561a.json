@@ -1,0 +1,47 @@
+{
+ "rules": [
+  {
+   "category": "algorithmic_rent_setting",
+   "jurisdiction_level": "city",
+   "jurisdiction_state": "NJ",
+   "jurisdiction_name": "Hoboken",
+   "title": "Prohibition Against Algorithmic Rent-Fixing in the Rental Housing Market",
+   "citation": "Hoboken City Code § 158-2",
+   "requirement": "Landlords in Hoboken may not use software, algorithms, or data-sharing platforms that collect private information from competing landlords to coordinate, recommend, or set rents, lease terms, or occupancy levels.",
+   "requirement_es": "Los propietarios en Hoboken no pueden usar programas, algoritmos o plataformas de intercambio de datos que recopilen información privada de otros propietarios competidores para coordinar, recomendar o fijar alquileres, términos de contrato o niveles de ocupación.",
+   "key_value": "Fine up to $2,000",
+   "coverage_text": "Any residential dwelling unit in Hoboken, defined as any primary residence excluding medical/long-term care or detention facilities.",
+   "applies_if": [
+    {
+     "fact": "other",
+     "op": "is_true",
+     "value_number": null,
+     "value_text": "Unit is a primary residence",
+     "value_list": []
+    }
+   ],
+   "exemptions": [
+    {
+     "label": "Medical/long-term care or detention facilities",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "Medical/long-term care or detention facility",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": "Upon conviction, one or more of: penalties under N.J.S.A. 40:49-5; a fine not exceeding $2,000; or community service not exceeding 90 days. Enforced by the Division of Housing or an aggrieved private citizen in Hoboken Municipal Court.",
+   "quote": "Landlords who rent any residential dwelling unit (defined as any primary residence excluding medical/long-term care or detention facilities) in the City of Hoboken are prohibited from price fixing using algorithmic pricing.",
+   "confidence": 0.8
+  }
+ ]
+}

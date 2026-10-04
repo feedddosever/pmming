@@ -1,0 +1,46 @@
+{
+ "rules": [
+  {
+   "key_value": null,
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Owner-occupied two-family dwelling",
+     "all": [
+      {
+       "fact": "units",
+       "op": "eq",
+       "value_number": 2,
+       "value_text": null,
+       "value_list": []
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "owner lives in the dwelling",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": "After a hearing, the Commission may levy civil fines of up to $300 for each violation, seek injunctive relief, damages, or file a criminal complaint.",
+   "jurisdiction_state": "MA",
+   "jurisdiction_level": "city",
+   "category": "screening_restrictions",
+   "jurisdiction_name": "Cambridge",
+   "title": "Fair housing: no source-of-income discrimination in tenant selection",
+   "citation": "Cambridge Mun. Code ch. 14.04",
+   "requirement": "Cambridge landlords cannot discriminate against applicants based on source of income, including Section 8 and public benefits. They may use reasonable standards, like ability to pay rent, only if applied equally to all applicants.",
+   "requirement_es": "Los propietarios en Cambridge no pueden discriminar a solicitantes por su fuente de ingresos, incluida la Sección 8 y beneficios públicos. Pueden usar criterios razonables, como la capacidad de pagar la renta, solo si se aplican por igual a todos los solicitantes.",
+   "coverage_text": "Housing in Cambridge under the Cambridge Fair Housing Ordinance; protected categories include source of income (Section 8 and public benefits). Exemption for 2-family dwellings where the owner lives there.",
+   "quote": "Under the law, landlords, sellers and rental agents may use any reasonable standard to determine which applicants are selected, as long as that standard is applied equally and uniformly to all applicants.",
+   "confidence": 0.6
+  }
+ ]
+}

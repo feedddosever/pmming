@@ -1,0 +1,37 @@
+{
+ "decision": "keep",
+ "reason": "Section 4 expressly prohibits cities and towns from enacting, maintaining or enforcing rent control of any kind, and bars any permitted regulation from regulating evictions. That is preemption stated in the text, so may_preempt is valid. The citation matches the document's Chapter 40P, Section 4.",
+ "rule": {
+  "category": "rent_increase_limits",
+  "jurisdiction_level": "state",
+  "jurisdiction_state": "MA",
+  "jurisdiction_name": "Massachusetts",
+  "title": "Massachusetts statewide ban on local rent control",
+  "citation": "M.G.L. c.40P § 4",
+  "requirement": "Massachusetts cities and towns may not enact or enforce rent control. A city that accepts this law may only adopt voluntary rent control that cannot regulate evictions, cannot cover owners of fewer than ten units or units with fair market rent above $400, and must compensate owners from city funds.",
+  "requirement_es": "Las ciudades y pueblos de Massachusetts no pueden adoptar ni aplicar el control de rentas. Una ciudad que acepte esta ley solo puede adoptar un control de rentas voluntario que no puede regular los desalojos, no puede cubrir a dueños de menos de diez unidades ni unidades con renta de mercado mayor de $400, y debe compensar a los dueños con fondos municipales.",
+  "key_value": null,
+  "coverage_text": "Applies statewide to all cities and towns in Massachusetts.",
+  "applies_if": [],
+  "exemptions": [],
+  "effective_date": null,
+  "end_date": null,
+  "status": "enacted",
+  "yields_to": [],
+  "may_preempt": [
+   {
+    "note": "No city or town may enact, maintain or enforce rent control of any kind, except narrow voluntary regulation in a city that accepts chapter 40P.",
+    "category": "rent_increase_limits",
+    "level": "city"
+   },
+   {
+    "note": "Any permitted local rent control regulation may not include the regulation of evictions.",
+    "category": "just_cause_eviction",
+    "level": "city"
+   }
+  ],
+  "penalty": null,
+  "quote": "Section 4. No city or town may enact, maintain or enforce rent control of any kind, except that any city or town that accepts this chapter may adopt rent control regulation that provides:",
+  "confidence": 0.8
+ }
+}

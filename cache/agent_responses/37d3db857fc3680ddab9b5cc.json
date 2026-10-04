@@ -1,0 +1,39 @@
+{
+ "rules": [
+  {
+   "category": "rent_increase_limits",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "MA",
+   "jurisdiction_name": "Massachusetts",
+   "title": "Rent control ballot question (struck from 2026 ballot)",
+   "citation": "Mass. rent control ballot question (2026)",
+   "requirement": "A proposed ballot question to limit yearly rent increases in Massachusetts was blocked by the Supreme Judicial Court and will not go before voters in November 2026. It is not law.",
+   "requirement_es": "Una propuesta de pregunta electoral para limitar los aumentos anuales de alquiler en Massachusetts fue bloqueada por la Corte Suprema Judicial y no se presentará a los votantes en noviembre de 2026. No es ley.",
+   "key_value": null,
+   "coverage_text": "Proposed statewide limit on annual rent increases for residences, with exemptions for several types of units, including ones operated solely for religious purposes.",
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Units operated solely for religious purposes",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "Unit operated solely for religious purposes",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": null,
+   "end_date": null,
+   "status": "struck",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "quote": "The state’s Supreme Judicial Court ruled a ballot question seeking to bring rent control back to Massachusetts cannot go forward this November, because it includes a religious exemption.",
+   "confidence": 0.75
+  }
+ ]
+}
