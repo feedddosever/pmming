@@ -43,7 +43,9 @@ Then:
    `superseded` only from the rule's own "yields to" text; conflicts only from preemption language.
 5. **Scorecard**: `python -m navigator report`, 10/10, T1–T5 against `dev/change_tests.json`.
 6. **Hour-16 drill**: `python -m navigator ingest <new ordinance> --doc-id hour16 --retrieval-date <date>`; show the
-   affected addresses and the effective date it prints, then the new rule in the UI.
+   affected addresses and the effective date it prints, then the new rule in the UI. Without agent help, use the
+   site's **Live extraction** tab with your own API key: paste the ordinance, extract, and show the verified quote
+   and the affected sample addresses.
 7. **Responsible design**: `out/audit_log.jsonl` (source hashes, model, prompt version, every review decision),
    the honest limits list in the README.
 
