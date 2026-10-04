@@ -175,3 +175,8 @@ def test_covered_by_follows_local_ordinance():
     addr = lambda yb: {"stack": ["CA", "CA:county:los-angeles", "CA:city:los-angeles"], "facts": {"year_built": yb}}
     assert {r["rule_id"]: r["result"] for r in evaluate_address(addr(1927), rules, D)}["RSO-annual"] == "applies"
     assert "RSO-annual" not in {r["rule_id"] for r in evaluate_address(addr(1990), rules, D)}
+
+
+def test_trigger_inside_exemption_does_not_exempt_building():
+    cov = {"exemptions": [{"label": "mobilehome homeowner", "all": [C("trigger", "is_true", text="tenant owns a mobilehome")]}]}
+    assert P.evaluate(cov, {}, D)[0] is True

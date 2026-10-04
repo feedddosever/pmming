@@ -162,7 +162,8 @@ def evaluate(coverage: dict | None, facts: dict, as_of: date) -> tuple[Any, list
     for ex in coverage.get("exemptions") or []:
         if not ex.get("all"):
             continue  # an exemption with no stated condition must not exempt everything
-        v = k_and(eval_clause(c, facts, as_of) for c in ex.get("all") or [])
+        # A tenancy/event condition inside an exemption does not exempt the building as a whole.
+        v = k_and(FALSE if c.get("fact") == "trigger" else eval_clause(c, facts, as_of) for c in ex.get("all") or [])
         ex_vals.append(v)
         if v is not FALSE:
             reasons.append(f"exemption '{ex.get('label', 'exemption')}' is {_word(v)}")
