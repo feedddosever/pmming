@@ -27,7 +27,7 @@ python -m navigator all                 # extract → resolve → lookup → cha
 python -m navigator lookup --as-of 2027-07-02   # extra as-of snapshots (lookups_<date>.json)
 python -m navigator report              # self-check scorecard: schema, quotes, lookups, T1-T5 (10/10)
 python -m http.server -d out/site 8000  # demo UI
-pytest -q                               # 24 tests, run offline with a fake LLM on synthetic fixtures
+pytest -q                               # 26 tests, run offline with a fake LLM on synthetic fixtures
 ```
 Outputs, in the participant guide's formats (§5):
 - `out/rules.json`: `{"rules": [...]}`, each record validated against `schema/rule_record.schema.json`
