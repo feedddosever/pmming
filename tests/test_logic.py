@@ -132,3 +132,16 @@ def test_agent_mode_queues_then_accepts_valid_answer(tmp_path, monkeypatch):
         llm.complete_json("sys", "user", prompts.NO_RULE_SCHEMA, "no_rule", mode="agent")
     resp.write_text(json.dumps({"exists": False, "explanation": "x", "citation": None, "quote": None}))
     assert llm.complete_json("sys", "user", prompts.NO_RULE_SCHEMA, "no_rule", mode="agent")["exists"] is False
+
+
+def test_review_flags():
+    from navigator.extract.review import needs_review
+    base = {"category": "rent_increase_limits", "jurisdiction": {"id": "CA"}, "confidence": 0.9,
+            "status": "enacted", "citation": "Cal. Civ. Code § 1947.12", "effective_date": "2020-01-01"}
+    assert needs_review(base, "... 1947.12 ...") == []
+    assert "has end_date" in needs_review({**base, "end_date": "2026-06-30"}, "1947.12")
+    assert "citation number not found in document" in needs_review({**base, "citation": "BMC ch. 13.76"}, "text")
+    assert "enacted bill without effective date" in needs_review({**base, "citation": "AB 325 (2025)",
+                                                                  "effective_date": None}, "AB 325 (2025)")
+    assert "pending local ordinance" in needs_review({**base, "status": "pending",
+                                                      "jurisdiction": {"id": "CA:city:berkeley"}}, "1947.12")

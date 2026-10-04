@@ -32,11 +32,16 @@ def main(path: str) -> int:
         return 1
     m = re.search(r"<document>\n(.*)\n</document>", req["user"], re.S)
     text = m.group(1) if m else req["user"]
-    quotes = [r["quote"] for r in data.get("rules", [])] if "rules" in data else ([data["quote"]] if data.get("quote") else [])
+    if "rules" in data:
+        quotes = [r["quote"] for r in data["rules"]]
+    elif "rule" in data:  # review answer
+        quotes = [] if data["decision"] == "drop" else [data["rule"]["quote"]]
+    else:
+        quotes = [data["quote"]] if data.get("quote") else []
     bad = [q for q in quotes if not locate(q, text)]
     for q in bad:
         print("QUOTE NOT VERBATIM:", q[:160])
-    n = len(data.get("rules", [])) if "rules" in data else int(bool(data.get("exists")))
+    n = len(data["rules"]) if "rules" in data else (data["decision"] if "rule" in data else int(bool(data.get("exists"))))
     print(f"OK schema; {n} record(s); {len(bad)} quote(s) not verbatim")
     return 1 if bad else 0
 

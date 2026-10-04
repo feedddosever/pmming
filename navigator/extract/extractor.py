@@ -110,7 +110,7 @@ def consolidate(rules: list[dict]) -> list[dict]:
     best: dict[str, dict] = {}
     for r in rules:
         # Superseded versions (with an end date) keep their own identity in a version chain.
-        if r.get("end_date") and "@" not in r["rule_id"]:
+        if r.get("end_date") and r["end_date"] <= config.DEFAULT_AS_OF.isoformat() and "@" not in r["rule_id"]:
             r = {**r, "rule_id": f"{r['rule_id']}@{r.get('effective_date') or 'start'}"}
         cur = best.get(r["rule_id"])
         seen_in = r.get("sources_seen") or [r["source"]["doc_id"]]
@@ -217,7 +217,11 @@ def extract_corpus(docs: list[dict], workers: int = 4, no_rule: bool = True) -> 
     with ThreadPoolExecutor(workers) as ex:
         all_rules = [r for rs in ex.map(extract_document, docs) for r in rs]
     rules = consolidate(all_rules)
-    if no_rule and not PENDING:  # absence checks need the complete rule set
+    if not PENDING:  # second pass over risky records, then absence checks on the complete set
+        from .review import review
+        by_id = {d["doc_id"]: d for d in docs}
+        rules = consolidate(review(rules, by_id, _rule_from_llm))
+    if no_rule and not PENDING:
         rules += no_rule_pass(rules, docs)
     return rules
 
