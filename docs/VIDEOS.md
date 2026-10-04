@@ -44,12 +44,13 @@ Then:
 5. **Scorecard**: `python -m navigator report`, 10/10, T1–T5 against `dev/change_tests.json`.
 6. **Hour-16 drill**: `python -m navigator ingest <new ordinance> --doc-id hour16 --retrieval-date <date>`; show the
    affected addresses and the effective date it prints, then the new rule in the UI. Without agent help, use the
-   site's **Live extraction** tab with your own API key: paste the ordinance, extract, and show the verified quote
-   and the affected sample addresses.
+   site's **Live extraction** tab with your own API key: paste the ordinance (or fetch its official page with a
+   Bright Data key), extract, and show the verified quote and the affected sample addresses. Say why the tab asks
+   for keys: there weren't enough promo codes for API credits.
 7. **Responsible design**: `out/audit_log.jsonl` (source hashes, model, prompt version, every review decision),
    the honest limits list in the README.
 
 ## Model access note (say it in the technical video)
-No API key was available during the hackathon, so the model steps ran in agent mode: each request, with the
+There weren't enough promo codes for API credits, so the team had no API key and the model steps ran in agent mode: each request, with the
 same prompt and schema as the API path, was answered by a Claude Code agent. The answers are committed and
 schema-checked, so anyone can replay the run offline. With a key, the default mode makes the same calls itself.

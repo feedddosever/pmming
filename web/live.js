@@ -12,7 +12,12 @@ const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<
 const T = {
   en: {
     intro: "Run the extraction step yourself on any corpus document or a new ordinance, with your own Anthropic API key. It uses the same prompt and JSON schema as the pipeline, then checks every quote word for word against the document.",
-    keynote: "Your key stays in this tab's memory: it is never saved and is sent only to api.anthropic.com, directly from your browser. Usage is billed to your Anthropic account (one document is typically a few cents).",
+    keynote: "Your keys stay in this tab's memory: they are never saved and are sent only to the provider they belong to (api.anthropic.com, api.brightdata.com), directly from your browser. Usage is billed to your own accounts (one document is typically a few cents).",
+    why: "Why does this tab ask for API keys? The hackathon didn't hand out enough promo codes for API credits, so this team has no paid API keys and the public demo can't pay for model or web-fetch calls. Everything else on this site was computed in advance and needs no key. To run extraction live, bring your own keys.",
+    bdkey: "Bright Data API key (optional)", bdzone: "Web Unlocker zone", bdurl: "Fetch a page by URL (official source)",
+    bdfetch: "Fetch with Bright Data", bdfetching: "Fetching the page through Bright Data…", bdneed: "Enter your Bright Data API key and a URL first.",
+    bdblocked: "This host publishes municipal codes under terms that restrict automated access, so the app does not fetch it (see the challenge rules). Use the starter-pack corpus or the city's own website instead.",
+    bdok: "Page fetched as text; review it below, then click Extract rules.",
     key: "Anthropic API key", model: "Model", doc: "Document", paste: "Paste a new document…",
     docid: "Document id", title: "Title", hint: "Jurisdiction hint (e.g. \"Cambridge, MA\")", text: "Document text",
     run: "Extract rules", running: "Extracting… (this can take a minute)", none: "No rules in scope were found in this document.",
@@ -25,7 +30,12 @@ const T = {
   },
   es: {
     intro: "Ejecute usted mismo el paso de extracción sobre cualquier documento del corpus o una nueva ordenanza, con su propia clave de API de Anthropic. Usa el mismo prompt y esquema JSON que el pipeline y verifica cada cita palabra por palabra.",
-    keynote: "Su clave queda solo en la memoria de esta pestaña: nunca se guarda y solo se envía a api.anthropic.com, directamente desde su navegador. El uso se cobra a su cuenta de Anthropic (un documento suele costar unos centavos).",
+    keynote: "Sus claves quedan solo en la memoria de esta pestaña: nunca se guardan y solo se envían al proveedor correspondiente (api.anthropic.com, api.brightdata.com), directamente desde su navegador. El uso se cobra a sus propias cuentas (un documento suele costar unos centavos).",
+    why: "¿Por qué esta pestaña pide claves de API? El hackathon no repartió suficientes códigos promocionales de créditos de API, así que este equipo no tiene claves pagadas y la demo pública no puede pagar llamadas al modelo ni descargas web. Todo lo demás en este sitio se calculó de antemano y no necesita clave. Para ejecutar la extracción en vivo, use sus propias claves.",
+    bdkey: "Clave de API de Bright Data (opcional)", bdzone: "Zona de Web Unlocker", bdurl: "Descargar una página por URL (fuente oficial)",
+    bdfetch: "Descargar con Bright Data", bdfetching: "Descargando la página con Bright Data…", bdneed: "Primero ingrese su clave de Bright Data y una URL.",
+    bdblocked: "Este sitio publica códigos municipales con términos que restringen el acceso automatizado, así que la app no lo descarga (ver las reglas del reto). Use el corpus del paquete inicial o el sitio de la ciudad.",
+    bdok: "Página descargada como texto; revísela abajo y luego haga clic en Extraer reglas.",
     key: "Clave de API de Anthropic", model: "Modelo", doc: "Documento", paste: "Pegar un documento nuevo…",
     docid: "Id del documento", title: "Título", hint: "Jurisdicción (p. ej. \"Cambridge, MA\")", text: "Texto del documento",
     run: "Extraer reglas", running: "Extrayendo… (puede tardar un minuto)", none: "No se encontraron reglas en este documento.",
@@ -89,17 +99,58 @@ async function loadLive() {
 }
 
 function texts() {
-  $("lv-intro").textContent = t("intro"); $("lv-keynote").textContent = t("keynote");
+  $("lv-intro").textContent = t("intro"); $("lv-keynote").textContent = t("keynote"); $("lv-why").textContent = t("why");
+  for (const k of ["bdkey", "bdzone", "bdurl"]) $("lv-" + k + "-l").textContent = t(k);
+  $("lv-bdfetch").textContent = t("bdfetch");
   for (const k of ["key", "model", "doc", "docid", "title", "hint", "text"]) $("lv-" + k + "-l").textContent = t(k);
   $("lv-run").textContent = t("run");
   const opt = $("lv-doc").querySelector('option[value=""]'); if (opt) opt.textContent = t("paste");
 }
 
+// Provenance of the text in the paste box when it came from a Bright Data fetch (cleared on manual edits).
+let fetched = null;
+
 function selectedDoc(L) {
   const id = $("lv-doc").value;
   if (id) return L.docs.find((d) => d.doc_id === id);
   return { doc_id: $("lv-docid").value.trim() || "pasted", title: $("lv-title").value.trim() || "Pasted document",
-           url: null, retrieval_date: null, jurisdiction_hint: $("lv-hint").value.trim() || null, text: $("lv-text").value };
+           url: fetched?.url ?? null, retrieval_date: fetched?.retrieval_date ?? null,
+           jurisdiction_hint: $("lv-hint").value.trim() || null, text: $("lv-text").value };
+}
+
+// ---- Bright Data Web Unlocker: fetch one official page the user names, as markdown ----
+// Code publishers whose terms restrict automated access (the challenge brief says to use the starter
+// corpus for these); the app never fetches them, with or without a key.
+const RESTRICTED_HOSTS = ["ecode360.com", "codelibrary.amlegal.com", "amlegal.com", "library.municode.com", "municode.com"];
+const restricted = (host) => RESTRICTED_HOSTS.some((h) => host === h || host.endsWith("." + h));
+
+async function fetchWithBrightData() {
+  const key = $("lv-bdkey").value.trim(), raw = $("lv-bdurl").value.trim();
+  if (!key || !raw) { $("lv-bdstatus").textContent = t("bdneed"); return; }
+  let url;
+  try { url = new URL(raw); if (!/^https?:$/.test(url.protocol)) throw new Error(); }
+  catch { $("lv-bdstatus").textContent = "Error: invalid URL"; return; }
+  if (restricted(url.hostname.toLowerCase())) { $("lv-bdstatus").textContent = t("bdblocked"); return; }
+  $("lv-bdfetch").disabled = true; $("lv-bdstatus").textContent = t("bdfetching");
+  try {
+    const res = await fetch("https://api.brightdata.com/request", {
+      method: "POST",
+      headers: { "Authorization": `Bearer ${key}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ zone: $("lv-bdzone").value.trim() || "web_unlocker1", url: url.href, format: "raw", data_format: "markdown" }),
+    });
+    const body = await res.text();
+    if (!res.ok) throw new Error(`Bright Data HTTP ${res.status}: ${body.slice(0, 200)}`);
+    if (body.trim().length < 200) throw new Error("The page returned almost no text.");
+    $("lv-doc").value = ""; $("lv-paste").hidden = false;
+    $("lv-text").value = body;
+    if (!$("lv-title").value.trim()) $("lv-title").value = url.hostname + url.pathname;
+    fetched = { url: url.href, retrieval_date: new Date().toISOString().slice(0, 10), text: body };
+    $("lv-bdstatus").textContent = `${t("bdok")} (${body.length.toLocaleString()} chars · ${fetched.retrieval_date})`;
+  } catch (e) {
+    $("lv-bdstatus").textContent = "Error: " + (e?.message || String(e));
+  } finally {
+    $("lv-bdfetch").disabled = false;
+  }
 }
 
 function renderRules(L, doc, rules, notes) {
@@ -131,6 +182,7 @@ async function run() {
   if (!key) { $("lv-status").textContent = t("needkey"); return; }
   const doc = selectedDoc(L);
   if (!doc || !doc.text.trim()) { $("lv-status").textContent = t("needtext"); return; }
+  const src = doc.url ? ` · ${doc.url}${doc.retrieval_date ? " (retrieved " + doc.retrieval_date + ")" : ""}` : "";
   const notes = [];
   let body = doc.text;
   if (body.length > L.max_chars) { body = body.slice(0, L.max_chars); notes.push(t("truncated")); }
@@ -153,7 +205,7 @@ async function run() {
     if (!textBlock) throw new Error("No text in the response.");
     const out = JSON.parse(textBlock.text);
     renderRules(L, doc, out.rules || [], notes);
-    $("lv-status").textContent = `${msg.model} · ${t("usage")}: ${msg.usage.input_tokens} / ${msg.usage.output_tokens} · prompt ${L.prompt_version}`;
+    $("lv-status").textContent = `${msg.model} · ${t("usage")}: ${msg.usage.input_tokens} / ${msg.usage.output_tokens} · prompt ${L.prompt_version}${src}`;
   } catch (e) {
     $("lv-status").textContent = "Error: " + (e?.error?.error?.message || e?.message || String(e));
   } finally {
@@ -169,6 +221,8 @@ async function init() {
   const syncPaste = () => { $("lv-paste").hidden = $("lv-doc").value !== ""; };
   $("lv-doc").addEventListener("change", syncPaste); syncPaste();
   $("lv-run").addEventListener("click", run);
+  $("lv-bdfetch").addEventListener("click", fetchWithBrightData);
+  $("lv-text").addEventListener("input", () => { if (fetched && $("lv-text").value !== fetched.text) fetched = null; });
   texts();
   new MutationObserver(texts).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
 }
