@@ -48,8 +48,9 @@ Every LLM and geocoder response is cached in `cache/`. `NAV_LLM=replay` reruns t
 offline and deterministically (useful for the live rerun in the demo check).
 
 ## Bring your own API key
-The hackathon credits don't cover a full rerun, so there are two ways to run the model step with your own
-Anthropic API key. The key is never written to the repo or the outputs.
+**Why the app asks for keys:** the hackathon didn't hand out enough promo codes for API credits, so this team has
+no paid API keys. Everything in `out/` and on the demo site was computed in advance and needs no key. The live
+features below run on the visitor's own keys instead. The keys are never written to the repo or the outputs.
 
 **1. Live extraction in the browser** (one document, typically a few cents). Open the **Live extraction** tab on
 https://rental-law-navigator-kappa.vercel.app (or the local `out/site`):
@@ -62,6 +63,14 @@ https://rental-law-navigator-kappa.vercel.app (or the local `out/site`):
   still evaluated by the Python pipeline.
 - The key stays in the open tab's memory. It is never stored and is sent only to `api.anthropic.com`, directly
   from the browser (the SDK's direct-browser-access mode), and is billed to the key's own account.
+- **Optional: fetch a page with Bright Data.** With a Bright Data API key and a Web Unlocker zone (default
+  `web_unlocker1`), paste the URL of an official page (for example a new city ordinance) and click **Fetch with
+  Bright Data**. The [Web Unlocker API](https://docs.brightdata.com/api-reference/rest-api/unlocker/unlock-website)
+  returns the page as markdown, which goes into the document box with its URL and retrieval date; then run
+  **Extract rules** as usual. The key is sent only to `api.brightdata.com`.
+- **Guardrail:** one user-chosen page at a time, never bulk. The app refuses hosts of municipal-code publishers
+  whose terms restrict automated access (eCode360, American Legal, Municode). The challenge brief says to use the
+  starter corpus for those, and its rules forbid scraping against a site's terms.
 
 **2. Full pipeline rerun from the command line:**
 ```bash

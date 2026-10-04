@@ -57,11 +57,19 @@ table{border-collapse:collapse;width:100%;font-size:14px}td,th{border-bottom:1px
   <section id="view-live" hidden>
     <h2 id="t-live"></h2>
     <p id="lv-intro"></p>
+    <div class="cat small" style="border-color:var(--unk)"><b id="lv-why"></b></div>
     <p class="small muted" id="lv-keynote"></p>
     <div class="controls" style="grid-template-columns:1fr 1fr">
       <div><label for="lv-key" id="lv-key-l"></label><input id="lv-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-ant-..."></div>
       <div><label for="lv-model" id="lv-model-l"></label><select id="lv-model"></select></div>
     </div>
+    <div class="controls" style="grid-template-columns:1fr 1fr 2fr auto">
+      <div><label for="lv-bdkey" id="lv-bdkey-l"></label><input id="lv-bdkey" type="password" autocomplete="off" spellcheck="false"></div>
+      <div><label for="lv-bdzone" id="lv-bdzone-l"></label><input id="lv-bdzone" value="web_unlocker1" spellcheck="false"></div>
+      <div><label for="lv-bdurl" id="lv-bdurl-l"></label><input id="lv-bdurl" type="url" placeholder="https://www.cambridgema.gov/..." spellcheck="false"></div>
+      <div><label>&nbsp;</label><button id="lv-bdfetch"></button></div>
+    </div>
+    <p class="small muted" id="lv-bdstatus"></p>
     <div><label for="lv-doc" id="lv-doc-l"></label><select id="lv-doc"></select></div>
     <div id="lv-paste" style="margin-top:10px">
       <div class="controls" style="grid-template-columns:1fr 1fr 1fr;margin:0 0 10px">
