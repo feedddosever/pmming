@@ -38,8 +38,8 @@ Outputs, in the participant guide's formats (§5):
 - `out/changes.json`: `{test_id: {affected_address_ids, conflict_flag_address_ids, notes}}` for T1–T5
   (dates and types read from `dev/change_tests.json`; selectors in `config/change_cases.json`).
 - Also `changes_details.json` (before/after per address), `no_rule_findings.json`, `audit_log.jsonl`, and
-  `out/site/` (static demo, committed; `.github/workflows/pages.yml` publishes it to GitHub Pages on pushes to
-  `main` once Settings → Pages → Source is set to "GitHub Actions").
+  `out/site/` (static demo, committed). **Live demo: https://rental-law-navigator-kappa.vercel.app** (Vercel project
+  linked to this repo with root directory `out/site` and no build step, so every push to `main` redeploys it).
 
 The official pack has **no scoring script or dev answer key** ("no-scoring" edition), so quality is checked
 against the expected behaviour stated in `dev/change_tests.json` and the participant guide.
