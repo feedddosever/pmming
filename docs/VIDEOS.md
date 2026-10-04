@@ -1,6 +1,7 @@
 # Video scripts
 
-The scores must be on screen. Before recording, run this and keep the terminal visible for a few seconds:
+The scores must be on screen. No `score.py` is publicly available (confirmed by the organizers), so the
+self-check scorecard is shown instead. Before recording, run this and keep the terminal visible for a few seconds:
 ```bash
 NAV_LLM=agent python -m navigator all      # offline replay of the committed run (seconds)
 NAV_LLM=agent python -m navigator report   # 10/10 self-check scorecard
@@ -8,14 +9,16 @@ python -m http.server -d out/site 8000     # demo UI at http://localhost:8000
 ```
 Say "informational only, not legal advice" once in every video. The UI shows it on every view.
 
-## 1. Team video (about 60 s)
+## 1. Team video (max 1 min)
 - Names and roles: team lead / pipeline, extraction and review, geocoding and coverage logic, UI and video.
 - The problem in one sentence: renters and operators can't tell which of dozens of overlapping state and city
   rules apply to one building on one date.
 - Our angle: **unknown beats wrong**. Every answer quotes the law word for word, and when the data can't
   decide, we say so instead of guessing.
 
-## 2. Demo video (about 3 min)
+## 2. Demo video (max 1 min)
+Recorded version: 47 s, captioned (San Francisco, Hoboken with the as-of date, Spanish, Boston, Law changes,
+Live extraction replay). Berkeley, Jersey City and the 2025-12-31 check are optional extras if time allows.
 Use these addresses from the official sample (`#A0016` etc. in the URL also works):
 
 | Step | Address | What to point at |
@@ -32,7 +35,9 @@ Then:
 3. Move it back to **2025-12-31**: the CA AB 325 / SB 763 rules show not yet effective (T1).
 4. Scroll to the **Changes** section: T1–T5 with the affected address counts (250 / 90 / 140 / 110 / 0).
 
-## 3. Technical video (about 3 min)
+## 3. Technical video (max 1 min)
+Recorded version: 58 s, eight screens (pipeline, extraction, citation lock, coverage, as-of engine, scorecard,
+audit log and scalability).
 1. **Pipeline** (README "Architecture" diagram): starter pack → extraction (strict JSON schema) → review of risky
    records → clause normalization → evidence-gated "no rule" checks → Census geocoding → as-of engine → outputs.
 2. **Citation lock**: `navigator/extract/verify.py`; every `quoted_span` is a verbatim substring
@@ -41,7 +46,8 @@ Then:
    20-unit building is never "single-family owner exempt" even when the owner type is unknown.
 4. **As-of engine and precedence**: status comes from enacted / effective / pending / struck dates;
    `superseded` only from the rule's own "yields to" text; conflicts only from preemption language.
-5. **Scorecard**: `python -m navigator report`, 10/10, T1–T5 against `dev/change_tests.json`.
+5. **Scorecard**: `python -m navigator report`, 10/10, T1–T5 against `dev/change_tests.json`. The organizers
+   confirmed no `score.py` is publicly available, so say that this self-check stands in for it.
 6. **Hour-16 drill**: `python -m navigator ingest <new ordinance> --doc-id hour16 --retrieval-date <date>`; show the
    affected addresses and the effective date it prints, then the new rule in the UI. Without agent help, use the
    site's **Live extraction** tab with your own API key: paste the ordinance (or fetch its official page with a
