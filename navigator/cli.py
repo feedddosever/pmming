@@ -13,6 +13,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import shutil
 import subprocess
@@ -116,15 +117,31 @@ def cmd_ingest(a, sp: StarterPack):
     src = Path(a.file)
     text = src.read_text(encoding="utf-8", errors="replace")
     doc_id = a.doc_id or src.stem
-    dest = sp.root / "ingested"
-    dest.mkdir(parents=True, exist_ok=True)
-    shutil.copy(src, dest / f"{doc_id}.txt")
-    doc = {"doc_id": doc_id, "title": a.title or src.stem, "url": a.url, "retrieval_date": a.retrieval_date,
-           "jurisdiction_hint": None, "doc_type": "ingested", "text": text, "link_only": False,
-           "sha256": sha256_text(text)}
+    # Keep the document in the supplement corpus so every later full run includes it.
+    supp = config.SUPPLEMENT_DIR
+    (supp / "text").mkdir(parents=True, exist_ok=True)
+    shutil.copy(src, supp / "text" / f"{doc_id}.txt")
+    man = supp / "manifest.csv"
+    rows = list(csv.DictReader(man.open())) if man.exists() else []
+    rows = [r for r in rows if r["doc_id"] != doc_id] + [{
+        "doc_id": doc_id, "jurisdictions": a.jurisdiction or "", "url": a.url or "", "source_type": "ingested",
+        "capture": "ingest", "retrieved_at": a.retrieval_date, "sha256": sha256_text(text),
+        "text_file": f"text/{doc_id}.txt", "status": "ok"}]
+    with man.open("w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(rows[0]))
+        w.writeheader()
+        w.writerows(rows)
+    doc = next(d for d in sp.documents() if d["doc_id"] == doc_id)  # identical to what full runs load
     ledger.log("ingest", doc_id=doc_id, sha256=doc["sha256"], path=str(src))
     old = _load(RULES_INTERNAL)
     new = extractor.extract_document(doc)
+    if not extractor.PENDING:  # same second-pass stages as a full run
+        from .extract.normalize import normalize
+        from .extract.review import review
+        new = normalize(extractor.consolidate(review(new, {doc_id: doc}, extractor._rule_from_llm)))
+    if extractor.PENDING:
+        sys.exit(f"{len(extractor.PENDING)} model request(s) queued in cache/agent_requests/ "
+                 f"(agent mode); answer them and rerun the same ingest command")
     merged = extractor.consolidate([r for r in old if r.get("kind") == "rule"] + new)
     enacted = {(r["jurisdiction"]["id"], r["category"]) for r in merged if r.get("status") == "enacted"}
     dropped = [r for r in old if r.get("kind") == "no_rule" and (r["jurisdiction"]["id"], r["category"]) in enacted]
@@ -204,6 +221,7 @@ def main(argv=None):
             s.add_argument("--url")
             s.add_argument("--retrieval-date", default=date.today().isoformat())
             s.add_argument("--case", default="T6")
+            s.add_argument("--jurisdiction", help='manifest-style hint, e.g. "Cambridge, MA"')
         if name == "score":
             s.add_argument("rest", nargs=argparse.REMAINDER)
     a = p.parse_args(argv)
