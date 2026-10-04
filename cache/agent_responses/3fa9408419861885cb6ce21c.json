@@ -1,0 +1,65 @@
+{
+ "rules": [
+  {
+   "key_value": "Convictions older than 5 years not considered",
+   "applies_if": [
+    {
+     "fact": "other",
+     "op": "is_true",
+     "value_number": null,
+     "value_text": "Housing receives Boston DND funding and/or land, or has income-restricted units created under the BPDA Inclusionary Development Policy",
+     "value_list": []
+    }
+   ],
+   "exemptions": [
+    {
+     "label": "Direct relationship to housing or safety risk",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "Direct relationship between the conviction and the housing sought, or unreasonable risk of substantial harm to the safety of others",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Current criminal behavior",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "Current criminal behavior",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [
+    {
+     "category": "screening_restrictions",
+     "level": "state",
+     "note": "Where federal or state law imposes a conflicting criminal history requirement, that law preempts this policy."
+    }
+   ],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "screening_restrictions",
+   "jurisdiction_level": "city",
+   "jurisdiction_state": "MA",
+   "jurisdiction_name": "Boston",
+   "title": "Boston Fair Chance Tenant Selection Policy",
+   "citation": "Boston Fair Chance Tenant Selection Policy (DND, 2017)",
+   "requirement": "City-funded and income-restricted housing in Boston may not use blanket bans on people with criminal records and must review applicants case by case. They may not consider arrests without conviction, sealed or expunged records, juvenile records, or convictions more than 5 years old, and may not use credit scores to approve or deny applicants.",
+   "requirement_es": "La vivienda financiada por la ciudad y la vivienda con ingresos restringidos en Boston no pueden usar prohibiciones generales contra personas con antecedentes penales y deben evaluar a cada solicitante de forma individual. No pueden considerar arrestos sin condena, antecedentes sellados o borrados, antecedentes juveniles ni condenas de más de 5 años, y no pueden usar la puntuación de crédito para aprobar o negar solicitudes.",
+   "coverage_text": "Housing providers receiving Boston Department of Neighborhood Development funding and/or land, or with income-restricted units under the BPDA Inclusionary Development Policy.",
+   "quote": "Housing providers receiving Department of Neighborhood Development (DND) funding and/or land, or that have income restricted units created under the Boston Planning and Development Agency (BPDA) Inclusionary Development Policy will not impose a blanket policy that denies housing to anyone with arrests and or convictions.",
+   "confidence": 0.7
+  }
+ ]
+}

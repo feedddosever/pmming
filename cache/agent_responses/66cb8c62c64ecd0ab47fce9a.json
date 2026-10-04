@@ -1,0 +1,26 @@
+{
+ "decision": "keep",
+ "reason": "This is substantive no-fault relocation assistance (the category covers relocation assistance), not a notice-only rule. Amounts, dates, the 15-day timing and the LAMC 165.06 citation all match the document.",
+ "rule": {
+  "category": "just_cause_eviction",
+  "jurisdiction_level": "city",
+  "jurisdiction_state": "CA",
+  "jurisdiction_name": "Los Angeles",
+  "title": "JCO no-fault eviction relocation assistance",
+  "citation": "L.A. Mun. Code \u00a7 165.06",
+  "requirement": "For no-fault evictions from units covered by the Just Cause Ordinance (JCO) in Los Angeles, the landlord must file a Declaration of Intent to Evict with LAHD and pay relocation assistance within 15 days of the notice. Amounts range from $11,000 to $27,400 for July 2026 to June 2027, or one month's rent for certain single-family homes owned by individuals.",
+  "requirement_es": "En desalojos sin culpa de unidades cubiertas por la Ordenanza de Causa Justa (JCO) en Los \u00c1ngeles, el propietario debe presentar una Declaraci\u00f3n de Intenci\u00f3n de Desalojo ante LAHD y pagar asistencia de reubicaci\u00f3n dentro de 15 d\u00edas del aviso. Los montos van de $11,000 a $27,400 de julio de 2026 a junio de 2027, o un mes de renta para ciertas casas unifamiliares de personas f\u00edsicas.",
+  "key_value": "$11,000\u2013$27,400 per unit (July 1, 2026\u2013June 30, 2027); one month's rent for single-family homes owned by natural persons",
+  "coverage_text": "No-fault evictions from units covered by the Los Angeles Just Cause Ordinance. Single-family dwellings owned by a natural person who owns no more than four units and a single-family home in the City pay one month's rent.",
+  "applies_if": [],
+  "exemptions": [],
+  "effective_date": null,
+  "end_date": null,
+  "status": "enacted",
+  "yields_to": [],
+  "may_preempt": [],
+  "penalty": "Failure to file the Landlord Declaration makes the eviction a violation of the JCO; tenant may raise non-payment as an affirmative defense.",
+  "quote": "All tenant not- at-fault evictions require payment of relocation assistance and the filing of a \nDeclaration of Intent to Evict form with the Los Angeles Housing Department (LAHD) before \nevicting tenants from units covered by the Rent Stabilization Ordinance (RSO) or the Just Cause \nOrdinance (JCO).",
+  "confidence": 0.7
+ }
+}

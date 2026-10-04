@@ -1,0 +1,32 @@
+{
+ "rules": [
+  {
+   "key_value": null,
+   "applies_if": [],
+   "exemptions": [],
+   "effective_date": "2027-07-01",
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [
+    {
+     "category": "algorithmic_rent_setting",
+     "level": "city",
+     "note": "Municipalities are prohibited from enacting ordinances that conflict with the act."
+    }
+   ],
+   "penalty": "Violation of the New Jersey Antitrust Act; remedies under N.J.S.A. 56:9-6 through 9-17 apply.",
+   "confidence": 0.75,
+   "category": "algorithmic_rent_setting",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "NJ",
+   "jurisdiction_name": "New Jersey",
+   "title": "FAIR Act ban on algorithmic rent coordination",
+   "citation": "N.J.S.A. 56:9-23",
+   "requirement": "Landlords cannot pay for or use rent-setting software or services that pool private data from competing landlords to set or recommend rents, and no one may coordinate rent prices this way. Violations are treated as breaking the New Jersey Antitrust Act.",
+   "requirement_es": "Los propietarios no pueden pagar ni usar programas o servicios que combinen datos privados de propietarios competidores para fijar o recomendar alquileres, y nadie puede coordinar precios de alquiler de esta forma. Las infracciones se tratan como violaciones de la Ley Antimonopolio de Nueva Jersey.",
+   "coverage_text": "Rental property owners, coordinators (operators of algorithmic revenue management software or algorithmic devices performing a coordinating function) and their agents, for residential dwelling units in New Jersey.",
+   "quote": "It shall be unlawful and a violation of the “New Jersey Antitrust Act,” P.L.1970, c.73 (C.56:9-1 et seq.) for: a. a rental property owner, or any agent, representative, or subcontractor thereof, to receive, subscribe to, contract for, or otherwise exchange any form of consideration in return for the use of, the services of a coordinator;"
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+{
+ "decision": "correct",
+ "reason": "Feb 28, 2027 is the end of the annual allowance period, not a sunset of the law: end_date set to null and the period moved into key_value (rule 1). The document does not name S.F. Admin. Code ch. 37, so the citation now uses the Rent Board announcement the document gives (rule 5).",
+ "rule": {
+  "category": "rent_increase_limits",
+  "jurisdiction_level": "city",
+  "jurisdiction_state": "CA",
+  "jurisdiction_name": "San Francisco",
+  "title": "San Francisco annual allowable rent increase (3/1/2026-2/28/2027)",
+  "citation": "San Francisco Rent Board, Annual Rent Increase for 3/1/26 - 2/28/27",
+  "requirement": "For rent-controlled units in San Francisco, the most your landlord can raise your rent for the yearly increase from March 1, 2026 to February 28, 2027 is 1.6%.",
+  "requirement_es": "Para unidades con control de renta en San Francisco, lo máximo que el propietario puede subir la renta en el aumento anual del 1 de marzo de 2026 al 28 de febrero de 2027 es 1.6%.",
+  "key_value": "1.6% (annual allowable increase for March 1, 2026 - February 28, 2027)",
+  "coverage_text": "Rent-controlled units in San Francisco.",
+  "applies_if": [
+   {
+    "fact": "other",
+    "op": "is_true",
+    "value_number": null,
+    "value_text": "unit is rent-controlled under the San Francisco Rent Ordinance",
+    "value_list": []
+   }
+  ],
+  "exemptions": [],
+  "effective_date": "2026-03-01",
+  "end_date": null,
+  "status": "enacted",
+  "yields_to": [],
+  "may_preempt": [],
+  "penalty": null,
+  "quote": "For rent-controlled units, the annual allowable increase amount effective March 1, 2026 through February 28, 2027 is 1.6%.",
+  "confidence": 0.8
+ }
+}

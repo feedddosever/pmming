@@ -1,0 +1,39 @@
+{
+ "rules": [
+  {
+   "key_value": "1.0% (65% of Bay Area CPI)",
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Tenancy began on or after January 1, 2025 with rent set under Costa-Hawkins",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "Tenancy began on or after January 1, 2025 and the rent was set pursuant to the Costa-Hawkins Rental Housing Act",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": "2026-01-01",
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "rent_increase_limits",
+   "jurisdiction_level": "city",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "Berkeley",
+   "title": "Berkeley 2026 Annual General Adjustment (1.0%)",
+   "citation": "Berkeley Mun. Code § 13.76.110",
+   "requirement": "For 2026, eligible Berkeley landlords may raise rent ceilings on covered units by no more than 1.0%, starting no earlier than January 1, 2026. The yearly increase is set at 65% of the Bay Area inflation rate (CPI).",
+   "requirement_es": "Para 2026, los propietarios elegibles de Berkeley pueden aumentar los topes de renta de las unidades cubiertas en no más de 1.0%, a partir del 1 de enero de 2026 como muy pronto. El aumento anual se fija en el 65% de la inflación (IPC) del Área de la Bahía.",
+   "coverage_text": "Eligible landlords of units with permanent rent ceilings under the Berkeley Rent Ordinance; conditions for qualifying are in Rent Board Regulation 1148.",
+   "quote": "At its regular meeting on October 16, 2025, the Berkeley Rent Stabilization Board adopted the Annual General Adjustment (AGA) Order for Year 2026 which will allow eligible landlords to increase the 2025 permanent rent ceilings by 1.0% no earlier than January 1, 2026.",
+   "confidence": 0.8
+  }
+ ]
+}

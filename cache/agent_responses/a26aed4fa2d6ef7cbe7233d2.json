@@ -1,0 +1,34 @@
+{
+ "decision": "drop",
+ "reason": "M.G.L. c.186 s.31 only requires a form to accompany a nonpayment notice to quit and proof of delivery before filing; this is a notification/procedural requirement, not a limit on eviction causes (rule 4).",
+ "rule": {
+  "category": "just_cause_eviction",
+  "jurisdiction_level": "state",
+  "jurisdiction_state": "MA",
+  "jurisdiction_name": "Massachusetts",
+  "title": "Required form with notice to quit for nonpayment of rent",
+  "citation": "M.G.L. c.186 § 31",
+  "requirement": "If your landlord gives you a written notice to quit for not paying rent, it must come with a state form listing rental help programs, court rules and eviction protections. A court cannot accept the eviction case without proof you got the form.",
+  "requirement_es": "Si el propietario le da un aviso por escrito para desalojar por falta de pago de renta, debe venir con un formulario del estado con programas de ayuda para la renta, reglas del tribunal y protecciones contra el desalojo. El tribunal no puede aceptar el caso de desalojo sin prueba de que usted recibió el formulario.",
+  "key_value": null,
+  "coverage_text": "Residential tenants who receive a written notice to quit for nonpayment of rent.",
+  "applies_if": [
+   {
+    "fact": "other",
+    "op": "is_true",
+    "value_number": null,
+    "value_text": "eviction is for nonpayment of rent",
+    "value_list": []
+   }
+  ],
+  "exemptions": [],
+  "effective_date": null,
+  "end_date": null,
+  "status": "enacted",
+  "yields_to": [],
+  "may_preempt": [],
+  "penalty": "Courts may not accept a summary process filing for nonpayment of rent without proof of delivery of the form.",
+  "quote": "A notice to quit for nonpayment of rent given in writing by a landlord to a residential tenant pursuant to this chapter shall be accompanied by a form that shall include, but not be limited to: (i) documentation of any agreements between the tenant and landlord for the tenant to repay the landlord for nonpayment of rent; and (ii) information on: (1) rental assistance programs including, but not limited to, the residential assistance for families in transition program; (2) applicable trial court rules, standing orders or emergency administrative orders pertaining to actions for summary process; and (3) any relevant federal or state legal restrictions on residential evictions.",
+  "confidence": 0.6
+ }
+}

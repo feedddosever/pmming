@@ -1,0 +1,182 @@
+{
+ "rules": [
+  {
+   "key_value": null,
+   "applies_if": [
+    {
+     "fact": "other",
+     "op": "is_false",
+     "value_number": null,
+     "value_text": "unit is regulated by the Los Angeles Rent Stabilization Ordinance (RSO)",
+     "value_list": []
+    },
+    {
+     "fact": "other",
+     "op": "is_true",
+     "value_number": null,
+     "value_text": "tenant has lived in the unit at least six months or the original lease expired, whichever comes first",
+     "value_list": []
+    }
+   ],
+   "exemptions": [
+    {
+     "label": "Transient hotels, licensed care facilities, fraternity/sorority houses, owner's roommate, certain cooperatives, some non-profit homeless or short-term treatment facilities, some HACLA/government-owned properties",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "unit is in a listed excluded category (transient hotel, licensed care facility, fraternity/sorority house, owner's roommate, certain cooperatives, certain non-profit facilities, certain HACLA/government-owned property)",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "just_cause_eviction",
+   "jurisdiction_level": "city",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "Los Angeles",
+   "title": "Los Angeles Just Cause Ordinance (JCO)",
+   "citation": "Los Angeles Just Cause Ordinance (JCO)",
+   "requirement": "In Los Angeles, most rental units not under rent control can only be ended for a legal reason listed in the law. If you are evicted for a no-fault reason, like the owner moving in, your landlord may have to pay you relocation money.",
+   "requirement_es": "En Los Ángeles, la mayoría de las unidades que no están bajo control de renta solo pueden terminarse por una razón legal de la lista de la ley. Si lo desalojan sin culpa suya, por ejemplo porque el dueño se muda, el propietario puede tener que pagarle dinero de reubicación.",
+   "coverage_text": "Most residential properties in the City of Los Angeles not regulated by the RSO, including single-family dwellings, once the tenant has lived in the unit 6 months or the original lease has expired, whichever comes first. Exceptions include transient hotels, licensed care facilities, fraternity/sorority houses, owner's roommate, certain cooperatives, some non-profit homeless or substance-abuse facilities, and some HACLA or government-owned properties. Since March 27, 2023, tenants cannot be evicted for nonpayment unless they owe more than the Fair Market Rent for the unit size.",
+   "quote": "It prohibits terminations of tenancies without just cause and requires relocation assistance for no-fault evictions.",
+   "confidence": 0.7
+  },
+  {
+   "key_value": "5% + CPI, max 10%",
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Built within the last 15 years",
+     "all": [
+      {
+       "fact": "age_years",
+       "op": "lte",
+       "value_number": 15,
+       "value_text": null,
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Deed-restricted affordable housing",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "unit restricted by deed, regulatory restriction or recorded document limiting affordability to low or moderate-income households",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Certain dormitories",
+     "all": [
+      {
+       "fact": "building_type",
+       "op": "eq",
+       "value_number": null,
+       "value_text": "dormitory",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Owner-occupied two-unit property",
+     "all": [
+      {
+       "fact": "units",
+       "op": "eq",
+       "value_number": 2,
+       "value_text": null,
+       "value_list": []
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "owner occupied the other unit for the entire tenancy",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Single-family home or condo not owned by REIT/corporation/LLC with corporate member, with written notice",
+     "all": [
+      {
+       "fact": "building_type",
+       "op": "in",
+       "value_number": null,
+       "value_text": null,
+       "value_list": [
+        "single_family",
+        "condo"
+       ]
+      },
+      {
+       "fact": "owner_type",
+       "op": "not_in",
+       "value_number": null,
+       "value_text": null,
+       "value_list": [
+        "reit",
+        "corporation"
+       ]
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "landlord gave written notice that tenancy is exempt under Civ. Code 1947.12(d)(5)(B)(i)",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Units subject to the City's RSO",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "unit is subject to the Los Angeles Rent Stabilization Ordinance",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [
+    {
+     "category": "rent_increase_limits",
+     "level": "city",
+     "note": "Units already subject to the Los Angeles RSO are not covered by AB 1482."
+    }
+   ],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "rent_increase_limits",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "California",
+   "title": "California Tenant Protection Act rent cap (AB 1482)",
+   "citation": "Cal. Civ. Code § 1947.12",
+   "requirement": "Under California's AB 1482, yearly rent increases are capped at 5% plus the local cost-of-living change, or 10%, whichever is lower, for covered buildings older than 15 years.",
+   "requirement_es": "Bajo la ley AB 1482 de California, los aumentos anuales de renta tienen un límite de 5% más el cambio local en el costo de vida, o 10%, lo que sea menor, para edificios cubiertos con más de 15 años.",
+   "coverage_text": "Buildings older than 15 years (rolling), except deed-restricted affordable units, certain dormitories, owner-occupied two-unit properties, qualifying single-family homes/condos with written notice, and units already subject to the Los Angeles RSO.",
+   "quote": "A\nnnual rent increases are limited to no more than 5% plus the percentage change in the cost of living for the region in which the property is located, or 10% whichever is lower).",
+   "confidence": 0.6
+  }
+ ]
+}

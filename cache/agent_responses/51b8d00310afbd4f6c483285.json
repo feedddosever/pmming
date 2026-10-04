@@ -1,0 +1,26 @@
+{
+ "decision": "correct",
+ "reason": "This is an enacted 2025 regular-session statute (Ch. 338, approved Oct 6, 2025) with no stated effective date and no urgency clause. Under the general rule (Cal. Const. art. IV, sec. 8(c)) it takes effect 2026-01-01.",
+ "rule": {
+  "category": "algorithmic_rent_setting",
+  "jurisdiction_level": "state",
+  "jurisdiction_state": "CA",
+  "jurisdiction_name": "California",
+  "title": "Cartwright Act ban on common pricing algorithms",
+  "citation": "AB 325 (2025)",
+  "requirement": "In California, it is illegal to use or share a common pricing algorithm (software using competitor data to set or recommend prices or terms) as part of an agreement to restrain trade, or to pressure others to adopt its recommended prices or terms.",
+  "requirement_es": "En California, es ilegal usar o compartir un algoritmo de precios común (programa que usa datos de competidores para fijar o recomendar precios o condiciones) como parte de un acuerdo para restringir el comercio, o presionar a otros a adoptar sus precios o condiciones recomendados.",
+  "key_value": null,
+  "coverage_text": "Any person (not end consumers) using or distributing a common pricing algorithm, meaning any methodology including software used by two or more persons that uses competitor data to recommend, align, stabilize, set or influence a price or commercial term. Adds Bus. & Prof. Code §§ 16729 and 16756.1.",
+  "applies_if": [],
+  "exemptions": [],
+  "effective_date": "2026-01-01",
+  "end_date": null,
+  "status": "enacted",
+  "yields_to": [],
+  "may_preempt": [],
+  "penalty": "Violations of the Cartwright Act are punishable as a crime.",
+  "quote": "(a) It shall be unlawful for a person to use or distribute a common pricing algorithm as part of a contract, combination in the form of a trust, or conspiracy to restrain trade or commerce in violation of this chapter.",
+  "confidence": 0.8
+ }
+}

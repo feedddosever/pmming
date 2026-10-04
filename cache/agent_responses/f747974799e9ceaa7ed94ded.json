@@ -1,0 +1,26 @@
+{
+ "rules": [
+  {
+   "key_value": null,
+   "applies_if": [],
+   "exemptions": [],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "screening_restrictions",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "MA",
+   "jurisdiction_name": "Massachusetts",
+   "title": "Ban on source-of-income discrimination in rentals",
+   "citation": "M.G.L. c.151B § 4(10)",
+   "requirement": "Landlords in Massachusetts may not discriminate against a renter because the renter receives public assistance or a housing subsidy, such as a rental voucher, or because of the requirements of that assistance program.",
+   "requirement_es": "Los propietarios en Massachusetts no pueden discriminar a un inquilino porque recibe asistencia pública o un subsidio de vivienda, como un vale de alquiler, ni por los requisitos de ese programa de asistencia.",
+   "coverage_text": "Any person furnishing rental accommodations in Massachusetts.",
+   "quote": "For any person furnishing credit, services or rental accommodations to discriminate against any individual who is a recipient of federal, state, or local public assistance, including medical assistance, or who is a tenant receiving federal, state, or local housing subsidies, including rental assistance or rental supplements, because the individual is such a recipient, or because of any requirement of such public assistance, rental assistance, or housing subsidy program.",
+   "confidence": 0.8
+  }
+ ]
+}

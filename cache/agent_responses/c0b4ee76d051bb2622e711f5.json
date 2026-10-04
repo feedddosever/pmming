@@ -1,0 +1,144 @@
+{
+ "rules": [
+  {
+   "key_value": "5% + CPI, max 10%",
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Deed-restricted or subsidized affordable housing",
+     "all": [
+      {
+       "fact": "subsidized",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": null,
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "School or college dormitory",
+     "all": [
+      {
+       "fact": "building_type",
+       "op": "eq",
+       "value_number": null,
+       "value_text": "dormitory",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Certificate of occupancy within previous 15 years (not mobilehome)",
+     "all": [
+      {
+       "fact": "age_years",
+       "op": "lte",
+       "value_number": 15,
+       "value_text": null,
+       "value_list": []
+      },
+      {
+       "fact": "building_type",
+       "op": "ne",
+       "value_number": null,
+       "value_text": "mobile_home",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Separately alienable home of non-corporate owner with exemption notice",
+     "all": [
+      {
+       "fact": "building_type",
+       "op": "in",
+       "value_number": null,
+       "value_text": null,
+       "value_list": [
+        "single_family",
+        "condo"
+       ]
+      },
+      {
+       "fact": "owner_type",
+       "op": "not_in",
+       "value_number": null,
+       "value_text": null,
+       "value_list": [
+        "reit",
+        "corporation"
+       ]
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "owner is not an LLC with a corporate member and tenants received the required written exemption notice",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Owner-occupied duplex",
+     "all": [
+      {
+       "fact": "building_type",
+       "op": "eq",
+       "value_number": null,
+       "value_text": "duplex",
+       "value_list": []
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "owner occupied one unit at start of tenancy and still does; neither unit is an ADU or JADU",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Mobilehome homeowner",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "tenant is a homeowner of a mobilehome as defined in Civ. Code 798.9",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": "2024-04-01",
+   "end_date": "2030-01-01",
+   "status": "enacted",
+   "yields_to": [
+    {
+     "category": "rent_increase_limits",
+     "level": "city",
+     "note": "Does not apply to housing under local rent control that restricts increases to less than this cap."
+    },
+    {
+     "category": "rent_increase_limits",
+     "level": "county",
+     "note": "Does not apply to housing under local rent control that restricts increases to less than this cap."
+    }
+   ],
+   "may_preempt": [],
+   "penalty": "Tenant may sue for injunctive relief, overcharge damages, attorney's fees, and up to three times the overcharge for willful violations; Attorney General and city/county may enforce.",
+   "confidence": 0.85,
+   "category": "rent_increase_limits",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "California",
+   "title": "Statewide rent increase cap (Tenant Protection Act)",
+   "citation": "Cal. Civ. Code § 1947.12",
+   "requirement": "Your landlord cannot raise your rent more than 5% plus local inflation, or 10%, whichever is lower, in any 12 months. Rent can be raised at most twice in 12 months.",
+   "requirement_es": "Su propietario no puede subir el alquiler más del 5% más la inflación local, o el 10%, lo que sea menor, en cualquier período de 12 meses. El alquiler solo puede subirse dos veces como máximo en 12 meses.",
+   "coverage_text": "Residential real property in California, except affordable/subsidized housing, school dormitories, units under stricter local rent control, housing with a certificate of occupancy in the last 15 years (unless a mobilehome), qualifying separately alienable homes of non-corporate owners with notice, owner-occupied duplexes, and mobilehome homeowners. Initial rent on a new tenancy is not limited.",
+   "quote": "Subject to subdivision (b), an owner of residential real property shall not, over the course of any 12-month period, increase the gross rental rate for a dwelling or a unit more than 5 percent plus the percentage change in the cost of living, or 10 percent, whichever is lower, of the lowest gross rental rate charged for that dwelling or unit at any time during the 12 months prior to the effective date of the increase."
+  }
+ ]
+}

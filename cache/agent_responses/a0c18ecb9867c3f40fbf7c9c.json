@@ -1,0 +1,85 @@
+{
+ "clauses": [
+  {
+   "index": 0,
+   "kind": "subsidized",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 1,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "dormitory"
+   ]
+  },
+  {
+   "index": 2,
+   "kind": "building_type",
+   "op": "not_in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "mobilehome"
+   ]
+  },
+  {
+   "index": 3,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "single_family",
+    "condominium"
+   ]
+  },
+  {
+   "index": 4,
+   "kind": "unknown",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 5,
+   "kind": "unknown",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 6,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "duplex"
+   ]
+  },
+  {
+   "index": 7,
+   "kind": "owner_occupied",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 8,
+   "kind": "trigger",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  }
+ ]
+}

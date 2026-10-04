@@ -1,0 +1,26 @@
+{
+ "rules": [
+  {
+   "key_value": "$30 per applicant, CPI-adjusted",
+   "applies_if": [],
+   "exemptions": [],
+   "effective_date": "2026-01-01",
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "application_screening_fees",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "California",
+   "title": "Application screening fee cap, receipts and refunds",
+   "citation": "Cal. Civ. Code § 1950.6",
+   "requirement": "A landlord can charge an application screening fee only to cover actual costs, and never more than $30 per applicant (adjusted each year for inflation). You must get an itemized receipt, a copy of your credit report, and a refund if no unit is available, your application is not considered, or the fee is not fully used.",
+   "requirement_es": "El propietario solo puede cobrar una tarifa de evaluación de solicitud para cubrir los costos reales, y nunca más de $30 por solicitante (ajustado cada año por inflación). Debe recibir un recibo detallado, una copia de su informe de crédito y un reembolso si no hay unidad disponible, si su solicitud no se considera o si la tarifa no se usa por completo.",
+   "coverage_text": "Applicants for residential rental property, including guarantors and cosigners.",
+   "quote": "In no case shall the amount of the application screening fee charged by the landlord or their agent be greater than thirty dollars ($30) per applicant.",
+   "confidence": 0.8
+  }
+ ]
+}

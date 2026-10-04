@@ -1,0 +1,34 @@
+{
+ "decision": "correct",
+ "reason": "June 30, 2026 ends the annual allowable-increase period; the RSO does not expire then. end_date set to null and the period moved into key_value (rule 1). Citation now matches the document's wording.",
+ "rule": {
+  "category": "rent_increase_limits",
+  "jurisdiction_level": "city",
+  "jurisdiction_state": "CA",
+  "jurisdiction_name": "Los Angeles",
+  "title": "RSO annual allowable rent increase (July 2025 - June 2026)",
+  "citation": "City of Los Angeles Rent Stabilization Ordinance (RSO)",
+  "requirement": "For units covered by the Los Angeles Rent Stabilization Ordinance, the yearly rent increase from July 1, 2025 through June 30, 2026 is limited to 3%. Starting February 2, 2026, landlords can no longer add an extra percentage for utilities.",
+  "requirement_es": "Para las unidades cubiertas por la Ordenanza de Estabilización de Rentas de Los Ángeles, el aumento anual de renta del 1 de julio de 2025 al 30 de junio de 2026 está limitado al 3%. A partir del 2 de febrero de 2026, los arrendadores ya no pueden agregar un porcentaje adicional por servicios públicos.",
+  "key_value": "3% (annual allowable increase for July 1, 2025 - June 30, 2026)",
+  "coverage_text": "Rental units subject to the City of Los Angeles Rent Stabilization Ordinance (RSO).",
+  "applies_if": [
+   {
+    "fact": "other",
+    "op": "is_true",
+    "value_number": null,
+    "value_text": "Unit is subject to the Los Angeles Rent Stabilization Ordinance (RSO)",
+    "value_list": []
+   }
+  ],
+  "exemptions": [],
+  "effective_date": "2025-07-01",
+  "end_date": null,
+  "status": "enacted",
+  "yields_to": [],
+  "may_preempt": [],
+  "penalty": null,
+  "quote": "Annual rent increases for rental units subject to the City of Los Angeles Rent Stabilization Ordinance (RSO), effective\nJuly 1, 2025, through June 30, 2026\nis\n3%",
+  "confidence": 0.7
+ }
+}

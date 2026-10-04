@@ -1,0 +1,142 @@
+{
+ "clauses": [
+  {
+   "index": 0,
+   "kind": "trigger",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 1,
+   "kind": "building_type",
+   "op": "not_in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "mobilehome"
+   ]
+  },
+  {
+   "index": 2,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "single_family"
+   ]
+  },
+  {
+   "index": 3,
+   "kind": "owner_occupied",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 4,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "duplex"
+   ]
+  },
+  {
+   "index": 5,
+   "kind": "owner_occupied",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 6,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "single_family",
+    "condominium",
+    "mobilehome"
+   ]
+  },
+  {
+   "index": 7,
+   "kind": "unknown",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 8,
+   "kind": "unknown",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 9,
+   "kind": "subsidized",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 10,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "dormitory"
+   ]
+  },
+  {
+   "index": 11,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "hotel_motel"
+   ]
+  },
+  {
+   "index": 12,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "care_facility"
+   ]
+  },
+  {
+   "index": 13,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "owner_occupied_room"
+   ]
+  },
+  {
+   "index": 14,
+   "kind": "trigger",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  }
+ ]
+}

@@ -4,7 +4,8 @@ __pycache__/
 .venv/
 data/starter_pack/*
 !data/starter_pack/README.md
-cache/
+cache/*
+!cache/agent_responses/
 out/site/
 .env
 out/*

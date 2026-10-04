@@ -1,0 +1,26 @@
+{
+ "rules": [
+  {
+   "key_value": null,
+   "applies_if": [],
+   "exemptions": [],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": "First offense: warning; second and subsequent offenses: $300 per day. A violation does not halt the eviction process.",
+   "category": "just_cause_eviction",
+   "jurisdiction_level": "city",
+   "jurisdiction_state": "MA",
+   "jurisdiction_name": "Boston",
+   "title": "Housing Stability Notification Act - notice of tenant rights",
+   "citation": "Boston City Ord. § 10-11.7",
+   "requirement": "Any Boston landlord ending a tenancy must give you a Notice of Tenants' Rights and Resources together with the notice to quit or non-renewal, and must also report the notice to the City.",
+   "requirement_es": "Cualquier arrendador en Boston que termine un arrendamiento debe entregarle un Aviso de Derechos y Recursos del Inquilino junto con el aviso de desalojo o de no renovación, y también debe reportar el aviso a la Ciudad.",
+   "coverage_text": "All landlords (and foreclosing owners) in Boston planning to end a tenancy agreement.",
+   "quote": "The Housing Stability Notification Act requires any landlord to provide renters with a Notice of Tenant’s Rights and Resources when planning to end a tenancy agreement.",
+   "confidence": 0.75
+  }
+ ]
+}

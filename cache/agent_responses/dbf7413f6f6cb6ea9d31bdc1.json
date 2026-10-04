@@ -1,0 +1,26 @@
+{
+ "decision": "keep",
+ "reason": "Pending is correct: the ordinance (O-2025-107) has blank ordinance number, final-passage and adoption dates, and is presented in a staff report as proposed. Citation §98.1103 and the O-number appear in the text, the quote is verbatim from §98.1103(b), the penalty matches §98.1104, and the effective date (30 days after final passage) cannot be computed yet, so null is right.",
+ "rule": {
+  "category": "algorithmic_rent_setting",
+  "jurisdiction_level": "city",
+  "jurisdiction_state": "CA",
+  "jurisdiction_name": "San Diego",
+  "title": "Proposed ban on anti-competitive automated rent price-fixing",
+  "citation": "San Diego Mun. Code § 98.1103 (proposed, O-2025-107)",
+  "requirement": "This proposed ordinance would make it illegal to sell or license rent-setting software that uses private competitor data, and illegal for landlords to use it to set rents or occupancy levels. Tenants could sue for up to $1,000 per violation.",
+  "requirement_es": "Esta ordenanza propuesta haría ilegal vender o licenciar software para fijar rentas que use datos privados de competidores, e ilegal que los arrendadores lo usen para fijar rentas o niveles de ocupación. Los inquilinos podrían demandar hasta $1,000 por cada infracción.",
+  "key_value": "Up to $1,000 per violation",
+  "coverage_text": "Persons selling, licensing or providing algorithmic devices that use nonpublic competitor data, and landlords of residential rental property in the City of San Diego. Excludes software publishing reports from public or 90+ day-old aggregated data, and software used for affordable housing program rent/income limits.",
+  "applies_if": [],
+  "exemptions": [],
+  "effective_date": null,
+  "end_date": null,
+  "status": "pending",
+  "yields_to": [],
+  "may_preempt": [],
+  "penalty": "Tenant may seek injunctive relief, damages, or civil penalties of up to $1,000 per violation; prevailing tenant recovers costs and attorney's fees. Each month and each property is a separate violation.",
+  "quote": "It is unlawful for a landlord to use an algorithmic device to set rental rates\nor occupancy levels for residential rental property.",
+  "confidence": 0.75
+ }
+}

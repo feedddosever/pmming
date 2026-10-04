@@ -1,0 +1,47 @@
+{
+ "decision": "correct",
+ "reason": "Relocation assistance for no-fault evictions is a substantive just-cause protection, not notice-only, so keep the rule. Corrected end_date to null: 2/28/2027 is the end of the annual rate period, not a sunset (rule 1); the period is now in key_value. 2026-03-01 is the rate period start, not the law's effective date, and the document states none, so effective_date is null. Citation changed to the name the document uses ('Rent Ordinance Section 37.9C'); 'S.F. Admin. Code' is not in the text (rule 5).",
+ "rule": {
+  "category": "just_cause_eviction",
+  "jurisdiction_level": "city",
+  "jurisdiction_state": "CA",
+  "jurisdiction_name": "San Francisco",
+  "title": "Relocation payments for no-fault evictions (owner move-in, demolition, capital improvement, rehab)",
+  "citation": "San Francisco Rent Ordinance Section 37.9C",
+  "requirement": "If you are evicted in San Francisco for an owner or relative move-in, demolition or removal of the unit, capital improvement work, or substantial rehab, your landlord must pay you $8,245 per tenant (up to $24,733 per unit), plus $5,497 more for each elderly (60+) or disabled tenant or household with minor children, for notices served 3/1/2026-2/28/2027.",
+  "requirement_es": "Si lo desalojan en San Francisco porque el dueño o un familiar se muda, por demolición o retiro de la unidad, por obras de mejora de capital o por rehabilitación sustancial, el propietario debe pagarle $8,245 por inquilino (hasta $24,733 por unidad), más $5,497 por cada inquilino mayor (60+) o discapacitado u hogar con hijos menores, para avisos entregados del 1/3/2026 al 28/2/2027.",
+  "key_value": "$8,245 per tenant; max $24,733 per unit; +$5,497 per elderly/disabled tenant or household with minor children (for eviction notices served 3/1/2026-2/28/2027)",
+  "coverage_text": "Evictions in San Francisco based on owner/relative move-in, demolition/permanent removal from housing use, temporary capital improvement work (20 days or more), or substantial rehabilitation; amounts based on date the eviction notice is served.",
+  "applies_if": [
+   {
+    "fact": "other",
+    "op": "is_true",
+    "value_number": null,
+    "value_text": "eviction based on owner/relative move-in, demolition/permanent removal, temporary capital improvement work, or substantial rehabilitation",
+    "value_list": []
+   }
+  ],
+  "exemptions": [
+   {
+    "label": "Temporary capital improvement evictions under 20 days (governed by Cal. Civ. Code § 1947.9)",
+    "all": [
+     {
+      "fact": "other",
+      "op": "is_true",
+      "value_number": null,
+      "value_text": "temporary capital improvement eviction for less than 20 days",
+      "value_list": []
+     }
+    ]
+   }
+  ],
+  "effective_date": null,
+  "end_date": null,
+  "status": "enacted",
+  "yields_to": [],
+  "may_preempt": [],
+  "penalty": null,
+  "quote": "Date of Service of Notice of Termination of Tenancy (\"Eviction Notice\")\nRelocation Amount Due Per Tenant\nMaximum Relocation Amount Due Per Unit\nPLUS Additional Amount Due for Each Elderly (60 years or older) or Disabled Tenant or Household with Minor Child(ren)\n3/01/26 – 2/28/27\n$8,245.00\n$24,733.00\n$5,497.00",
+  "confidence": 0.75
+ }
+}

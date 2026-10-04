@@ -1,0 +1,58 @@
+{
+ "clauses": [
+  {
+   "index": 0,
+   "kind": "trigger",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 1,
+   "kind": "subsidized",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 2,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "dormitory"
+   ]
+  },
+  {
+   "index": 3,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "hotel_motel"
+   ]
+  },
+  {
+   "index": 4,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "care_facility"
+   ]
+  },
+  {
+   "index": 5,
+   "kind": "unknown",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  }
+ ]
+}

@@ -1,0 +1,26 @@
+{
+ "rules": [
+  {
+   "category": "algorithmic_rent_setting",
+   "jurisdiction_level": "city",
+   "jurisdiction_state": "NJ",
+   "jurisdiction_name": "Jersey City",
+   "title": "Preventing Algorithmic Rent Fixing in the Rental Housing Market",
+   "citation": "Jersey City Mun. Code § 218-12",
+   "requirement": "Landlords, their agents, and subcontractors in Jersey City may not subscribe to, contract with, pay for, or use the services of an algorithmic rent-setting service provider. Service providers may not help landlords agree not to compete on rents, fees, or other rental terms.",
+   "requirement_es": "Los propietarios, sus agentes y subcontratistas en Jersey City no pueden suscribirse, contratar, pagar ni usar los servicios de un proveedor de fijación algorítmica de alquileres. Los proveedores de servicios no pueden ayudar a los propietarios a acordar no competir en alquileres, cargos u otros términos de alquiler.",
+   "key_value": null,
+   "coverage_text": "Real estate lessors, agents, or subcontractors in Jersey City, and service providers.",
+   "applies_if": [],
+   "exemptions": [],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "quote": "It is unlawful for any real estate lessor, agent, or subcontractor thereof, to subscribe to, contract with, or otherwise exchange anything of value in return for or otherwise utilize the services of a Service Provider.",
+   "confidence": 0.8
+  }
+ ]
+}

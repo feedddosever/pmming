@@ -1,0 +1,46 @@
+{
+ "rules": [
+  {
+   "key_value": "No criminal-history inquiry before conditional offer; lookback 6 yrs (1st degree), 4 yrs (2nd/3rd degree), 1 yr (4th degree)",
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Owner-occupied premises of not more than four units",
+     "all": [
+      {
+       "fact": "units",
+       "op": "lte",
+       "value_number": 4,
+       "value_text": null,
+       "value_list": []
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "owner occupies the premises",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": "2022-01-01",
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": "Up to $1,000 for a first violation, up to $5,000 for a second within five years, and up to $10,000 for two or more prior violations within seven years; complaints are filed with the Division on Civil Rights.",
+   "category": "screening_restrictions",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "NJ",
+   "jurisdiction_name": "New Jersey",
+   "title": "Fair Chance in Housing Act: criminal history screening limits",
+   "citation": "N.J.S.A. 46:8-55",
+   "requirement": "In New Jersey, a landlord cannot ask about your criminal record until after making you a conditional offer to rent. After that, they can only consider certain recent or serious convictions, must do an individual review, and must tell you in writing why if they take back the offer.",
+   "requirement_es": "En Nueva Jersey, el propietario no puede preguntar sobre sus antecedentes penales hasta después de hacerle una oferta condicional de alquiler. Después, solo puede considerar ciertas condenas recientes o graves, debe hacer una evaluación individual y debe explicarle por escrito si retira la oferta.",
+   "coverage_text": "Rental dwelling units offered by housing providers, other than units in owner-occupied premises of not more than four dwelling units. Exceptions allow considering methamphetamine production on federally assisted housing premises and lifetime sex offender registration.",
+   "quote": "A housing provider shall not make any oral or written inquiry regarding an applicant’s criminal record prior to making a conditional offer.",
+   "confidence": 0.75
+  }
+ ]
+}

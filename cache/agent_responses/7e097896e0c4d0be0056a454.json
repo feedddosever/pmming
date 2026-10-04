@@ -1,0 +1,160 @@
+{
+ "clauses": [
+  {
+   "index": 0,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "hotel_motel"
+   ]
+  },
+  {
+   "index": 1,
+   "kind": "trigger",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 2,
+   "kind": "subsidized",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 3,
+   "kind": "subsidized",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 4,
+   "kind": "trigger",
+   "op": "is_false",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 5,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "mobilehome"
+   ]
+  },
+  {
+   "index": 6,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "care_facility",
+    "shelter"
+   ]
+  },
+  {
+   "index": 7,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "dormitory"
+   ]
+  },
+  {
+   "index": 8,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "owner_occupied_room"
+   ]
+  },
+  {
+   "index": 9,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "single_family"
+   ]
+  },
+  {
+   "index": 10,
+   "kind": "owner_occupied",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 11,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "duplex"
+   ]
+  },
+  {
+   "index": 12,
+   "kind": "owner_occupied",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 13,
+   "kind": "building_type",
+   "op": "not_in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "mobilehome"
+   ]
+  },
+  {
+   "index": 14,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "single_family",
+    "condominium"
+   ]
+  },
+  {
+   "index": 15,
+   "kind": "unknown",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 16,
+   "kind": "trigger",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  }
+ ]
+}

@@ -1,0 +1,26 @@
+{
+ "decision": "keep",
+ "reason": "The document states substantive RPO relocation assistance for demolition of Protected Units: Chart B amounts $87,450-$115,480 for 2026-27, with RSO/JCO minimums. Relocation assistance falls in the just_cause_eviction category, and this is more than a notice rule. Effective date 2/11/2025, ordinance numbers, penalty and quote are all stated in the document.",
+ "rule": {
+  "category": "just_cause_eviction",
+  "jurisdiction_level": "city",
+  "jurisdiction_state": "CA",
+  "jurisdiction_name": "Los Angeles",
+  "title": "Resident Protections Ordinance relocation for demolition",
+  "citation": "L.A. Ordinance Nos. 188481 & 188482 (Resident Protections Ordinance)",
+  "requirement": "If a Los Angeles landlord demolishes a protected unit to build new housing, lower-income tenants must get enhanced relocation payments (for 2026-27, up to $115,480 under the standard option), and all tenants get at least the RSO or JCO amount.",
+  "requirement_es": "Si un propietario en Los Ángeles demuele una unidad protegida para construir nueva vivienda, los inquilinos de bajos ingresos deben recibir pagos de reubicación mayores (para 2026-27, hasta $115,480 bajo la opción estándar), y todos los inquilinos reciben al menos el monto de RSO o JCO.",
+  "key_value": "$87,450–$115,480 for lower-income households (Option 1, 2026-27)",
+  "coverage_text": "Protected Units demolished for new construction within 5 years after filing the Notice of Intent to Withdraw or Declaration of Intent to Evict; Protected Units include all RSO units and units with recent affordability covenants, rent control, lower-income occupants, or Ellis Act withdrawal.",
+  "applies_if": [],
+  "exemptions": [],
+  "effective_date": "2025-02-11",
+  "end_date": null,
+  "status": "enacted",
+  "yields_to": [],
+  "may_preempt": [],
+  "penalty": "Financial penalties starting at $250,000 per displaced unit and withholding of LAHD permit clearances.",
+  "quote": "Owners who demolish a Protected Unit for the purpose of new construction within 5 years after the \nfiling of the Notice of Intent to Withdraw or Declaration of Intent to Evict with LAHD are required to \ncomply with relocation requirements under the RPO.",
+  "confidence": 0.6
+ }
+}

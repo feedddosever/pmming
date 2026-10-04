@@ -1,0 +1,26 @@
+{
+ "rules": [
+  {
+   "jurisdiction_level": "state",
+   "key_value": "one month's rent (two months for qualifying small landlords)",
+   "applies_if": [],
+   "exemptions": [],
+   "effective_date": "2024-07-01",
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": "Bad-faith retention of the security may result in statutory damages of up to twice the amount of the security, in addition to actual damages.",
+   "category": "security_deposits",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "California",
+   "title": "Security deposit cap",
+   "citation": "Cal. Civ. Code § 1950.5",
+   "requirement": "A landlord may not ask for a security deposit of more than one month's rent, on top of the first month's rent. Small landlords (natural persons owning no more than two rental properties with no more than four units) may ask for up to two months' rent, but not from service members.",
+   "requirement_es": "El arrendador no puede pedir un depósito de garantía de más de un mes de renta, además de la renta del primer mes. Los arrendadores pequeños (personas naturales que tienen no más de dos propiedades de alquiler con no más de cuatro unidades) pueden pedir hasta dos meses de renta, pero no a miembros del servicio militar.",
+   "coverage_text": "Applies to security for a rental agreement for residential property used as the tenant's dwelling. Landlords who are natural persons (or LLCs whose members are all natural persons) owning no more than two residential rental properties with no more than four units total may collect up to two months' rent, except from service members. Does not apply to security collected or demanded before July 1, 2024. An advance payment of at least six months' rent is allowed for leases of six months or longer.",
+   "quote": "(1) Except as provided in paragraph (2), (3), or (5), a landlord shall not demand or receive security, however denominated, in an amount or value in excess of an amount equal to one month’s rent, in addition to any rent for the first month paid on or before initial occupancy.",
+   "confidence": 0.85
+  }
+ ]
+}

@@ -1,0 +1,33 @@
+{
+ "clauses": [
+  {
+   "index": 0,
+   "kind": "covered_by",
+   "op": "is_false",
+   "value_number": null,
+   "value_text": "rent_increase_limits",
+   "value_list": []
+  },
+  {
+   "index": 1,
+   "kind": "trigger",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 2,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "hotel_motel",
+    "care_facility",
+    "dormitory",
+    "owner_occupied_room"
+   ]
+  }
+ ]
+}

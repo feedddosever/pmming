@@ -1,0 +1,12 @@
+{
+ "clauses": [
+  {
+   "index": 0,
+   "kind": "covered_by",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": "just_cause_eviction",
+   "value_list": []
+  }
+ ]
+}

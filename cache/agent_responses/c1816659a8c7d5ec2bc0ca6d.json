@@ -1,0 +1,26 @@
+{
+ "rules": [
+  {
+   "key_value": "Up to $1,000 per violation",
+   "applies_if": [],
+   "exemptions": [],
+   "effective_date": null,
+   "end_date": null,
+   "status": "pending",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": "Tenant may seek injunctive relief, damages, or civil penalties of up to $1,000 per violation; prevailing tenant recovers costs and attorney's fees. Each month and each property is a separate violation.",
+   "category": "algorithmic_rent_setting",
+   "jurisdiction_level": "city",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "San Diego",
+   "title": "Proposed ban on anti-competitive automated rent price-fixing",
+   "citation": "San Diego Mun. Code § 98.1103 (proposed, O-2025-107)",
+   "requirement": "This proposed ordinance would make it illegal to sell or license rent-setting software that uses private competitor data, and illegal for landlords to use it to set rents or occupancy levels. Tenants could sue for up to $1,000 per violation.",
+   "requirement_es": "Esta ordenanza propuesta haría ilegal vender o licenciar software para fijar rentas que use datos privados de competidores, e ilegal que los arrendadores lo usen para fijar rentas o niveles de ocupación. Los inquilinos podrían demandar hasta $1,000 por cada infracción.",
+   "coverage_text": "Persons selling, licensing or providing algorithmic devices that use nonpublic competitor data, and landlords of residential rental property in the City of San Diego. Excludes software publishing reports from public or 90+ day-old aggregated data, and software used for affordable housing program rent/income limits.",
+   "quote": "It is unlawful for a landlord to use an algorithmic device to set rental rates or occupancy levels for residential rental property.",
+   "confidence": 0.75
+  }
+ ]
+}

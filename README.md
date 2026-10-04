@@ -94,10 +94,48 @@ rules + stacks + date ─► apply/predicates.py (three-valued) + status.py (as-
   the as-of date; boundary years return `unknown`.
 
 ## Status and limits
-- Adapted to the official starter pack (formats, column names, category names, T1–T5).
-- Address resolution has been run on all 500 sample addresses: 493 matched by the Census geocoder,
-  7 resolved from the postal city (house-number-less Boston streets, Newark rows with wrong ZIPs);
-  every address lands in the expected city.
-- **Extraction has not been run yet:** it needs `ANTHROPIC_API_KEY`. Estimated 55 extraction calls,
-  roughly $10–20 with the default model.
-- Tests use a synthetic fixture corpus under `fixtures/` (labelled *not legal text*) and a fake LLM.
+**Submission files are in `out/`** (`rules.json`, `lookups.json`, `changes.json`, plus as-of snapshots for
+2025-12-31 and 2027-07-02, `changes_details.json`, `no_rule_findings.json` and the audit log).
+
+How the current results were produced:
+- **No API key was available**, so the model steps ran in **agent mode** (`NAV_LLM=agent`). Each request (same
+  prompt and JSON schema as the API path) is written to `cache/agent_requests/` and answered by a Claude Code
+  agent. Answers are schema-validated, and every quote is checked word for word against the document.
+  The answers are committed in `cache/agent_responses/`, so `NAV_LLM=agent python -m navigator all` replays
+  the whole run offline in seconds. With an API key, the default mode makes the same calls itself.
+- **Pipeline stages:**
+  - extraction (58 calls over 54 corpus documents and 3 supplementary ones);
+  - review of risky records (25: end dates, preemption tags, notice-only "just cause" rules, citations not
+    in the text, pending ordinances, bills without effective dates);
+  - clause normalization (32);
+  - evidence-gated "no rule" checks (44).
+- **Supplementary sources:** `scripts/fetch_supplement.py` fetches three sources the pack lists as link-only:
+  - the official Hoboken §158-2 ordinance;
+  - Jersey City Ord. 25-076 (§218-12);
+  - an article on the struck MA ballot question.
+
+  Hoboken's ecode360 pages block automated access and are not fetched.
+- **Building facts:** facts missing from the CSV are derived from assessor use descriptions
+  (`config/use_codes.json`), e.g. unit ranges from "APT 7-30 UNITS" or New Jersey's "…-14U-…". Derived facts are
+  named in every explanation that relies on them. "Subsidized" is assumed false unless the description
+  says otherwise.
+
+Self-check against `dev/change_tests.json`:
+
+| Test | Result |
+|---|---|
+| T1 | all 250 CA addresses: not_yet_effective on 2025-12-31, applies on 2026-01-02 |
+| T2 | Hoboken ban only for the 40 Hoboken addresses, Jersey City ban only for the 50 Jersey City addresses, none in Newark |
+| T3 | all 140 NJ addresses: not_yet_effective now, applies on 2027-07-02; the 90 Jersey City and Hoboken addresses are conflict-flagged |
+| T4 | all 110 MA addresses, reported as pending |
+| T5 | empty; the ballot question is recorded as failed; no rent cap reported in Boston or Cambridge (only the c.40P bar) |
+
+All 58 exported rules validate against the official schema, and every `quoted_span` is found verbatim in its document.
+
+Known limits:
+- **San Francisco rent control:** no corpus document states the 1979 certificate-of-occupancy cutoff, so SF
+  rent-control coverage stays `unknown`.
+- **Berkeley ch. 13.63:** the corpus copy shows only first reading, so it is reported as pending.
+- **Owner-type exemptions** (e.g. AB 12's small-landlord rule) can't be resolved from the data and stay `unknown`.
+- **No scoring script or answer key** ships in this edition of the pack.
+- Tests (`pytest`) use a synthetic fixture corpus and a fake model.

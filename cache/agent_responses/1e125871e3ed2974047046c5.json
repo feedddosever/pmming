@@ -1,0 +1,22 @@
+{
+ "clauses": [
+  {
+   "index": 0,
+   "kind": "trigger",
+   "op": "is_true",
+   "value_number": null,
+   "value_text": null,
+   "value_list": []
+  },
+  {
+   "index": 1,
+   "kind": "building_type",
+   "op": "in",
+   "value_number": null,
+   "value_text": null,
+   "value_list": [
+    "care_facility"
+   ]
+  }
+ ]
+}

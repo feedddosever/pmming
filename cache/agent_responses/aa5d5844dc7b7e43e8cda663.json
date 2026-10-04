@@ -1,0 +1,26 @@
+{
+ "rules": [
+  {
+   "key_value": null,
+   "applies_if": [],
+   "exemptions": [],
+   "effective_date": null,
+   "end_date": null,
+   "status": "pending",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "confidence": 0.6,
+   "category": "algorithmic_rent_setting",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "MA",
+   "jurisdiction_name": "Massachusetts",
+   "title": "Proposed ban on algorithmic rent setting",
+   "citation": "S.2983 (2026)",
+   "requirement": "A Massachusetts bill would ban using algorithms to set rents. It is not law yet; it was sent to the Senate Ways and Means committee.",
+   "requirement_es": "Un proyecto de ley de Massachusetts prohibiría usar algoritmos para fijar los alquileres. Todavía no es ley; fue enviado al comité de Medios y Arbitrios del Senado.",
+   "coverage_text": "Pending bill; the document does not give the bill text or its coverage.",
+   "quote": "An Act prohibiting algorithmic rent setting"
+  }
+ ]
+}

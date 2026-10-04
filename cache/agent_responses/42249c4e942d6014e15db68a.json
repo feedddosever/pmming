@@ -1,0 +1,51 @@
+{
+ "rules": [
+  {
+   "key_value": "$50, CPI-adjusted",
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Unit in a one-family or two-family dwelling",
+     "all": [
+      {
+       "fact": "units",
+       "op": "lte",
+       "value_number": 2,
+       "value_text": null,
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Real estate licensee who is not the landlord",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "fee charged by a New Jersey Real Estate Commission licensee who is not the landlord",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": "2026-05-01",
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": "Up to $500 for a first offense, $750 for a second, and $1,000 for each later offense; the overcharge is refunded to the applicant.",
+   "confidence": 0.85,
+   "category": "application_screening_fees",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "NJ",
+   "jurisdiction_name": "New Jersey",
+   "title": "Rental application fee cap",
+   "citation": "N.J.S.A. 46:8-18.1",
+   "requirement": "A landlord or agent cannot charge more than $50 for a rental application fee. The cap goes up each year with inflation.",
+   "requirement_es": "Un propietario o su agente no puede cobrar más de $50 por la solicitud de alquiler. El límite se ajusta cada año según la inflación.",
+   "coverage_text": "Applications to lease or sublease residential rental property, except units in one- or two-family dwellings and real estate licensees who are not the landlord.",
+   "quote": "A landlord, or agent thereof, shall not require an application or other similar fee to apply to lease or sublease a residential rental property for dwelling purposes, which exceeds $50."
+  }
+ ]
+}

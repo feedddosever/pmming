@@ -1,0 +1,26 @@
+{
+ "decision": "correct",
+ "reason": "The may_preempt entry described the 30-year exemption of newly built multiple dwellings from local rent control. That is a building exemption, not a state preemption of local rules (rule 2), so may_preempt is now empty. yields_to is also cleared: the document says increases must comply with municipal ordinances as well, not that this rule stops applying where a local ordinance applies (rule 3). The local-ordinance interplay stays in requirement and coverage_text.",
+ "rule": {
+  "category": "rent_increase_limits",
+  "jurisdiction_level": "state",
+  "jurisdiction_state": "NJ",
+  "jurisdiction_name": "New Jersey",
+  "title": "No state rent control; increases must not be unconscionable",
+  "citation": "N.J.S.A. 2A:18-61.1(f)",
+  "requirement": "New Jersey has no statewide cap on rent. A landlord cannot raise rent in the middle of a lease, must give proper written notice to end the old lease and offer a new one, and the increase cannot be unconscionable (shockingly unfair) and must follow any local rent control ordinance.",
+  "requirement_es": "Nueva Jersey no tiene un límite estatal sobre el alquiler. El arrendador no puede subir el alquiler a mitad del contrato, debe dar aviso por escrito para terminar el contrato anterior y ofrecer uno nuevo, y el aumento no puede ser abusivo (injusto de manera escandalosa) y debe cumplir con cualquier ordenanza local de control de alquileres.",
+  "key_value": "No fixed cap; increase must not be unconscionable",
+  "coverage_text": "Applies statewide to tenancies covered by the Anti-Eviction Act. Local rent control or rent leveling ordinances may set stricter limits; newly constructed multiple dwellings are exempt from local rent control for 30 years after completion (N.J.S.A. 2A:42-84.5), and HUD- or NJHMFA-controlled housing is not subject to municipal rent control.",
+  "applies_if": [],
+  "exemptions": [],
+  "effective_date": null,
+  "end_date": null,
+  "status": "enacted",
+  "yields_to": [],
+  "may_preempt": [],
+  "penalty": null,
+  "quote": "The increase in rent must not be \nunconscionable; it must not be so unreasonable as to shock the conscience of a fair and honest \nperson and must comply with any municipal ordinances governing rent increases.",
+  "confidence": 0.6
+ }
+}

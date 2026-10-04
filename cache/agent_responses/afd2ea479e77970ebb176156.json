@@ -1,0 +1,106 @@
+{
+ "rules": [
+  {
+   "jurisdiction_level": "city",
+   "key_value": "allowable annual percentage, once every 12 months",
+   "applies_if": [
+    {
+     "fact": "year_built",
+     "op": "before_date",
+     "value_number": null,
+     "value_text": "1978-10-02",
+     "value_list": []
+    }
+   ],
+   "exemptions": [
+    {
+     "label": "Condo or townhome tenancy that began after Dec 31, 1995",
+     "all": [
+      {
+       "fact": "building_type",
+       "op": "in",
+       "value_number": null,
+       "value_text": null,
+       "value_list": [
+        "condo",
+        "townhome"
+       ]
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "tenancy commenced after December 31, 1995",
+       "value_list": []
+      }
+     ]
+    },
+    {
+     "label": "Single-family home alone on its parcel",
+     "all": [
+      {
+       "fact": "building_type",
+       "op": "eq",
+       "value_number": null,
+       "value_text": "single_family",
+       "value_list": []
+      },
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "only one single-family dwelling on the parcel",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "rent_increase_limits",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "Los Angeles",
+   "title": "Rent Stabilization Ordinance (RSO) annual increase limit",
+   "citation": "L.A. Rent Stabilization Ordinance",
+   "requirement": "For rent-stabilized units, rent may go up only once every 12 months, by the allowable percentage set each year. When a tenant moves out voluntarily or is evicted for certain reasons, the rent can be reset to market rate.",
+   "requirement_es": "En las unidades con renta estabilizada, la renta solo puede subir una vez cada 12 meses, según el porcentaje permitido que se fija cada año. Cuando un inquilino se muda voluntariamente o es desalojado por ciertas razones, la renta puede ajustarse al precio de mercado.",
+   "coverage_text": "Generally applies to rental properties in the City of Los Angeles first built on or before October 1, 1978 (plus replacement units under LAMC 151.28): apartments, condos and townhomes, duplexes, two or more single-family dwellings on one parcel, long-stay hotel/rooming house units, units attached to commercial buildings, ADUs/JADUs, and mobile homes. Rent amount is not regulated for condo/townhome tenancies that began after December 31, 1995.",
+   "quote": "Rent may be increased once every 12 months by the allowable rent increase percentage",
+   "confidence": 0.75
+  },
+  {
+   "jurisdiction_level": "city",
+   "key_value": "relocation assistance for no-fault evictions",
+   "applies_if": [
+    {
+     "fact": "year_built",
+     "op": "before_date",
+     "value_number": null,
+     "value_text": "1978-10-02",
+     "value_list": []
+    }
+   ],
+   "exemptions": [],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "just_cause_eviction",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "Los Angeles",
+   "title": "RSO legal reasons for eviction and relocation assistance",
+   "citation": "L.A. Mun. Code § 151.09",
+   "requirement": "Tenants in rent-stabilized units can only be evicted for listed legal reasons, such as not paying rent or the owner moving in. No-fault evictions require relocation payments, and eviction notices must be filed with LAHD within three business days.",
+   "requirement_es": "Los inquilinos en unidades con renta estabilizada solo pueden ser desalojados por razones legales indicadas, como no pagar la renta o que el dueño se mude a la unidad. Los desalojos sin culpa requieren pagos de reubicación, y los avisos de desalojo deben presentarse ante LAHD dentro de tres días hábiles.",
+   "coverage_text": "Generally applies to rental properties in the City of Los Angeles first built on or before October 1, 1978 (plus replacement units under LAMC 151.28): apartments, condos and townhomes, duplexes, two or more single-family dwellings on one parcel, long-stay hotel/rooming house units, units attached to commercial buildings, ADUs/JADUs, and mobile homes. Rent amount is not regulated for condo/townhome tenancies that began after December 31, 1995. Properties not covered by the RSO may be covered by the separate Just Cause Ordinance.",
+   "quote": "No-fault evictions require the payment of relocation assistance",
+   "confidence": 0.7
+  }
+ ]
+}

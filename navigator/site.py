@@ -69,7 +69,7 @@ def build(rules: list[dict], addresses: list[dict], changes: dict | None = None)
         "reasons": list(reasons),
         "addresses": [{"id": a["address_id"],
                        "label": ", ".join(x for x in [a.get("street"), a.get("city"), a.get("state"), a.get("zip")] if x),
-                       "facts": {k: a["facts"].get(k) for k in ("year_built", "units", "use_code")},
+                       "facts": {k: a["facts"].get(k) for k in ("year_built", "units", "use_code", "units_min", "units_max", "use_description")},
                        "stack": a.get("stack"), "stack_labels": [label(j) for j in a.get("stack") or []], "geocode": a.get("geocode"),
                        "no_rule": [f["rule_id"] for f in no_rule_findings(a, rules)]} for a in addresses],
         "results": results,

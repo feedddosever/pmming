@@ -1,0 +1,26 @@
+{
+ "decision": "keep",
+ "reason": "The city page states the substantive rule: the landlord must have a valid reason to evict, with listed causes (nonpayment, lease breach, owner move-in), plus relocation assistance for some causes. That limits the reasons for eviction rather than being a notice rule. The quote is verbatim, and the ordinance name used as the citation is the one the document uses.",
+ "rule": {
+  "category": "just_cause_eviction",
+  "jurisdiction_level": "city",
+  "jurisdiction_state": "CA",
+  "jurisdiction_name": "Santa Ana",
+  "title": "Santa Ana just cause eviction and relocation assistance",
+  "citation": "Santa Ana Rent Stabilization and Just Cause Eviction Ordinance",
+  "requirement": "Your landlord needs a valid reason to evict you, such as not paying rent, breaking the lease, or moving into the unit. For some reasons, the landlord may have to help pay your moving costs.",
+  "requirement_es": "Su propietario necesita una razón válida para desalojarlo, como no pagar la renta, violar el contrato o mudarse a la unidad. Por algunas razones, el propietario podría tener que ayudar a pagar sus gastos de mudanza.",
+  "key_value": null,
+  "coverage_text": "Rental units covered by the Santa Ana Rent Stabilization and Just Cause Eviction Ordinance.",
+  "applies_if": [],
+  "exemptions": [],
+  "effective_date": null,
+  "end_date": null,
+  "status": "enacted",
+  "yields_to": [],
+  "may_preempt": [],
+  "penalty": null,
+  "quote": "Your landlord must have a valid reason to evict you.",
+  "confidence": 0.65
+ }
+}

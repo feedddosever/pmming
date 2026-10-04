@@ -1,0 +1,51 @@
+{
+ "decision": "drop",
+ "reason": "The HSNA only requires a rights notice with the notice to quit and a copy filed with the City. It does not limit the reasons for eviction or non-renewal, and violations do not halt the eviction. Under rule 4 a notification-only rule is not just_cause_eviction.",
+ "rule": {
+  "category": "just_cause_eviction",
+  "jurisdiction_level": "city",
+  "jurisdiction_state": "MA",
+  "jurisdiction_name": "Boston",
+  "title": "Housing Stability Notification Act: notice of tenants' rights with notice to quit",
+  "citation": "Boston Code Ord. § 10-11.7",
+  "requirement": "When a landlord serves a notice to quit or a notice that your lease will not be renewed, they must give you a Notice of Tenants' Rights and Resources at the same time. The landlord must also send a copy of the notice to the City's Office of Housing Stability.",
+  "requirement_es": "Cuando el propietario le entrega un aviso de desalojo o un aviso de que no renovará su contrato, debe darle al mismo tiempo un Aviso de Derechos y Recursos de los Inquilinos. El propietario también debe enviar una copia del aviso a la Oficina de Estabilidad de Vivienda de la Ciudad.",
+  "key_value": "Rights notice must accompany notice to quit",
+  "coverage_text": "All landlords and foreclosing owners ending a tenancy or post-foreclosure occupancy in Boston.",
+  "applies_if": [],
+  "exemptions": [
+   {
+    "label": "Hospital, skilled nursing or health facility",
+    "all": [
+     {
+      "fact": "other",
+      "op": "is_true",
+      "value_number": null,
+      "value_text": "Residence in a hospital, skilled nursing facility or health facility",
+      "value_list": []
+     }
+    ]
+   },
+   {
+    "label": "Non-profit substance abuse treatment facility",
+    "all": [
+     {
+      "fact": "other",
+      "op": "is_true",
+      "value_number": null,
+      "value_text": "Residence in a non-profit facility for short-term substance abuse treatment",
+      "value_list": []
+     }
+    ]
+   }
+  ],
+  "effective_date": "2020-11-06",
+  "end_date": null,
+  "status": "enacted",
+  "yields_to": [],
+  "may_preempt": [],
+  "penalty": "1st offense: warning; 2nd and subsequent offenses: $300 per day",
+  "quote": "The Notice of\nTenants’ Rights and Resources must be delivered at the same time as the Notice to\nQuit.",
+  "confidence": 0.6
+ }
+}

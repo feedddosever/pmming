@@ -1,0 +1,26 @@
+{
+ "rules": [
+  {
+   "key_value": "No source-of-income discrimination; alternative to credit history for subsidized applicants",
+   "applies_if": [],
+   "exemptions": [],
+   "effective_date": "2024-01-01",
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "screening_restrictions",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "California",
+   "title": "Source-of-income discrimination ban and credit-history alternative",
+   "citation": "Cal. Gov. Code § 12955",
+   "requirement": "Landlords cannot refuse or treat you differently because of your source of income, including Section 8 and other housing vouchers. If you have a rent subsidy, the landlord must base income tests on your share of the rent and let you show other proof of ability to pay instead of credit history.",
+   "requirement_es": "Los propietarios no pueden rechazarlo ni tratarlo de manera diferente por su fuente de ingresos, incluidos los vales de vivienda de la Sección 8 y otros. Si tiene un subsidio de renta, el propietario debe basar los requisitos de ingresos en su parte de la renta y permitirle mostrar otra prueba de capacidad de pago en lugar de su historial de crédito.",
+   "coverage_text": "Owners of housing accommodations in California.",
+   "quote": "(a) For the owner of any housing accommodation to discriminate against or harass any person because of the race, color, religion, sex, gender, gender identity, gender expression, sexual orientation, marital status, national origin, ancestry, familial status, source of income, disability, veteran or military status, or genetic information of that person.",
+   "confidence": 0.7
+  }
+ ]
+}

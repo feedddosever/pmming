@@ -1,0 +1,70 @@
+{
+ "decision": "keep",
+ "reason": "Substantive good-cause requirement: no eviction or non-renewal without good cause. The quote is verbatim, the citation N.J.S.A. 2A:18-61.1 is stated in the document, and the exemptions match it.",
+ "rule": {
+  "category": "just_cause_eviction",
+  "jurisdiction_level": "state",
+  "jurisdiction_state": "NJ",
+  "jurisdiction_name": "New Jersey",
+  "title": "Anti-Eviction Act good-cause requirement",
+  "citation": "N.J.S.A. 2A:18-61.1",
+  "requirement": "A landlord can only evict a tenant or refuse to renew a lease (written or oral) for one of the good causes listed in state law, and must prove the cause in court. Except for unpaid rent, the landlord must give the tenant a written Notice to Quit describing the cause.",
+  "requirement_es": "El arrendador solo puede desalojar a un inquilino o negarse a renovar un contrato (escrito u oral) por una de las causas justificadas que indica la ley estatal, y debe probar la causa ante el tribunal. Excepto por falta de pago del alquiler, el arrendador debe darle al inquilino un Aviso de Desalojo (Notice to Quit) por escrito que describa la causa.",
+  "key_value": null,
+  "coverage_text": "Applies to most residential rentals, including single-family homes, mobile homes and mobile home park land, apartment buildings, complexes, and rooming and boarding homes. Does not apply to owner-occupied premises with two or fewer rental units, transient or seasonal hotel/motel/guest house occupants, or a unit held in trust for a developmentally disabled immediate family member who permanently occupies it.",
+  "applies_if": [],
+  "exemptions": [
+   {
+    "label": "Owner-occupied two- or three-unit premises with two or fewer rental units",
+    "all": [
+     {
+      "fact": "units",
+      "op": "lte",
+      "value_number": 3,
+      "value_text": null,
+      "value_list": []
+     },
+     {
+      "fact": "other",
+      "op": "is_true",
+      "value_number": null,
+      "value_text": "owner occupies one of the units",
+      "value_list": []
+     }
+    ]
+   },
+   {
+    "label": "Hotel, motel or guest house rented to transient or seasonal guests",
+    "all": [
+     {
+      "fact": "other",
+      "op": "is_true",
+      "value_number": null,
+      "value_text": "hotel, motel or guest house rented to a transient guest or seasonal tenant (not a continual resident with no alternate residence)",
+      "value_list": []
+     }
+    ]
+   },
+   {
+    "label": "Unit held in trust for a developmentally disabled immediate family member who permanently occupies it",
+    "all": [
+     {
+      "fact": "other",
+      "op": "is_true",
+      "value_number": null,
+      "value_text": "unit held in trust for developmentally disabled immediate family member who permanently occupies it",
+      "value_list": []
+     }
+    ]
+   }
+  ],
+  "effective_date": null,
+  "end_date": null,
+  "status": "enacted",
+  "yields_to": [],
+  "may_preempt": [],
+  "penalty": null,
+  "quote": "No residential landlord may evict or fail to renew a \nlease, whether it is a written or an oral lease without good cause.",
+  "confidence": 0.8
+ }
+}

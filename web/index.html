@@ -67,7 +67,7 @@ conflict:"Possible conflict with",norule:"No rule found in the provided corpus f
 noruleat:"No rule at this level:",upcoming:"Coming up",geolow:"Address matched by postal city only; boundary not verified.",
 low:"Low confidence — flagged for human review",review:"Quote could not be verified — flagged for human review",
 affected:"Affected addresses",conflicts:"Conflict flags",rules:"Matched rules",notes:"Notes",kv:"Key value",
-range:"No data before",foot:"Sources: provided starter-pack corpus. Extraction is automated; see the audit log in the repository for model, prompt version and source hashes."},
+range:"No data before",derived:"from assessor use description",foot:"Sources: provided starter-pack corpus. Extraction is automated; see the audit log in the repository for model, prompt version and source hashes."},
 es:{title:"Navegador de leyes de vivienda de alquiler",sub:"¿Qué reglas aplican a esta dirección y qué está por cambiar?",
 banner:"Solo informativo. No es asesoría legal. Cada respuesta enlaza a la ley de origen; consulte a un abogado o a su agencia de vivienda local antes de actuar.",
 lookup:"Buscar dirección",changes:"Cambios de ley",addr:"Dirección",asof:"Respuesta a la fecha",today:"Fecha predeterminada",
@@ -78,7 +78,7 @@ conflict:"Posible conflicto con",norule:"No se encontró ninguna regla en el cor
 noruleat:"No hay regla en este nivel:",upcoming:"Próximamente",geolow:"Dirección ubicada solo por ciudad postal; límite no verificado.",
 low:"Confianza baja — marcada para revisión humana",review:"No se pudo verificar la cita — marcada para revisión humana",
 affected:"Direcciones afectadas",conflicts:"Conflictos",rules:"Reglas",notes:"Notas",kv:"Valor clave",
-range:"No hay datos antes de",foot:"Fuentes: corpus del paquete inicial. La extracción es automática; el registro de auditoría muestra modelo, versión de prompt y hashes."}};
+range:"No hay datos antes de",derived:"según la descripción de uso del tasador",foot:"Fuentes: corpus del paquete inicial. La extracción es automática; el registro de auditoría muestra modelo, versión de prompt y hashes."}};
 let L="en",D=null,cur=null;
 const $=id=>document.getElementById(id),esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 function t(k){return T[L][k]}
@@ -92,7 +92,7 @@ const ai=D.addresses.findIndex(a=>a.id===cur),a=D.addresses[ai],di=snap($("asof"
 if(di<0){$("result").innerHTML=`<p class="muted">${t("range")} ${esc(D.dates[0])}.</p>`;renderChanges();return}const rows=D.results[ai][di];
 const f=v=>v==null?`<span class="muted">${t("notindata")}</span>`:esc(v);
 let h=`<div class="cat"><h3>${esc(a.label)}</h3><div class="chips">${(a.stack_labels||a.stack).map(s=>`<span class="chip">${esc(s)}</span>`).join("")}</div>
-<div class="facts"><span>${t("built")}: ${f(a.facts.year_built)}</span><span>${t("units")}: ${f(a.facts.units)}</span><span>${t("use")}: ${f(a.facts.use_code)}</span></div>
+<div class="facts"><span>${t("built")}: ${f(a.facts.year_built)}</span><span>${t("units")}: ${a.facts.units!=null?esc(a.facts.units):(a.facts.units_min!=null?`${esc(a.facts.units_min)}${a.facts.units_max==a.facts.units_min?"":(a.facts.units_max!=null&&a.facts.units_max<1e6?"–"+esc(a.facts.units_max):"+")} <span class="muted small">(${t("derived")})</span>`:f(null))}</span><span>${t("use")}: ${f(a.facts.use_code)}</span></div>
 ${a.geocode&&a.geocode.confidence==="low"?`<p class="small" style="color:var(--unk)">${t("geolow")}</p>`:""}</div>`;
 for(const [cat,labels] of Object.entries(D.categories)){
  const items=rows.filter(r=>D.rules[r[0]].category===cat);const nr=D.no_rule.filter(n=>n.category===cat&&a.no_rule.includes(n.id));

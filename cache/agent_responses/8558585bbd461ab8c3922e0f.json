@@ -1,0 +1,39 @@
+{
+ "rules": [
+  {
+   "key_value": null,
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "1-4 unit properties",
+     "all": [
+      {
+       "fact": "units",
+       "op": "lte",
+       "value_number": 4,
+       "value_text": null,
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": null,
+   "category": "rent_increase_limits",
+   "jurisdiction_level": "city",
+   "jurisdiction_state": "NJ",
+   "jurisdiction_name": "Jersey City",
+   "title": "Jersey City Rent Control Ordinance",
+   "citation": "Jersey City Mun. Code ch. 260",
+   "requirement": "Jersey City regulates rents under its Rent Control Ordinance, enforced by the Office of Landlord/Tenant Relations. Buildings with 1 to 4 units are exempt from rent control.",
+   "requirement_es": "Jersey City regula las rentas bajo su Ordenanza de Control de Rentas, aplicada por la Oficina de Relaciones entre Arrendadores e Inquilinos. Los edificios de 1 a 4 unidades están exentos del control de rentas.",
+   "coverage_text": "Rental properties in Jersey City subject to the Rent Control Ordinance (Chapter 260); 1-4 unit properties are exempt and other exemptions may be requested.",
+   "quote": "Please Note: All 1-4 Unit Properties are exempt from rent control",
+   "confidence": 0.6
+  }
+ ]
+}

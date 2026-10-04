@@ -1,0 +1,74 @@
+{
+ "rules": [
+  {
+   "key_value": null,
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Owner-occupied home renting to one additional person",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "owner occupies the home and rents to only one additional person",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": "Remedies include out-of-pocket losses, injunctions, emotional distress damages, civil penalties or punitive damages, and attorney's fees.",
+   "confidence": 0.7,
+   "category": "screening_restrictions",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "California",
+   "title": "Source of income discrimination ban (FEHA)",
+   "citation": "Cal. Fair Employment and Housing Act (FEHA) - source of income",
+   "requirement": "Landlords cannot refuse to rent to you or treat you differently because of how you pay rent, including Section 8 vouchers or other rental assistance.",
+   "requirement_es": "Los propietarios no pueden negarse a alquilarle ni tratarlo de manera diferente por la forma en que paga el alquiler, incluidos los vales de la Sección 8 u otra ayuda para el alquiler.",
+   "coverage_text": "Most housing providers and housing-related services in California, including landlords and tenant screening companies.",
+   "quote": "No. California law protects tenants from discrimination based on how a tenant will be paying rent (“source of income”)."
+  },
+  {
+   "key_value": null,
+   "applies_if": [],
+   "exemptions": [
+    {
+     "label": "Owner-occupied home renting to one additional person",
+     "all": [
+      {
+       "fact": "other",
+       "op": "is_true",
+       "value_number": null,
+       "value_text": "owner occupies the home and rents to only one additional person",
+       "value_list": []
+      }
+     ]
+    }
+   ],
+   "effective_date": null,
+   "end_date": null,
+   "status": "enacted",
+   "yields_to": [],
+   "may_preempt": [],
+   "penalty": "Remedies include out-of-pocket losses, injunctions, emotional distress damages, civil penalties or punitive damages, and attorney's fees.",
+   "confidence": 0.7,
+   "category": "screening_restrictions",
+   "jurisdiction_level": "state",
+   "jurisdiction_state": "CA",
+   "jurisdiction_name": "California",
+   "title": "Limits on criminal history screening (FEHA)",
+   "citation": "Cal. Fair Employment and Housing Act (FEHA) - criminal history",
+   "requirement": "Landlords may check criminal history but cannot consider arrests without conviction, sealed or expunged records, or juvenile records, and cannot ban everyone with a record. A denial must be based on a conviction directly related to being a good tenant.",
+   "requirement_es": "Los propietarios pueden revisar antecedentes penales, pero no pueden considerar arrestos sin condena, registros sellados o borrados, ni registros juveniles, y no pueden rechazar a todas las personas con antecedentes. Un rechazo debe basarse en una condena directamente relacionada con ser un buen inquilino.",
+   "coverage_text": "Most housing providers and housing-related services in California, including landlords and tenant screening companies.",
+   "quote": "Housing  providers cannot consider some types of criminal history including arrests that did not lead to a conviction, records that are sealed or expunged, or records or matters processed in the juvenile justice system. Housing providers are also prohibited from having “blanket bans” of all people with a criminal history."
+  }
+ ]
+}
