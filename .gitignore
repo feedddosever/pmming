@@ -9,3 +9,4 @@ out/site/
 .env
 out/*
 !out/README.md
+data/supplement/

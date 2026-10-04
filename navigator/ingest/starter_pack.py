@@ -122,6 +122,24 @@ class StarterPack:
 
     # ---------- corpus ----------
     def documents(self) -> list[dict]:
+        """Starter-pack corpus plus data/supplement/ (scripts/fetch_supplement.py), if present."""
+        docs = self._documents()
+        supp = config.SUPPLEMENT_DIR / "manifest.csv"
+        if supp.exists():
+            header, rows = _read_csv(supp)
+            col = {k: _pick(header, k, {}) for k in
+                   ("doc_id", "path", "url", "title", "retrieval_date", "jurisdiction", "doc_type")}
+            have = {d["doc_id"] for d in docs}
+            for row in rows:
+                if row["doc_id"] in have:
+                    continue
+                text = (supp.parent / row[col["path"]]).read_text(encoding="utf-8", errors="replace")
+                d = self._doc(row["doc_id"], text, row, col)
+                d["supplement"] = True
+                docs.append(d)
+        return docs
+
+    def _documents(self) -> list[dict]:
         docs = []
         if self.manifest_path:
             header, rows = _read_csv(self.manifest_path)

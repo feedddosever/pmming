@@ -146,7 +146,9 @@ def _excerpts(docs, state: str, place_words: list[str], category: str, limit: in
         if d.get("link_only"):
             continue
         t, low = d["text"], d["text"].lower()
-        if not any(w in low for w in place_words):
+        hint = (d.get("jurisdiction_hint") or "").lower()
+        if not (any(w in low for w in place_words) or hint == state.lower()
+                or any(w and hint.startswith(w) for w in place_words)):
             continue
         for w in _CAT_WORDS[category]:
             for m in re.finditer(re.escape(w), low):

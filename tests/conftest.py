@@ -21,6 +21,7 @@ def workspace(tmp_path, monkeypatch):
     monkeypatch.setattr(config, "CACHE_DIR", tmp_path / "cache")
     monkeypatch.setattr(config, "CONFIG_DIR", cfg)
     monkeypatch.setattr(config, "LLM_MODE", "fake")
+    monkeypatch.setattr(config, "SUPPLEMENT_DIR", tmp_path / "no_supplement")
     import navigator.cli as cli
     monkeypatch.setattr(cli, "OUT", tmp_path / "out")
     monkeypatch.setattr(cli, "RULES_INTERNAL", tmp_path / "out" / "rules_internal.json")

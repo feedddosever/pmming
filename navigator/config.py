@@ -11,6 +11,7 @@ STARTER_PACK = Path(os.environ.get("NAV_STARTER_PACK", ROOT / "data" / "starter_
 OUT_DIR = Path(os.environ.get("NAV_OUT", ROOT / "out"))
 CACHE_DIR = Path(os.environ.get("NAV_CACHE", ROOT / "cache"))
 CONFIG_DIR = Path(os.environ.get("NAV_CONFIG", ROOT / "config"))
+SUPPLEMENT_DIR = Path(os.environ.get("NAV_SUPPLEMENT", ROOT / "data" / "supplement"))
 
 # The brief's answers are "as of Oct 1, 2026". Never use the system clock by default.
 DEFAULT_AS_OF = date.fromisoformat(os.environ.get("NAV_AS_OF", "2026-10-01"))
