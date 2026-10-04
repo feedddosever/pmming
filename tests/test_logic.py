@@ -180,3 +180,29 @@ def test_covered_by_follows_local_ordinance():
 def test_trigger_inside_exemption_does_not_exempt_building():
     cov = {"exemptions": [{"label": "mobilehome homeowner", "all": [C("trigger", "is_true", text="tenant owns a mobilehome")]}]}
     assert P.evaluate(cov, {}, D)[0] is True
+
+
+def test_covered_by_without_local_rule_is_false_and_respects_dates():
+    from navigator.apply.engine import evaluate_address
+    base = lambda rid, jid, cat, cov, **kw: {"rule_id": rid, "kind": "rule", "category": cat, "jurisdiction": {"id": jid},
+                                             "citation": rid, "status": "enacted", "coverage": cov, "source": {}, **kw}
+    jc = base("JC", "CA:city:los-angeles", "just_cause_eviction",
+              {"applies_if": [C("covered_by", "is_false", text="rent_increase_limits")]})
+    addr = {"stack": ["CA", "CA:county:los-angeles", "CA:city:los-angeles"], "facts": {"year_built": 1927}}
+    res = lambda rules, **kw: {r["rule_id"]: r["result"] for r in evaluate_address(addr, rules, D, **kw)}
+    assert res([jc])["JC"] == "applies"  # no local rent rule: not covered
+    later = base("RSO", "CA:city:los-angeles", "rent_increase_limits", {}, effective_date="2099-01-01")
+    assert res([jc, later])["JC"] == "applies"  # local rent rule not yet effective
+    pend = base("RSO", "CA:city:los-angeles", "rent_increase_limits", {}, status="pending")
+    assert res([jc, pend])["JC"] == "applies"
+    assert "JC" not in res([jc, pend], assume_enacted={"RSO"})  # what-if: the ordinance passes and covers it
+    only_dep = base("SELF", "CA:city:los-angeles", "rent_increase_limits",
+                    {"applies_if": [C("covered_by", "is_true", text="rent_increase_limits")]})
+    assert res([jc, only_dep])["JC"] == "unknown"
+
+
+def test_county_names_do_not_resolve_to_cities():
+    from navigator.resolve.jurisdictions import canonical_id
+    assert canonical_id("county", "CA", "Los Angeles County") == "CA:county:los-angeles"
+    assert canonical_id("city", "CA", "South San Francisco") != "CA:city:san-francisco"
+    assert canonical_id("city", "NJ", "City of Jersey City") == "NJ:city:jersey-city"

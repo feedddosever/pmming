@@ -33,18 +33,26 @@ def evaluate_address(address: dict, rules: list[dict], as_of: date, *, assume_en
     facts = address.get("facts") or {}
     candidates = [r for r in rules if r.get("kind", "rule") == "rule" and r["jurisdiction"]["id"] in stack]
 
-    # "covered by the local <category> ordinance": OR of the coverage of local in-force rules in that
-    # category that do not themselves depend on such a reference.
+    # "covered by the local <category> ordinance": OR of the coverage of the local rules in that category
+    # that are in force on as_of. No such rule in the stack -> not covered (FALSE). A local rule whose own
+    # coverage is itself defined by such a reference is skipped; if only such rules exist, the answer is UNKNOWN.
     facts = dict(facts)
     cov_map: dict[str, object] = {}
+    dependent: set[str] = set()
     for r in candidates:
-        if ":" not in r["jurisdiction"]["id"] or st.status_on(r, as_of) != st.IN_FORCE:
+        if ":" not in r["jurisdiction"]["id"]:
+            continue
+        rr = {**r, "status": "enacted"} if r["rule_id"] in assume_enacted else r
+        if st.status_on(rr, as_of) != st.IN_FORCE:
             continue
         cov = r.get("coverage") or {}
         if any(c.get("fact") == "covered_by" for c in cov.get("applies_if") or []):
+            dependent.add(r["category"])
             continue
         v, _ = predicates.evaluate(cov, facts, as_of)
         cov_map[r["category"]] = predicates.k_or([cov_map.get(r["category"], False), v])
+    for cat in dependent - set(cov_map):
+        cov_map[cat] = predicates.UNKNOWN
     facts["_covered_by"] = cov_map
 
     raw: dict[str, dict] = {}

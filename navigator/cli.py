@@ -118,6 +118,9 @@ def cmd_ingest(a, sp: StarterPack):
     src = Path(a.file)
     text = src.read_text(encoding="utf-8", errors="replace")
     doc_id = a.doc_id or src.stem
+    if any(d["doc_id"] == doc_id and not d.get("supplement") for d in sp.documents()):
+        sys.exit(f"doc id {doc_id!r} is already used by the starter pack; pass a different --doc-id")
+    extractor.PENDING.clear()
     # Keep the document in the supplement corpus so every later full run includes it.
     supp = config.SUPPLEMENT_DIR
     (supp / "text").mkdir(parents=True, exist_ok=True)

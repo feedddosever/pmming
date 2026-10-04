@@ -1638,7 +1638,7 @@
     "r-e7ba6c88",
     "r-ec22b635"
    ],
-   "interaction": "yields to local just_cause_eviction rules where they apply; yields to local just_cause_eviction rules where they apply",
+   "interaction": "yields to local just_cause_eviction rules where they apply",
    "effective_date": "2024-04-01",
    "citation": "Cal. Civ. Code § 1946.2",
    "source_doc_id": "D023",
@@ -1789,13 +1789,11 @@
     "r-17c8801a",
     "r-48474c6c",
     "r-80c7ad79",
-    "r-9ce2f898",
     "r-b352a53c",
     "r-b663eddc",
-    "r-bfcc6605",
-    "r-cab5c003"
+    "r-bfcc6605"
    ],
-   "interaction": "yields to local rent_increase_limits rules where they apply; yields to local rent_increase_limits rules where they apply",
+   "interaction": "yields to local rent_increase_limits rules where they apply",
    "effective_date": "2024-04-01",
    "citation": "Cal. Civ. Code § 1947.12",
    "source_doc_id": "D024",
@@ -2086,12 +2084,8 @@
     ]
    },
    "exemptions": "Direct relationship to housing or safety risk; Current criminal behavior",
-   "overrides": [
-    "r-13fd71ff",
-    "r-55be438b",
-    "r-911bf066"
-   ],
-   "interaction": "yields to local screening_restrictions rules where they apply",
+   "overrides": [],
+   "interaction": null,
    "effective_date": null,
    "citation": "Boston Fair Chance Tenant Selection Policy (DND, 2017)",
    "source_doc_id": "D010",

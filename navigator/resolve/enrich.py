@@ -53,5 +53,7 @@ def enrich(facts: dict) -> dict:
     for k, v in derived.items():
         if f.get(k) in (None, ""):
             f[k] = v
-    f["derived_facts"] = sorted(k for k in derived if facts.get(k) in (None, ""))
+    known_units = facts.get("units") not in (None, "")
+    f["derived_facts"] = sorted(k for k in derived if facts.get(k) in (None, "")
+                                and not (known_units and k in ("units_min", "units_max")))
     return f

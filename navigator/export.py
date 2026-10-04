@@ -160,12 +160,18 @@ def official_rules(rules: list[dict], as_of: date) -> tuple[dict, list[dict]]:
             continue
         juris, level = _official_jurisdiction(r["jurisdiction"]["id"])
         overrides, notes = [], []
+        state = r["jurisdiction"]["id"].split(":")[0]
         for y in r.get("yields_to") or []:
-            locals_ = [o for o in real if o["category"] == y.get("category", r["category"])
-                       and o["jurisdiction"]["id"].count(":") == 2 and o is not r]
-            overrides += [team_id(o["rule_id"]) for o in locals_]
-            if locals_:
-                notes.append(f"yields to local {y.get('category', r['category'])} rules where they apply")
+            cat, lvl = y.get("category") or r["category"], y.get("level") or "city"
+            locals_ = [o for o in real if o is not r and o["category"] == cat
+                       and o["jurisdiction"]["id"].startswith(f"{state}:{lvl}:")
+                       and _official_status(o, as_of) in ("in_force", "not_yet_effective", "pending")
+                       and len((o.get("source") or {}).get("quote") or "") >= 20]
+            new = [team_id(o["rule_id"]) for o in locals_ if team_id(o["rule_id"]) not in overrides]
+            overrides += new
+            note = f"yields to local {cat} rules where they apply"
+            if locals_ and note not in notes:
+                notes.append(note)
         conflict_notes = [p.get("note") or "possible preemption of local rules" for p in r.get("may_preempt") or []]
         # a local rule targeted by a state preemption clause carries the flag too
         for o in real:

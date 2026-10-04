@@ -216,6 +216,7 @@ def no_rule_pass(rules: list[dict], docs: list[dict]) -> list[dict]:
 
 
 def extract_corpus(docs: list[dict], workers: int = 4, no_rule: bool = True) -> list[dict]:
+    PENDING.clear()
     with ThreadPoolExecutor(workers) as ex:
         all_rules = [r for rs in ex.map(extract_document, docs) for r in rs]
     rules = consolidate(all_rules)

@@ -73,10 +73,14 @@ def canonical_id(level: str, state: str | None, name: str | None) -> str | None:
     level = (level or "").lower()
     if level == "state":
         return st
-    low = (name or "").lower()
-    for (cst, cslug), (_county, disp, _cn) in CITIES.items():  # known city names first ("Jersey City")
-        if cst == st and re.search(rf"\b{re.escape(disp.lower())}\b", low):
-            return f"{st}:city:{cslug}"
+    # Known city names first ("Jersey City" must not slug to "jersey"); whole-name match only, and never
+    # for a county ("Los Angeles County" is not the City of Los Angeles).
+    low = re.sub(r"^(the\s+)?(city and county|city|town|township|borough)\s+of\s+", "", (name or "").strip().lower())
+    low = re.sub(r",.*$", "", low).strip()
+    if level in ("", "city", "municipal", "municipality", "city_county", "city-county", "local"):
+        for (cst, cslug), (_county, disp, _cn) in CITIES.items():
+            if cst == st and low == disp.lower():
+                return f"{st}:city:{cslug}"
     s = slug(name or "")
     if not s:
         return None

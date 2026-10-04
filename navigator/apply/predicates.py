@@ -105,7 +105,10 @@ def eval_clause(clause: dict, facts: dict, as_of: date):
     if fact == "trigger":  # tenancy/event condition: not part of building-level coverage
         return TRUE
     if fact == "covered_by":
-        v = (facts.get("_covered_by") or {}).get(clause.get("value_text"), UNKNOWN)
+        cmap = facts.get("_covered_by")
+        if cmap is None:  # evaluated outside the engine: no stack information
+            return UNKNOWN
+        v = cmap.get(clause.get("value_text"), FALSE)
         return k_not(v) if op == "is_false" else v
     num, text, lst = clause.get("value_number"), clause.get("value_text"), clause.get("value_list") or []
 
