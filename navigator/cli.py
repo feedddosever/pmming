@@ -184,7 +184,7 @@ def cmd_site(a, sp: StarterPack):
     rules, addrs = _load(RULES_INTERNAL), _load(ADDRS)
     p = OUT / "changes_details.json"
     changes = json.loads(p.read_text()) if p.exists() else None
-    path = site.build(rules, addrs, changes)
+    path = site.build(rules, addrs, changes, sp.documents())
     print(f"site written to {path}  (serve: python -m http.server -d {path} 8000)")
 
 

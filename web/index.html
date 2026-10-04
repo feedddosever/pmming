@@ -44,7 +44,7 @@ table{border-collapse:collapse;width:100%;font-size:14px}td,th{border-bottom:1px
   <div class="tabs"><button id="lang-en" class="on">English</button><button id="lang-es">Español</button></div>
 </div></header>
 <main class="wrap">
-  <div class="tabs"><button id="tab-lookup" class="on"></button><button id="tab-changes"></button></div>
+  <div class="tabs"><button id="tab-lookup" class="on"></button><button id="tab-changes"></button><button id="tab-live"></button></div>
   <section id="view-lookup">
     <div class="controls">
       <div><label for="addr" id="t-addr"></label><input id="addr" list="addr-list" autocomplete="off"><datalist id="addr-list"></datalist></div>
@@ -54,12 +54,32 @@ table{border-collapse:collapse;width:100%;font-size:14px}td,th{border-bottom:1px
     <div id="result"></div>
   </section>
   <section id="view-changes" hidden><div id="changes"></div></section>
+  <section id="view-live" hidden>
+    <h2 id="t-live"></h2>
+    <p id="lv-intro"></p>
+    <p class="small muted" id="lv-keynote"></p>
+    <div class="controls" style="grid-template-columns:1fr 1fr">
+      <div><label for="lv-key" id="lv-key-l"></label><input id="lv-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-ant-..."></div>
+      <div><label for="lv-model" id="lv-model-l"></label><select id="lv-model"></select></div>
+    </div>
+    <div><label for="lv-doc" id="lv-doc-l"></label><select id="lv-doc"></select></div>
+    <div id="lv-paste" style="margin-top:10px">
+      <div class="controls" style="grid-template-columns:1fr 1fr 1fr;margin:0 0 10px">
+        <div><label for="lv-docid" id="lv-docid-l"></label><input id="lv-docid" value="hour16"></div>
+        <div><label for="lv-title" id="lv-title-l"></label><input id="lv-title"></div>
+        <div><label for="lv-hint" id="lv-hint-l"></label><input id="lv-hint"></div>
+      </div>
+      <label for="lv-text" id="lv-text-l"></label><textarea id="lv-text" rows="10" style="width:100%;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px"></textarea>
+    </div>
+    <p><button id="lv-run"></button> <span class="small muted" id="lv-status"></span></p>
+    <div id="lv-out"></div>
+  </section>
   <footer id="foot"></footer>
 </main>
 <script>
 const T={en:{title:"Rental Housing Law Navigator",sub:"Which rules apply to this address, and what is about to change?",
 banner:"Informational only. Not legal advice. Every answer links to the law it comes from; check with a lawyer or your local housing agency before acting.",
-lookup:"Address lookup",changes:"Law changes",addr:"Address",asof:"Answer as of",today:"Default date",
+lookup:"Address lookup",changes:"Law changes",live:"Live extraction (your API key)",addr:"Address",asof:"Answer as of",today:"Default date",
 pick:"Start typing an address from the sample list.",juris:"Jurisdictions",built:"Year built",units:"Units",use:"Use code",
 notindata:"not in data",applies:"Applies",unknown:"Unknown — depends on a fact we don't have",superseded:"Superseded by local law",
 not_yet_effective:"Not yet in effect",pending:"Pending bill — not law",source:"Show the law",retrieved:"retrieved",why:"Why this result",
@@ -70,7 +90,7 @@ affected:"Affected addresses",conflicts:"Conflict flags",rules:"Matched rules",n
 range:"No data before",derived:"from assessor use description",foot:"Sources: provided starter-pack corpus. Extraction is automated; see the audit log in the repository for model, prompt version and source hashes."},
 es:{title:"Navegador de leyes de vivienda de alquiler",sub:"¿Qué reglas aplican a esta dirección y qué está por cambiar?",
 banner:"Solo informativo. No es asesoría legal. Cada respuesta enlaza a la ley de origen; consulte a un abogado o a su agencia de vivienda local antes de actuar.",
-lookup:"Buscar dirección",changes:"Cambios de ley",addr:"Dirección",asof:"Respuesta a la fecha",today:"Fecha predeterminada",
+lookup:"Buscar dirección",changes:"Cambios de ley",live:"Extracción en vivo (su clave de API)",addr:"Dirección",asof:"Respuesta a la fecha",today:"Fecha predeterminada",
 pick:"Empiece a escribir una dirección de la lista.",juris:"Jurisdicciones",built:"Año de construcción",units:"Unidades",use:"Código de uso",
 notindata:"sin datos",applies:"Aplica",unknown:"Desconocido — depende de un dato que no tenemos",superseded:"Reemplazada por ley local",
 not_yet_effective:"Aún no vigente",pending:"Proyecto de ley — no es ley",source:"Ver la ley",retrieved:"consultado",why:"Por qué",
@@ -85,7 +105,7 @@ function t(k){return T[L][k]}
 function snap(d){let i=-1;D.dates.forEach((x,j)=>{if(x<=d)i=j});return i}
 function safeUrl(u){return /^https?:\/\//i.test(u||"")?u:""}
 function texts(){["title","sub","banner"].forEach(k=>$(k==="banner"?"banner":"t-"+k).textContent=t(k));
-$("tab-lookup").textContent=t("lookup");$("tab-changes").textContent=t("changes");$("t-addr").textContent=t("addr");
+$("tab-lookup").textContent=t("lookup");$("tab-changes").textContent=t("changes");$("tab-live").textContent=t("live");$("t-live").textContent=t("live");$("t-addr").textContent=t("addr");
 $("t-asof").textContent=t("asof");$("today").textContent=t("today");$("foot").textContent=t("foot");document.documentElement.lang=L}
 function render(){texts();if(!cur){$("result").innerHTML=`<p class="muted">${t("pick")}</p>`;renderChanges();return}
 const ai=D.addresses.findIndex(a=>a.id===cur),a=D.addresses[ai],di=snap($("asof").value||D.as_of_default);
@@ -114,7 +134,7 @@ function renderChanges(){if(!D.changes){$("changes").innerHTML="";return}
 $("changes").innerHTML=`<h2>${t("changes")}</h2><table><tr><th>Test</th><th>${t("rules")}</th><th>${t("affected")}</th><th>${t("conflicts")}</th><th>${t("notes")}</th></tr>`+
 D.changes.tests.map(x=>`<tr><td><b>${esc(x.id)}</b><div class="small muted">${esc(x.title)}</div><div class="small muted">${esc(x.before||"")} → ${esc(x.after||"")}</div></td>
 <td class="small">${x.rules.map(r=>esc(r.citation)+" ("+esc(r.status)+")").join("<br>")}</td><td>${x.affected_addresses.length}</td><td>${x.conflicts.length}</td><td class="small">${x.notes.map(esc).join("<br>")}</td></tr>`).join("")+`</table>`}
-fetch("data.json").then(r=>r.json()).then(d=>{D=d;$("addr-list").innerHTML=D.addresses.map(a=>`<option value="${esc(a.label)}">`).join("");
+fetch("data.json").then(r=>r.json()).then(d=>{D=d;window.NAV_DATA=d;$("addr-list").innerHTML=D.addresses.map(a=>`<option value="${esc(a.label)}">`).join("");
 $("asof").value=D.as_of_default;
 const pick=()=>{const a=D.addresses.find(a=>a.label===$("addr").value||a.id===$("addr").value);if(a){cur=a.id;history.replaceState(null,"","#"+encodeURIComponent(a.id))}render()};
 $("addr").addEventListener("change",pick);$("addr").addEventListener("input",pick);$("asof").addEventListener("change",render);
@@ -122,7 +142,9 @@ $("today").onclick=()=>{$("asof").value=D.as_of_default;render()};
 const fromHash=()=>{const h=decodeURIComponent(location.hash.slice(1));if(h&&D.addresses.some(a=>a.id===h)){cur=h;$("addr").value=D.addresses.find(a=>a.id===h).label}render()};
 window.addEventListener("hashchange",fromHash);fromHash()});
 for(const l of ["en","es"])$("lang-"+l).onclick=()=>{L=l;$("lang-en").classList.toggle("on",l==="en");$("lang-es").classList.toggle("on",l==="es");render()};
-for(const v of ["lookup","changes"])$("tab-"+v).onclick=()=>{["lookup","changes"].forEach(w=>{$("view-"+w).hidden=w!==v;$("tab-"+w).classList.toggle("on",w===v)})};
+const VIEWS=["lookup","changes","live"];
+for(const v of VIEWS)$("tab-"+v).onclick=()=>{VIEWS.forEach(w=>{$("view-"+w).hidden=w!==v;$("tab-"+w).classList.toggle("on",w===v)});if(v==="live")window.dispatchEvent(new Event("nav:live-open"))};
 </script>
+<script type="module" src="live.js"></script>
 </body>
 </html>

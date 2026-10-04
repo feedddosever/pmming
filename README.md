@@ -27,7 +27,7 @@ python -m navigator all                 # extract → resolve → lookup → cha
 python -m navigator lookup --as-of 2027-07-02   # extra as-of snapshots (lookups_<date>.json)
 python -m navigator report              # self-check scorecard: schema, quotes, lookups, T1-T5 (10/10)
 python -m http.server -d out/site 8000  # demo UI
-pytest -q                               # 26 tests, run offline with a fake LLM on synthetic fixtures
+pytest -q                               # 27 tests, run offline with a fake LLM on synthetic fixtures
 ```
 Outputs, in the participant guide's formats (§5):
 - `out/rules.json`: `{"rules": [...]}`, each record validated against `schema/rule_record.schema.json`
@@ -46,6 +46,31 @@ against the expected behaviour stated in `dev/change_tests.json` and the partici
 
 Every LLM and geocoder response is cached in `cache/`. `NAV_LLM=replay` reruns the whole pipeline
 offline and deterministically (useful for the live rerun in the demo check).
+
+## Bring your own API key
+The hackathon credits don't cover a full rerun, so there are two ways to run the model step with your own
+Anthropic API key. The key is never written to the repo or the outputs.
+
+**1. Live extraction in the browser** (one document, typically a few cents). Open the **Live extraction** tab on
+https://rental-law-navigator-kappa.vercel.app (or the local `out/site`):
+- Paste your key, pick a corpus document or paste a new ordinance (the hour-16 drill), and click **Extract rules**.
+- It sends the same system prompt, JSON schema and effort as the pipeline (shipped in `out/site/live.json`), using
+  the official Anthropic JavaScript SDK loaded from jsDelivr.
+- Every quote is checked word for word against the document with a port of `navigator/extract/verify.py`.
+  Unverified quotes are flagged, the same rule the pipeline uses to skip them.
+- Each rule shows how many sample addresses are in its jurisdiction. Per-address coverage conditions are
+  still evaluated by the Python pipeline.
+- The key stays in the open tab's memory. It is never stored and is sent only to `api.anthropic.com`, directly
+  from the browser (the SDK's direct-browser-access mode), and is billed to the key's own account.
+
+**2. Full pipeline rerun from the command line:**
+```bash
+export ANTHROPIC_API_KEY=<your key>
+NAV_MODEL=claude-opus-5-5 python -m navigator all   # or claude-sonnet-5-5 to lower the cost
+python -m navigator report
+```
+A full run is about 173 model calls, roughly 670k input and 65k output tokens (measured from the committed
+agent-mode run). Unchanged calls are served from `cache/`, so reruns only pay for what changed.
 
 ## Run checklist
 1. `export ANTHROPIC_API_KEY=...`, then `python -m navigator all`.

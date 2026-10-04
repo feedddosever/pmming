@@ -95,3 +95,14 @@ def test_site_payload(workspace):
     assert "2026-01-01" in data["dates"] and "2027-07-01" in data["dates"]
     assert len(data["results"]) == len(data["addresses"])
     assert (workspace / "out" / "site" / "index.html").exists()
+
+
+def test_live_extraction_payload_matches_pipeline(workspace):
+    from navigator.extract import prompts
+    run_all(workspace)
+    site = workspace / "out" / "site"
+    live = json.loads((site / "live.json").read_text())
+    assert live["system"] == prompts.EXTRACT_SYSTEM and live["schema"] == prompts.RULES_SCHEMA
+    assert live["docs"] and all(d["text"].strip() for d in live["docs"])
+    assert live["jurisdictions"]["MA"]["cambridge"] == "MA:city:cambridge"
+    assert (site / "live.js").exists()

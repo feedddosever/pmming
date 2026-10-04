@@ -13,7 +13,9 @@ from datetime import date
 from . import config
 from .apply.engine import evaluate_address, no_rule_findings
 from .apply.status import boundary_dates
-from .resolve.jurisdictions import label
+from .extract import prompts
+from .extract.extractor import CHUNK_CHARS
+from .resolve.jurisdictions import CITIES, STATES, label
 
 RESULT_CODES = ["applies", "unknown", "superseded", "not_yet_effective", "pending"]
 
@@ -24,7 +26,21 @@ def timeline_dates(rules) -> list[date]:
     return sorted(d for d in ds if date(2019, 1, 1) <= d <= date(2031, 1, 1))
 
 
-def build(rules: list[dict], addresses: list[dict], changes: dict | None = None):
+def live_payload(docs: list[dict]) -> dict:
+    """Everything the in-browser "live extraction" panel needs: the same prompt and schema as the
+    pipeline, the corpus texts, and the jurisdiction ids used by the address stacks."""
+    juris = {st: {disp.lower(): f"{st}:city:{slug}" for (cst, slug), (_c, disp, _n) in CITIES.items() if cst == st}
+             for st in STATES}
+    return {
+        "system": prompts.EXTRACT_SYSTEM, "schema": prompts.RULES_SCHEMA,
+        "prompt_version": config.PROMPT_VERSION, "effort": config.LLM_EFFORT, "max_chars": CHUNK_CHARS,
+        "jurisdictions": juris,
+        "docs": [{k: d.get(k) for k in ("doc_id", "title", "url", "retrieval_date", "jurisdiction_hint", "text")}
+                 for d in docs if not d.get("link_only")],
+    }
+
+
+def build(rules: list[dict], addresses: list[dict], changes: dict | None = None, docs: list[dict] | None = None):
     site = config.OUT_DIR / "site"
     if site.exists():
         shutil.rmtree(site)
@@ -76,4 +92,6 @@ def build(rules: list[dict], addresses: list[dict], changes: dict | None = None)
         "changes": changes,
     }
     (site / "data.json").write_text(json.dumps(payload, separators=(",", ":"), ensure_ascii=False))
+    if docs is not None:
+        (site / "live.json").write_text(json.dumps(live_payload(docs), separators=(",", ":"), ensure_ascii=False))
     return site
